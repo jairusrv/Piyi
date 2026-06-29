@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Piyi.Domain\Piyi.Domain.csproj" />
+    <ProjectReference Include="..\Piyi.Contracts\Piyi.Contracts.csproj" />
+    <ProjectReference Include="..\Piyi.Shared\Piyi.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+</Project>

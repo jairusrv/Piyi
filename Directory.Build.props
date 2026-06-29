@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Company>Piyí</Company>
+    <Product>Piyí Platform</Product>
+    <Authors>Jairo Rivera</Authors>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+</Project>

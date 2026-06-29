@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.db
+*.sqlite
+.env
+appsettings.Production.json
+.dart_tool/
+build/
+.pub-cache/
