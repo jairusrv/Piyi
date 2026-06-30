@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import 'lost_pet_sightings_controller.dart';
 import 'lost_pets_controller.dart';
+import 'report_sighting_screen.dart';
 
 class LostPetDetailScreen extends ConsumerWidget {
   const LostPetDetailScreen({super.key, required this.lostPetId});
@@ -14,6 +17,7 @@ class LostPetDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detailAsync = ref.watch(lostPetDetailProvider(lostPetId));
+    final sightingsAsync = ref.watch(lostPetSightingsProvider(lostPetId));
 
     return Scaffold(
       appBar: AppBar(title: const Text('Reporte')),
@@ -46,15 +50,52 @@ class LostPetDetailScreen extends ConsumerWidget {
               _InfoCard(icon: Icons.color_lens, title: 'Color', subtitle: report.color ?? 'No indicado'),
               _InfoCard(icon: Icons.phone, title: 'Contacto', subtitle: report.contactPhone ?? 'No indicado'),
               _InfoCard(icon: Icons.card_giftcard, title: 'Recompensa', subtitle: report.rewardAmount == null ? 'No indicada' : '₡${report.rewardAmount}'),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               FilledButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Avistamientos se agregarán en el próximo sprint.')),
-                  );
-                },
+                onPressed: () => context.go(ReportSightingScreen.path(lostPetId)),
                 icon: const Icon(Icons.visibility),
                 label: const Text('Creo que la vi'),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Avistamientos',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 8),
+              sightingsAsync.when(
+                data: (items) {
+                  if (items.isEmpty) {
+                    return const Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(18),
+                        child: Text('Aún no hay avistamientos reportados.'),
+                      ),
+                    );
+                  }
+
+                  return Column(
+                    children: items.map((sighting) {
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: ListTile(
+                          leading: const Icon(Icons.place),
+                          title: Text(sighting.address ?? 'Ubicación reportada'),
+                          subtitle: Text(
+                            '${sighting.observation ?? 'Sin observación'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}\nEstado: ${sighting.status}',
+                          ),
+                          isThreeLine: true,
+                        ),
+                      );
+                    }).toList(),
+                  );
+                },
+                error: (error, _) => Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: Text('Error cargando avistamientos: $error'),
+                  ),
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
               ),
             ],
           ),

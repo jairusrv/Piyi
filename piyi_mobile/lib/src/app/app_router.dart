@@ -7,6 +7,7 @@ import '../features/home/presentation/home_screen.dart';
 import '../features/lost_pets/presentation/lost_pet_detail_screen.dart';
 import '../features/lost_pets/presentation/lost_pets_screen.dart';
 import '../features/lost_pets/presentation/report_lost_pet_screen.dart';
+import '../features/lost_pets/presentation/report_sighting_screen.dart';
 import '../features/pets/presentation/create_pet_screen.dart';
 import '../features/pets/presentation/pet_detail_screen.dart';
 import '../features/pets/presentation/pets_screen.dart';
@@ -34,6 +35,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: LostPetDetailScreen.route,
         builder: (context, state) => LostPetDetailScreen(lostPetId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: ReportSightingScreen.route,
+        builder: (context, state) => ReportSightingScreen(lostPetId: state.pathParameters['lostPetId']!),
       ),
     ],
   );
