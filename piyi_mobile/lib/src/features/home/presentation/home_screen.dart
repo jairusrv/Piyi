@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/login_screen.dart';
+import '../../businesses/presentation/businesses_screen.dart';
 import '../../lost_pets/presentation/lost_pets_screen.dart';
 import '../../pets/presentation/pets_screen.dart';
 
@@ -36,7 +37,7 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             _HomeCard(icon: '🐶', title: 'Mis mascotas', subtitle: 'Registra y administra tus mascotas.', onTap: () => context.go(PetsScreen.route)),
             _HomeCard(icon: '📍', title: 'Mascotas perdidas', subtitle: 'Reportes y alertas por zona.', onTap: () => context.go(LostPetsScreen.route)),
-            _HomeCard(icon: '🏥', title: 'Servicios cercanos', subtitle: 'Veterinarias, groomers, tiendas y más.', onTap: () {}),
+            _HomeCard(icon: '🏥', title: 'Servicios cercanos', subtitle: 'Veterinarias, groomers, tiendas y más.', onTap: () => context.go(BusinessesScreen.route)),
           ],
         ),
       ),

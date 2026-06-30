@@ -1,17 +1,18 @@
-# Piyí - Sprint 05.07 Flutter Lost Pet Sightings
+# Piyí - Sprint 05.08 Flutter Business Directory
 
 ## Objetivo
 
-Agregar avistamientos en Flutter.
+Agregar directorio de negocios en Flutter.
 
 ## Incluye
 
-- Pantalla para reportar avistamiento.
-- Listado de avistamientos.
-- Botón real desde detalle de mascota perdida.
+- Pantalla de negocios.
+- Detalle del negocio.
+- Filtro por búsqueda.
+- Acceso desde Home.
 - Consumo de:
-  - POST /api/lost-pets/{lostPetId}/sightings
-  - GET /api/lost-pets/{lostPetId}/sightings
+  - GET /api/businesses
+  - GET /api/businesses/{id}
 
 ## Aplicar
 
