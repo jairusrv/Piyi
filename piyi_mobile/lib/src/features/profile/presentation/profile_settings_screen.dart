@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../devices/presentation/devices_screen.dart';
+import '../../push_diagnostics/presentation/push_diagnostics_screen.dart';
 import '../data/profile_settings_repository.dart';
 import '../data/user_alert_setting_model.dart';
 import 'profile_settings_controller.dart';
@@ -30,6 +31,12 @@ class ProfileSettingsScreen extends ConsumerWidget {
                 onPressed: () => context.go(DevicesScreen.route),
                 icon: const Icon(Icons.phone_android),
                 label: const Text('Mis dispositivos'),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton.icon(
+                onPressed: () => context.go(PushDiagnosticsScreen.route),
+                icon: const Icon(Icons.bug_report),
+                label: const Text('Diagnóstico push'),
               ),
               const SizedBox(height: 16),
               _AlertSettingsForm(initial: settings),

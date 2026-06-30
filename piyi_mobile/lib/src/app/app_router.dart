@@ -16,6 +16,7 @@ import '../features/pets/presentation/create_pet_screen.dart';
 import '../features/pets/presentation/pet_detail_screen.dart';
 import '../features/pets/presentation/pets_screen.dart';
 import '../features/profile/presentation/profile_settings_screen.dart';
+import '../features/push_diagnostics/presentation/push_diagnostics_screen.dart';
 import '../features/splash/presentation/splash_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -53,6 +54,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(path: NotificationsScreen.route, builder: (context, state) => const NotificationsScreen()),
       GoRoute(path: ProfileSettingsScreen.route, builder: (context, state) => const ProfileSettingsScreen()),
       GoRoute(path: DevicesScreen.route, builder: (context, state) => const DevicesScreen()),
+      GoRoute(path: PushDiagnosticsScreen.route, builder: (context, state) => const PushDiagnosticsScreen()),
     ],
   );
 });

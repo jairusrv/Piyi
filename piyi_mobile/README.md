@@ -1,26 +1,16 @@
-# Piyí - Sprint 05.13 Flutter Firebase Base
+# Piyí - Sprint 05.14 Flutter Push Diagnostics
 
 ## Objetivo
 
-Preparar Flutter para Firebase Cloud Messaging sin romper desarrollo local.
+Agregar pantalla de diagnóstico de notificaciones push.
 
 ## Incluye
 
-- Dependencias Firebase.
-- Inicialización segura de Firebase.
-- Servicio para obtener token FCM.
-- Fallback a token DEV si Firebase no está configurado.
-- Registro de dispositivo actualizado.
-
-## Importante
-
-Este sprint compila aunque Firebase aún no esté configurado oficialmente, porque tiene fallback.
-
-Más adelante agregaremos:
-- firebase_options.dart generado por FlutterFire CLI.
-- google-services.json.
-- permisos Android.
-- recepción de notificaciones en foreground/background.
+- Ver si Firebase está inicializado.
+- Ver token push actual.
+- Ver plataforma y deviceId local.
+- Registrar dispositivo desde diagnóstico.
+- Acceso desde Configuración.
 
 ## Aplicar
 
