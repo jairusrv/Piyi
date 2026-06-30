@@ -1,21 +1,17 @@
-# Piyí - Sprint 05.09 + 05.10 Flutter Actions & Notifications
+# Piyí - Sprint 05.11 Flutter Profile & Alert Settings
+
+## Objetivo
+
+Agregar perfil/configuración de usuario y alertas por zona.
 
 ## Incluye
 
-Sprint 05.09:
-- Llamar negocio.
-- Abrir WhatsApp.
-- Abrir Google Maps con ubicación/dirección.
-
-Sprint 05.10:
-- Pantalla de notificaciones internas.
-- Listar notificaciones.
-- Marcar como leída.
-- Acceso desde Home.
-
-## Importante
-
-Agrega `url_launcher` al pubspec.yaml.
+- Pantalla de configuración.
+- Activar/desactivar alertas de mascotas perdidas.
+- Guardar latitud, longitud, radio, país, provincia y ciudad.
+- Consumo de:
+  - GET /api/users/me/alert-settings
+  - PUT /api/users/me/alert-settings
 
 ## Aplicar
 
