@@ -28,6 +28,7 @@ public sealed class PiyiDbContext : DbContext
     public DbSet<Review> Reviews => Set<Review>();
     public DbSet<LostPet> LostPets => Set<LostPet>();
     public DbSet<LostPetPhoto> LostPetPhotos => Set<LostPetPhoto>();
+    public DbSet<LostPetSighting> LostPetSightings => Set<LostPetSighting>();
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
     public DbSet<AdEvent> AdEvents => Set<AdEvent>();
 

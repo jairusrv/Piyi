@@ -1,21 +1,52 @@
-# Piyí - Sprint 04.02 Lost Pet Photos + Filters
+# Piyí - Sprint 04.03 Lost Pet Sightings
 
 ## Objetivo
 
-Mejorar mascotas perdidas con fotos adicionales y filtros.
+Agregar avistamientos para mascotas perdidas.
 
-## Endpoints públicos
+Permite que un usuario reporte que cree haber visto una mascota perdida, incluyendo ubicación, comentario y foto opcional.
+
+## Endpoints públicos/protegidos
+
+Crear avistamiento:
 
 ```text
-GET /api/lost-pets?city=Cartago&region=Cartago&latitude=9.86&longitude=-83.91&radiusKm=10
-GET /api/lost-pets/{id}
+POST /api/lost-pets/{lostPetId}/sightings
 ```
 
-## Endpoints protegidos
+Listar avistamientos:
 
 ```text
-POST   /api/lost-pets/{lostPetId}/photos
-DELETE /api/lost-pets/{lostPetId}/photos/{photoId}
+GET /api/lost-pets/{lostPetId}/sightings
+```
+
+Administrar avistamiento por dueño del reporte:
+
+```text
+PUT /api/lost-pets/{lostPetId}/sightings/{sightingId}/confirm
+PUT /api/lost-pets/{lostPetId}/sightings/{sightingId}/discard
+DELETE /api/lost-pets/{lostPetId}/sightings/{sightingId}
+```
+
+## Nueva entidad
+
+```text
+LostPetSighting
+```
+
+## Si ya tienes migraciones
+
+Crear migración:
+
+```powershell
+dotnet ef migrations add AddLostPetSightings `
+  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
+  --startup-project .\src\Piyi.API\Piyi.API.csproj `
+  --output-dir Data\Migrations
+
+dotnet ef database update `
+  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
+  --startup-project .\src\Piyi.API\Piyi.API.csproj
 ```
 
 ## Cómo aplicar
