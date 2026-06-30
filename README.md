@@ -1,50 +1,50 @@
-# Piyí - Sprint 01.03 User Profile
+# Piyí - Sprint 02.01 Pets Base
 
 ## Objetivo
 
-Completar el módulo base de usuario autenticado.
+Implementar el primer módulo central de Piyí: mascotas.
 
 Incluye:
 
-- `GET /api/users/me`
-- `PUT /api/users/me`
-- `PUT /api/users/change-password`
+- Crear mascota.
+- Listar mis mascotas.
+- Ver detalle de mascota.
+- Actualizar mascota.
+- Eliminar mascota con soft delete.
+
+## Endpoints
+
+```text
+GET    /api/pets
+GET    /api/pets/{id}
+POST   /api/pets
+PUT    /api/pets/{id}
+DELETE /api/pets/{id}
+```
+
+Todos requieren JWT.
 
 ## Cómo aplicar
 
-Extraer este ZIP sobre:
+Extraer sobre:
 
 ```powershell
 C:\Users\jairo\Documents\Piyi
 ```
 
-Luego ejecutar:
+Luego:
 
 ```powershell
 dotnet restore
 dotnet build
-dotnet run --project .\src\Piyi.API\Piyi.API.csproj
 ```
 
-## Pruebas
+## Prueba manual
 
-1. Registrar usuario en `/api/auth/register`.
-2. Iniciar sesión en `/api/auth/login`.
-3. Copiar token.
-4. En Swagger usar `Authorize` con:
-
-```text
-Bearer TU_TOKEN
-```
-
-5. Probar:
-
-```text
-GET /api/users/me
-PUT /api/users/me
-PUT /api/users/change-password
-```
-
-## Nota
-
-Este sprint depende de que Sprint 01.01.1 ya esté aplicado.
+1. Registrar usuario.
+2. Login.
+3. Autorizar Swagger con Bearer Token.
+4. Crear una mascota.
+5. Listar mascotas.
+6. Editar mascota.
+7. Eliminar mascota.
