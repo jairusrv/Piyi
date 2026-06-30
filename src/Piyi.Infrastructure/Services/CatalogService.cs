@@ -35,7 +35,9 @@ public sealed class CatalogService : ICatalogService
         return Result<IReadOnlyList<SpeciesResponse>>.Success(items);
     }
 
-    public async Task<Result<IReadOnlyList<BreedResponse>>> GetBreedsBySpeciesAsync(Guid speciesId, CancellationToken cancellationToken = default)
+    public async Task<Result<IReadOnlyList<BreedResponse>>> GetBreedsBySpeciesAsync(
+        Guid speciesId,
+        CancellationToken cancellationToken = default)
     {
         var speciesExists = await _dbContext.Species
             .AnyAsync(x => x.Id == speciesId && !x.IsDeleted, cancellationToken);
@@ -46,15 +48,14 @@ public sealed class CatalogService : ICatalogService
         var items = await _dbContext.Breeds
             .AsNoTracking()
             .Where(x => x.SpeciesId == speciesId && !x.IsDeleted)
-            .OrderBy(x => x.SortOrder)
-            .ThenBy(x => x.Name)
+            .OrderBy(x => x.Name)
             .Select(x => new BreedResponse
             {
                 Id = x.Id,
                 SpeciesId = x.SpeciesId,
                 Name = x.Name,
                 Size = x.Size,
-                SortOrder = x.SortOrder
+                SortOrder = 0
             })
             .ToListAsync(cancellationToken);
 

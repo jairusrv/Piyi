@@ -1,21 +1,18 @@
-# Piyí - Sprint 02.02 Pet Catalogs
+# Piyí - Sprint 02.02.1 Pet Catalogs Fix
 
-## Objetivo
+## Corrección
 
-Agregar catálogos básicos para el registro de mascotas.
-
-Incluye:
-
-- Listar especies.
-- Listar razas por especie.
-- Endpoint público para catálogos.
-
-## Endpoints
+Corrige error:
 
 ```text
-GET /api/catalogs/species
-GET /api/catalogs/species/{speciesId}/breeds
+Breed no contiene una definición para SortOrder
 ```
+
+## Cambio aplicado
+
+- `CatalogService` ya no ordena razas por `SortOrder`.
+- `BreedResponse.SortOrder` se mantiene en `0` temporalmente.
+- Las razas se ordenan por `Name`.
 
 ## Cómo aplicar
 
@@ -31,7 +28,3 @@ Luego:
 dotnet restore
 dotnet build
 ```
-
-## Nota
-
-Estos endpoints no requieren JWT porque la pantalla de registro de mascota necesita cargar catálogos de forma simple.
