@@ -1,32 +1,20 @@
-# Piyí - Sprint 03.02 Business Profile Detail
+# Piyí - Sprint 03.03 Admin Business Create
 
 ## Objetivo
 
-Ampliar el directorio de negocios para que el usuario vea información útil de veterinarias, groomers, tiendas, hoteles, paseadores y otros servicios.
+Agregar endpoints protegidos para que un administrador pueda crear y actualizar negocios.
 
-## Endpoints públicos
+## Endpoints
 
 ```text
-GET /api/businesses
-GET /api/businesses/{id}
+POST /api/admin/businesses
+PUT  /api/admin/businesses/{id}
+PUT  /api/admin/businesses/{id}/verify
+PUT  /api/admin/businesses/{id}/activate
+PUT  /api/admin/businesses/{id}/deactivate
 ```
 
-## Información incluida
-
-- Descripción
-- Teléfono
-- WhatsApp
-- Email
-- Website
-- Redes sociales
-- Dirección
-- País / Región / Ciudad
-- Latitud / Longitud
-- Logo
-- Estado verificado
-- Servicios
-- Fotos
-- Horarios
+Requieren JWT con rol `Admin`.
 
 ## Cómo aplicar
 
@@ -45,4 +33,4 @@ dotnet build
 
 ## Nota
 
-Este sprint solo mejora lectura pública. La administración de negocios vendrá en el panel Admin.
+Si todavía no tienes un usuario Admin, luego agregaremos endpoint/seed temporal para promover tu usuario.
