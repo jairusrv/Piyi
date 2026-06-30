@@ -1,26 +1,23 @@
-# Piyí - Sprint 05.03 Flutter QR & Health REAL
+# Piyí - Sprint 05.04 Flutter Pet Profile Visual
 
 ## Objetivo
 
-Agregar al detalle de mascota:
+Mejorar visualmente el perfil de mascota.
 
-- Información general
-- QR
-- Vacunas
-- Recordatorios
-- Citas
+Incluye:
+- Header visual de mascota.
+- Acciones rápidas.
+- Botón Reportar perdida preparado.
+- Resumen de salud.
+- Tarjetas mejoradas para QR, vacunas, recordatorios y citas.
 
-## Cómo aplicar
+## Aplicar
 
 Extraer sobre:
 
-```powershell
 C:\Users\jairo\Documents\Piyi\piyi_mobile
-```
 
 Luego:
 
-```powershell
 flutter pub get
 flutter run
-```
