@@ -8,13 +8,16 @@ namespace Piyi.API.Controllers;
 public sealed class DevNotificationsController : ControllerBase
 {
     private readonly INotificationService _notificationService;
+    private readonly IPushQueueProcessorService _pushQueueProcessorService;
     private readonly IWebHostEnvironment _environment;
 
     public DevNotificationsController(
         INotificationService notificationService,
+        IPushQueueProcessorService pushQueueProcessorService,
         IWebHostEnvironment environment)
     {
         _notificationService = notificationService;
+        _pushQueueProcessorService = pushQueueProcessorService;
         _environment = environment;
     }
 
@@ -39,6 +42,22 @@ public sealed class DevNotificationsController : ControllerBase
             return NotFound();
 
         var result = await _notificationService.GetPendingPushQueueAsync(cancellationToken);
+        return Ok(result.Value);
+    }
+
+    [HttpPost("push-queue/process")]
+    public async Task<IActionResult> ProcessPushQueue(
+        [FromQuery] int maxItems,
+        CancellationToken cancellationToken)
+    {
+        if (!_environment.IsDevelopment())
+            return NotFound();
+
+        var result = await _pushQueueProcessorService.ProcessPendingAsync(maxItems <= 0 ? 50 : maxItems, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest(new { message = result.Error });
+
         return Ok(result.Value);
     }
 }

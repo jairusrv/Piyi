@@ -1,35 +1,22 @@
-# Piyí - Sprint 04.06 Notifications Queue
+# Piyí - Sprint 04.07 Push Queue Processor
 
 ## Objetivo
 
-Agregar base de notificaciones internas y cola de envíos push.
+Agregar procesador base de cola push.
 
-Este sprint NO envía Firebase real todavía. Prepara:
+Este sprint todavía NO integra Firebase real. Agrega:
 
-- Notificaciones internas del usuario.
-- Cola de push notifications.
-- Generación de alertas para mascotas perdidas usando candidatos por zona.
-- Consulta de mis notificaciones.
-- Marcar como leída.
-
-## Nuevas entidades
-
-```text
-UserNotification
-PushNotificationQueue
-```
-
-## Endpoints protegidos
-
-```text
-GET /api/users/me/notifications
-PUT /api/users/me/notifications/{notificationId}/read
-```
+- `IPushSender`
+- `FakePushSender`
+- `IPushQueueProcessorService`
+- Procesamiento de cola pendiente
+- Marcado de envíos como `Sent` o `Failed`
+- Endpoint Development para procesar manualmente
 
 ## Endpoints Development
 
 ```text
-POST /api/dev/lost-pets/{lostPetId}/generate-alerts
+POST /api/dev/push-queue/process
 GET  /api/dev/push-queue/pending
 ```
 
@@ -47,3 +34,7 @@ Luego:
 dotnet restore
 dotnet build
 ```
+
+## Próximo paso
+
+Después de esto podemos integrar Firebase Admin SDK real o iniciar Flutter Mobile.

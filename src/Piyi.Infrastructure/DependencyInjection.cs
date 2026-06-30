@@ -41,6 +41,8 @@ public static class DependencyInjection
         services.AddScoped<ILostPetAlertCandidateService, LostPetAlertCandidateService>();
         services.AddScoped<IUserDeviceService, UserDeviceService>();
         services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IPushSender, FakePushSender>();
+        services.AddScoped<IPushQueueProcessorService, PushQueueProcessorService>();
 
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? new JwtSettings();
         var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
