@@ -1,12 +1,36 @@
-# Piyí - Sprint 03.03.2 BusinessDirectory Syntax Fix
+# Piyí - Sprint 03.04 Admin Business Details
 
-## Corrección
+## Objetivo
 
-Corrige error:
+Permitir que un administrador agregue detalles a los negocios:
+
+- Servicios.
+- Fotos.
+- Horarios.
+
+## Endpoints Admin
+
+Servicios:
 
 ```text
-BusinessDirectoryService.cs(26,38): error CS1002: Se esperaba ;
+POST   /api/admin/businesses/{businessId}/services
+DELETE /api/admin/businesses/{businessId}/services/{serviceId}
 ```
+
+Fotos:
+
+```text
+POST   /api/admin/businesses/{businessId}/photos
+DELETE /api/admin/businesses/{businessId}/photos/{photoId}
+```
+
+Horarios:
+
+```text
+PUT /api/admin/businesses/{businessId}/schedules
+```
+
+Todos requieren JWT con rol `Admin`.
 
 ## Cómo aplicar
 
