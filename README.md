@@ -1,18 +1,30 @@
-# Piyí - Sprint 02.02.1 Pet Catalogs Fix
+# Piyí - Sprint 02.03 Pet QR Base
 
-## Corrección
+## Objetivo
 
-Corrige error:
+Implementar QR base para mascotas.
+
+Incluye:
+
+- Generar QR único para una mascota.
+- Consultar QR de una mascota.
+- Endpoint público para escaneo.
+- Incrementar contador de escaneos.
+
+## Endpoints
+
+Protegidos con JWT:
 
 ```text
-Breed no contiene una definición para SortOrder
+POST /api/pets/{petId}/qr
+GET  /api/pets/{petId}/qr
 ```
 
-## Cambio aplicado
+Público:
 
-- `CatalogService` ya no ordena razas por `SortOrder`.
-- `BreedResponse.SortOrder` se mantiene en `0` temporalmente.
-- Las razas se ordenan por `Name`.
+```text
+GET /api/public/pets/qr/{code}
+```
 
 ## Cómo aplicar
 
@@ -28,3 +40,7 @@ Luego:
 dotnet restore
 dotnet build
 ```
+
+## Nota
+
+Este sprint asume que existe la entidad `PetQrCode` y DbSet `PetQrCodes`.
