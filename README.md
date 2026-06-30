@@ -1,36 +1,31 @@
-# Piyí - Sprint 03.04 Admin Business Details
+# Piyí - Sprint 03.05 Admin Developer Tools
 
 ## Objetivo
 
-Permitir que un administrador agregue detalles a los negocios:
+Agregar herramientas temporales de desarrollo para poder probar endpoints de administrador.
 
-- Servicios.
-- Fotos.
-- Horarios.
+Incluye:
 
-## Endpoints Admin
+- Promover usuario a Admin por correo.
+- Endpoint solo disponible en Development.
 
-Servicios:
-
-```text
-POST   /api/admin/businesses/{businessId}/services
-DELETE /api/admin/businesses/{businessId}/services/{serviceId}
-```
-
-Fotos:
+## Endpoint
 
 ```text
-POST   /api/admin/businesses/{businessId}/photos
-DELETE /api/admin/businesses/{businessId}/photos/{photoId}
+POST /api/dev/users/promote-admin
 ```
 
-Horarios:
+Body:
 
-```text
-PUT /api/admin/businesses/{businessId}/schedules
+```json
+{
+  "email": "tu-correo@correo.com"
+}
 ```
 
-Todos requieren JWT con rol `Admin`.
+## Importante
+
+Este controller queda protegido para ambiente Development. No debe usarse en producción.
 
 ## Cómo aplicar
 
@@ -45,4 +40,13 @@ Luego:
 ```powershell
 dotnet restore
 dotnet build
+dotnet run --project .\src\Piyi.API\Piyi.API.csproj
 ```
+
+## Flujo de prueba
+
+1. Registrar usuario.
+2. Ejecutar `POST /api/dev/users/promote-admin`.
+3. Hacer login nuevamente.
+4. Usar token nuevo.
+5. Probar endpoints `/api/admin/...`.
