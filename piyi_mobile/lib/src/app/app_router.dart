@@ -5,6 +5,7 @@ import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/businesses/presentation/business_detail_screen.dart';
 import '../features/businesses/presentation/businesses_screen.dart';
+import '../features/devices/presentation/devices_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/lost_pets/presentation/lost_pet_detail_screen.dart';
 import '../features/lost_pets/presentation/lost_pets_screen.dart';
@@ -51,6 +52,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: NotificationsScreen.route, builder: (context, state) => const NotificationsScreen()),
       GoRoute(path: ProfileSettingsScreen.route, builder: (context, state) => const ProfileSettingsScreen()),
+      GoRoute(path: DevicesScreen.route, builder: (context, state) => const DevicesScreen()),
     ],
   );
 });

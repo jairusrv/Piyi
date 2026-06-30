@@ -1,17 +1,20 @@
-# Piyí - Sprint 05.11 Flutter Profile & Alert Settings
+# Piyí - Sprint 05.12 Flutter Device Registration
 
 ## Objetivo
 
-Agregar perfil/configuración de usuario y alertas por zona.
+Registrar dispositivo móvil en backend para preparar notificaciones push.
 
 ## Incluye
 
-- Pantalla de configuración.
-- Activar/desactivar alertas de mascotas perdidas.
-- Guardar latitud, longitud, radio, país, provincia y ciudad.
+- Pantalla de dispositivos.
+- Registro de dispositivo.
+- Token push temporal de desarrollo.
+- Listado de dispositivos.
+- Desactivar dispositivo.
 - Consumo de:
-  - GET /api/users/me/alert-settings
-  - PUT /api/users/me/alert-settings
+  - GET /api/users/me/devices
+  - POST /api/users/me/devices
+  - DELETE /api/users/me/devices/{deviceId}
 
 ## Aplicar
 

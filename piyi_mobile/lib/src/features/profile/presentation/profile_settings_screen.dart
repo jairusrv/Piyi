@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../devices/presentation/devices_screen.dart';
 import '../data/profile_settings_repository.dart';
 import '../data/user_alert_setting_model.dart';
 import 'profile_settings_controller.dart';
@@ -22,7 +24,17 @@ class ProfileSettingsScreen extends ConsumerWidget {
       body: SafeArea(
         minimum: const EdgeInsets.all(16),
         child: settingsAsync.when(
-          data: (settings) => _AlertSettingsForm(initial: settings),
+          data: (settings) => ListView(
+            children: [
+              FilledButton.icon(
+                onPressed: () => context.go(DevicesScreen.route),
+                icon: const Icon(Icons.phone_android),
+                label: const Text('Mis dispositivos'),
+              ),
+              const SizedBox(height: 16),
+              _AlertSettingsForm(initial: settings),
+            ],
+          ),
           error: (error, _) => Center(child: Text('Error: $error')),
           loading: () => const Center(child: CircularProgressIndicator()),
         ),
@@ -132,7 +144,7 @@ class _AlertSettingsFormState extends ConsumerState<_AlertSettingsForm> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         Card(
           child: Padding(
@@ -186,26 +198,14 @@ class _AlertSettingsFormState extends ConsumerState<_AlertSettingsForm> {
         TextField(
           controller: _radiusController,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            labelText: 'Radio en km',
-            hintText: 'Ej: 10',
-          ),
+          decoration: const InputDecoration(labelText: 'Radio en km'),
         ),
         const SizedBox(height: 12),
-        TextField(
-          controller: _countryController,
-          decoration: const InputDecoration(labelText: 'País'),
-        ),
+        TextField(controller: _countryController, decoration: const InputDecoration(labelText: 'País')),
         const SizedBox(height: 12),
-        TextField(
-          controller: _regionController,
-          decoration: const InputDecoration(labelText: 'Provincia'),
-        ),
+        TextField(controller: _regionController, decoration: const InputDecoration(labelText: 'Provincia')),
         const SizedBox(height: 12),
-        TextField(
-          controller: _cityController,
-          decoration: const InputDecoration(labelText: 'Ciudad'),
-        ),
+        TextField(controller: _cityController, decoration: const InputDecoration(labelText: 'Ciudad')),
         const SizedBox(height: 24),
         FilledButton.icon(
           onPressed: _isSaving ? null : _save,
