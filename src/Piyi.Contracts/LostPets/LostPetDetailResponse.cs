@@ -34,5 +34,7 @@ public sealed class LostPetDetailResponse
 
     public decimal? RewardAmount { get; set; }
 
+    public IReadOnlyList<LostPetPhotoResponse> Photos { get; set; } = [];
+
     public DateTimeOffset CreatedAt { get; set; }
 }

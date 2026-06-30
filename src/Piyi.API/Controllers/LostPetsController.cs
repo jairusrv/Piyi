@@ -18,9 +18,15 @@ public sealed class LostPetsController : ControllerBase
     }
 
     [HttpGet("lost-pets")]
-    public async Task<IActionResult> GetActive(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetActive(
+        [FromQuery] string? city,
+        [FromQuery] string? region,
+        [FromQuery] decimal? latitude,
+        [FromQuery] decimal? longitude,
+        [FromQuery] decimal? radiusKm,
+        CancellationToken cancellationToken)
     {
-        var result = await _lostPetService.GetActiveAsync(cancellationToken);
+        var result = await _lostPetService.GetActiveAsync(city, region, latitude, longitude, radiusKm, cancellationToken);
         return Ok(result.Value);
     }
 
@@ -48,6 +54,36 @@ public sealed class LostPetsController : ControllerBase
             return BadRequest(new { message = result.Error });
 
         return Ok(result.Value);
+    }
+
+    [HttpPost("lost-pets/{lostPetId:guid}/photos")]
+    [Authorize]
+    public async Task<IActionResult> AddPhoto(Guid lostPetId, [FromBody] AddLostPetPhotoRequest request, CancellationToken cancellationToken)
+    {
+        var userId = GetCurrentUserId();
+        if (userId is null) return Unauthorized(new { message = "Token inválido." });
+
+        var result = await _lostPetService.AddPhotoAsync(userId.Value, lostPetId, request, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest(new { message = result.Error });
+
+        return Ok(result.Value);
+    }
+
+    [HttpDelete("lost-pets/{lostPetId:guid}/photos/{photoId:guid}")]
+    [Authorize]
+    public async Task<IActionResult> DeletePhoto(Guid lostPetId, Guid photoId, CancellationToken cancellationToken)
+    {
+        var userId = GetCurrentUserId();
+        if (userId is null) return Unauthorized(new { message = "Token inválido." });
+
+        var result = await _lostPetService.DeletePhotoAsync(userId.Value, lostPetId, photoId, cancellationToken);
+
+        if (result.IsFailure)
+            return BadRequest(new { message = result.Error });
+
+        return Ok(new { message = "Foto eliminada correctamente." });
     }
 
     [HttpPut("lost-pets/{id:guid}/found")]

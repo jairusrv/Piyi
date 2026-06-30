@@ -1,22 +1,21 @@
-# Piyí - Sprint 04.01 Lost Pets Base
+# Piyí - Sprint 04.02 Lost Pet Photos + Filters
 
 ## Objetivo
 
-Agregar módulo base de mascotas perdidas.
+Mejorar mascotas perdidas con fotos adicionales y filtros.
 
 ## Endpoints públicos
 
 ```text
-GET /api/lost-pets
+GET /api/lost-pets?city=Cartago&region=Cartago&latitude=9.86&longitude=-83.91&radiusKm=10
 GET /api/lost-pets/{id}
 ```
 
 ## Endpoints protegidos
 
 ```text
-POST /api/pets/{petId}/lost-pets
-PUT  /api/lost-pets/{id}/found
-PUT  /api/lost-pets/{id}/close
+POST   /api/lost-pets/{lostPetId}/photos
+DELETE /api/lost-pets/{lostPetId}/photos/{photoId}
 ```
 
 ## Cómo aplicar
