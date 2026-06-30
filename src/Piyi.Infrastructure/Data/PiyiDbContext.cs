@@ -4,8 +4,13 @@ using Piyi.Domain.Entities;
 
 namespace Piyi.Infrastructure.Data;
 
-public class PiyiDbContext(DbContextOptions<PiyiDbContext> options) : DbContext(options)
+public sealed class PiyiDbContext : DbContext
 {
+    public PiyiDbContext(DbContextOptions<PiyiDbContext> options)
+        : base(options)
+    {
+    }
+
     public DbSet<User> Users => Set<User>();
     public DbSet<AuthProvider> AuthProviders => Set<AuthProvider>();
     public DbSet<Pet> Pets => Set<Pet>();
@@ -14,6 +19,7 @@ public class PiyiDbContext(DbContextOptions<PiyiDbContext> options) : DbContext(
     public DbSet<PetQrCode> PetQrCodes => Set<PetQrCode>();
     public DbSet<PetVaccine> PetVaccines => Set<PetVaccine>();
     public DbSet<PetReminder> PetReminders => Set<PetReminder>();
+    public DbSet<PetAppointment> PetAppointments => Set<PetAppointment>();
     public DbSet<Business> Businesses => Set<Business>();
     public DbSet<BusinessType> BusinessTypes => Set<BusinessType>();
     public DbSet<BusinessPhoto> BusinessPhotos => Set<BusinessPhoto>();
@@ -31,28 +37,28 @@ public class PiyiDbContext(DbContextOptions<PiyiDbContext> options) : DbContext(
         base.OnModelCreating(modelBuilder);
     }
 
-    public override int SaveChanges()
-    {
-        ApplyAuditData();
-        return base.SaveChanges();
-    }
-
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        ApplyAuditData();
+        ApplyAuditFields();
         return base.SaveChangesAsync(cancellationToken);
     }
 
-    private void ApplyAuditData()
+    public override int SaveChanges()
     {
-        var entries = ChangeTracker.Entries<BaseEntity>();
+        ApplyAuditFields();
+        return base.SaveChanges();
+    }
+
+    private void ApplyAuditFields()
+    {
         var now = DateTimeOffset.UtcNow;
 
-        foreach (var entry in entries)
+        foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedAt = now;
+                if (entry.Entity.CreatedAt == default)
+                    entry.Entity.CreatedAt = now;
             }
 
             if (entry.State == EntityState.Modified)

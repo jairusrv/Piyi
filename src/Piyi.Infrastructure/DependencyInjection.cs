@@ -31,6 +31,7 @@ public static class DependencyInjection
         services.AddScoped<ICatalogService, CatalogService>();
         services.AddScoped<IPetQrService, PetQrService>();
         services.AddScoped<IPetHealthService, PetHealthService>();
+        services.AddScoped<IPetAppointmentService, PetAppointmentService>();
 
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? new JwtSettings();
         var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
