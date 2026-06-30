@@ -23,11 +23,12 @@ public sealed class BusinessDirectoryService : IBusinessDirectoryService
         var query = _dbContext.Businesses
             .AsNoTracking()
             .Include(x => x.BusinessType)
-            .Where(x => !x.IsDeleted)
+            .Where(x => !x.IsDeleted && x.IsActive);
 
         if (!string.IsNullOrWhiteSpace(search))
         {
             var term = search.Trim().ToLower();
+
             query = query.Where(x =>
                 x.Name.ToLower().Contains(term) ||
                 (x.Description != null && x.Description.ToLower().Contains(term)) ||
@@ -66,7 +67,9 @@ public sealed class BusinessDirectoryService : IBusinessDirectoryService
         return Result<IReadOnlyList<BusinessListItemResponse>>.Success(items);
     }
 
-    public async Task<Result<BusinessDetailResponse>> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Result<BusinessDetailResponse>> GetByIdAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
     {
         var business = await _dbContext.Businesses
             .AsNoTracking()
@@ -74,12 +77,12 @@ public sealed class BusinessDirectoryService : IBusinessDirectoryService
             .Include(x => x.Photos)
             .Include(x => x.Services)
             .Include(x => x.Schedules)
-           .FirstOrDefaultAsync(x =>
-    x.Id == id &&
-    !x.IsDeleted,
-    cancellationToken);
+            .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted && x.IsActive, cancellationToken);
+
         if (business is null)
+        {
             return Result<BusinessDetailResponse>.Failure("Negocio no encontrado.");
+        }
 
         return Result<BusinessDetailResponse>.Success(new BusinessDetailResponse
         {
