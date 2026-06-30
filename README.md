@@ -1,39 +1,36 @@
-# Piyí - Sprint 04.05 Push Device Tokens
+# Piyí - Sprint 04.06 Notifications Queue
 
 ## Objetivo
 
-Preparar backend para notificaciones push.
+Agregar base de notificaciones internas y cola de envíos push.
 
-Este sprint NO envía notificaciones todavía. Solo registra tokens de dispositivos.
+Este sprint NO envía Firebase real todavía. Prepara:
+
+- Notificaciones internas del usuario.
+- Cola de push notifications.
+- Generación de alertas para mascotas perdidas usando candidatos por zona.
+- Consulta de mis notificaciones.
+- Marcar como leída.
+
+## Nuevas entidades
+
+```text
+UserNotification
+PushNotificationQueue
+```
 
 ## Endpoints protegidos
 
 ```text
-GET    /api/users/me/devices
-POST   /api/users/me/devices
-PUT    /api/users/me/devices/{deviceId}
-DELETE /api/users/me/devices/{deviceId}
+GET /api/users/me/notifications
+PUT /api/users/me/notifications/{notificationId}/read
 ```
 
-## Nueva entidad
+## Endpoints Development
 
 ```text
-UserDevice
-```
-
-## Si ya tienes migraciones
-
-Crear migración:
-
-```powershell
-dotnet ef migrations add AddUserDevices `
-  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
-  --startup-project .\src\Piyi.API\Piyi.API.csproj `
-  --output-dir Data\Migrations
-
-dotnet ef database update `
-  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
-  --startup-project .\src\Piyi.API\Piyi.API.csproj
+POST /api/dev/lost-pets/{lostPetId}/generate-alerts
+GET  /api/dev/push-queue/pending
 ```
 
 ## Cómo aplicar
