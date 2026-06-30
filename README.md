@@ -1,36 +1,24 @@
-# Piyí - Sprint 04.04 Location Alerts Base
+# Piyí - Sprint 04.05 Push Device Tokens
 
 ## Objetivo
 
-Preparar la base de alertas por zona para mascotas perdidas.
+Preparar backend para notificaciones push.
 
-Este sprint NO envía push notifications todavía. Deja lista la estructura para:
-
-- Guardar zona de alerta del usuario.
-- Activar/desactivar alertas.
-- Consultar configuración actual.
-- Detectar usuarios candidatos a recibir alerta por cercanía.
-- Endpoint admin/dev para simular candidatos.
+Este sprint NO envía notificaciones todavía. Solo registra tokens de dispositivos.
 
 ## Endpoints protegidos
 
-Usuario:
-
 ```text
-GET /api/users/me/alert-settings
-PUT /api/users/me/alert-settings
-```
-
-Admin/Dev:
-
-```text
-GET /api/dev/lost-pets/{lostPetId}/alert-candidates
+GET    /api/users/me/devices
+POST   /api/users/me/devices
+PUT    /api/users/me/devices/{deviceId}
+DELETE /api/users/me/devices/{deviceId}
 ```
 
 ## Nueva entidad
 
 ```text
-UserAlertSetting
+UserDevice
 ```
 
 ## Si ya tienes migraciones
@@ -38,7 +26,7 @@ UserAlertSetting
 Crear migración:
 
 ```powershell
-dotnet ef migrations add AddUserAlertSettings `
+dotnet ef migrations add AddUserDevices `
   --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
   --startup-project .\src\Piyi.API\Piyi.API.csproj `
   --output-dir Data\Migrations
