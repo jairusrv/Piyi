@@ -1,30 +1,27 @@
-# Piyí - Sprint 02.03 Pet QR Base
+# Piyí - Sprint 02.04 Pet Vaccines + Reminders
 
 ## Objetivo
 
-Implementar QR base para mascotas.
-
-Incluye:
-
-- Generar QR único para una mascota.
-- Consultar QR de una mascota.
-- Endpoint público para escaneo.
-- Incrementar contador de escaneos.
+Agregar gestión básica de vacunas y recordatorios para mascotas.
 
 ## Endpoints
 
-Protegidos con JWT:
+Vacunas:
 
 ```text
-POST /api/pets/{petId}/qr
-GET  /api/pets/{petId}/qr
+GET  /api/pets/{petId}/vaccines
+POST /api/pets/{petId}/vaccines
 ```
 
-Público:
+Recordatorios:
 
 ```text
-GET /api/public/pets/qr/{code}
+GET /api/pets/{petId}/reminders
+POST /api/pets/{petId}/reminders
+PUT /api/pets/{petId}/reminders/{reminderId}/complete
 ```
+
+Todos requieren JWT.
 
 ## Cómo aplicar
 
@@ -40,7 +37,3 @@ Luego:
 dotnet restore
 dotnet build
 ```
-
-## Nota
-
-Este sprint asume que existe la entidad `PetQrCode` y DbSet `PetQrCodes`.
