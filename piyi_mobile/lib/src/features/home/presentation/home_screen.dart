@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/login_screen.dart';
+import '../../lost_pets/presentation/lost_pets_screen.dart';
 import '../../pets/presentation/pets_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -13,10 +14,7 @@ class HomeScreen extends ConsumerWidget {
 
   Future<void> _logout(BuildContext context, WidgetRef ref) async {
     await ref.read(authRepositoryProvider).logout();
-
-    if (context.mounted) {
-      context.go(LoginScreen.route);
-    }
+    if (context.mounted) context.go(LoginScreen.route);
   }
 
   @override
@@ -25,47 +23,20 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Piyí'),
         actions: [
-          IconButton(
-            onPressed: () => _logout(context, ref),
-            icon: const Icon(Icons.logout),
-          ),
+          IconButton(onPressed: () => _logout(context, ref), icon: const Icon(Icons.logout)),
         ],
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(24),
         child: ListView(
           children: [
-            const Text(
-              'Hola 👋',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
+            const Text('Hola 👋', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900)),
             const SizedBox(height: 8),
-            const Text(
-              'El hogar digital de tus mascotas.',
-              style: TextStyle(fontSize: 17),
-            ),
+            const Text('El hogar digital de tus mascotas.', style: TextStyle(fontSize: 17)),
             const SizedBox(height: 24),
-            _HomeCard(
-              icon: '🐶',
-              title: 'Mis mascotas',
-              subtitle: 'Registra y administra tus mascotas.',
-              onTap: () => context.go(PetsScreen.route),
-            ),
-            _HomeCard(
-              icon: '📍',
-              title: 'Mascotas perdidas',
-              subtitle: 'Reportes y alertas por zona.',
-              onTap: () {},
-            ),
-            _HomeCard(
-              icon: '🏥',
-              title: 'Servicios cercanos',
-              subtitle: 'Veterinarias, groomers, tiendas y más.',
-              onTap: () {},
-            ),
+            _HomeCard(icon: '🐶', title: 'Mis mascotas', subtitle: 'Registra y administra tus mascotas.', onTap: () => context.go(PetsScreen.route)),
+            _HomeCard(icon: '📍', title: 'Mascotas perdidas', subtitle: 'Reportes y alertas por zona.', onTap: () => context.go(LostPetsScreen.route)),
+            _HomeCard(icon: '🏥', title: 'Servicios cercanos', subtitle: 'Veterinarias, groomers, tiendas y más.', onTap: () {}),
           ],
         ),
       ),
@@ -74,12 +45,7 @@ class HomeScreen extends ConsumerWidget {
 }
 
 class _HomeCard extends StatelessWidget {
-  const _HomeCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-  });
+  const _HomeCard({required this.icon, required this.title, required this.subtitle, required this.onTap});
 
   final String icon;
   final String title;
@@ -97,22 +63,13 @@ class _HomeCard extends StatelessWidget {
           padding: const EdgeInsets.all(18),
           child: Row(
             children: [
-              Text(
-                icon,
-                style: const TextStyle(fontSize: 36),
-              ),
+              Text(icon, style: const TextStyle(fontSize: 36)),
               const SizedBox(width: 18),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 18,
-                      ),
-                    ),
+                    Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
                     const SizedBox(height: 4),
                     Text(subtitle),
                   ],

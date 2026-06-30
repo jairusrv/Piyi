@@ -1,25 +1,18 @@
-# Piyí - Sprint 05.05 Flutter Report Lost Pet
+# Piyí - Sprint 05.06 Flutter Lost Pets List
 
 ## Objetivo
-
-Agregar flujo para reportar una mascota como perdida desde la app móvil.
+Agregar listado público de mascotas perdidas en Flutter.
 
 ## Incluye
-
-- Pantalla `ReportLostPetScreen`.
-- Repositorio para lost pets.
-- Navegación desde detalle de mascota.
-- Formulario inicial sin mapa todavía.
-- Envío al backend:
-  POST /api/pets/{petId}/lost-pets
-
-## Cómo aplicar
+- Pantalla de mascotas perdidas.
+- Detalle público de reporte.
+- Filtro por ciudad/provincia.
+- Acceso desde Home.
+- Consumo de GET /api/lost-pets y GET /api/lost-pets/{id}.
 
 Extraer sobre:
-
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 
 Luego:
-
 flutter pub get
 flutter run
