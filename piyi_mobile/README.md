@@ -1,17 +1,19 @@
-# Piyí - Sprint 05.04 Flutter Pet Profile Visual
+# Piyí - Sprint 05.05 Flutter Report Lost Pet
 
 ## Objetivo
 
-Mejorar visualmente el perfil de mascota.
+Agregar flujo para reportar una mascota como perdida desde la app móvil.
 
-Incluye:
-- Header visual de mascota.
-- Acciones rápidas.
-- Botón Reportar perdida preparado.
-- Resumen de salud.
-- Tarjetas mejoradas para QR, vacunas, recordatorios y citas.
+## Incluye
 
-## Aplicar
+- Pantalla `ReportLostPetScreen`.
+- Repositorio para lost pets.
+- Navegación desde detalle de mascota.
+- Formulario inicial sin mapa todavía.
+- Envío al backend:
+  POST /api/pets/{petId}/lost-pets
+
+## Cómo aplicar
 
 Extraer sobre:
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../lost_pets/presentation/report_lost_pet_screen.dart';
 import 'pet_health_controller.dart';
 import 'pets_controller.dart';
 import '../data/pet_health_repository.dart';
@@ -180,11 +182,7 @@ class _ActionPanel extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             FilledButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Reportar perdida se agregará en el próximo sprint.')),
-                );
-              },
+              onPressed: () => context.go(ReportLostPetScreen.path(petId)),
               icon: const Icon(Icons.location_on),
               label: const Text('Reportar como perdida'),
             ),
@@ -302,7 +300,6 @@ class _VaccinesTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(petVaccinesProvider(petId));
-
     return _AsyncList(
       asyncValue: async,
       emptyIcon: Icons.vaccines,
@@ -310,7 +307,7 @@ class _VaccinesTab extends ConsumerWidget {
       itemBuilder: (vaccine) => ListTile(
         leading: const Icon(Icons.vaccines),
         title: Text(vaccine.name),
-        subtitle: Text('Aplicada: ${vaccine.appliedDate ?? 'No indicada'}\nPróxima: ${vaccine.nextDueDate ?? 'No indicada'}'),
+        subtitle: Text('Aplicada: ${vaccine.appliedDate ?? 'No indicada'}\\nPróxima: ${vaccine.nextDueDate ?? 'No indicada'}'),
       ),
     );
   }
@@ -323,7 +320,6 @@ class _RemindersTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(petRemindersProvider(petId));
-
     return _AsyncList(
       asyncValue: async,
       emptyIcon: Icons.notifications_none,
@@ -331,7 +327,7 @@ class _RemindersTab extends ConsumerWidget {
       itemBuilder: (reminder) => ListTile(
         leading: Icon(reminder.isCompleted ? Icons.check_circle : Icons.notifications),
         title: Text(reminder.title),
-        subtitle: Text('${reminder.type}\n${reminder.reminderDate}'),
+        subtitle: Text('${reminder.type}\\n${reminder.reminderDate}'),
       ),
     );
   }
@@ -344,7 +340,6 @@ class _AppointmentsTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(petAppointmentsProvider(petId));
-
     return _AsyncList(
       asyncValue: async,
       emptyIcon: Icons.event_available,
@@ -352,7 +347,7 @@ class _AppointmentsTab extends ConsumerWidget {
       itemBuilder: (appointment) => ListTile(
         leading: const Icon(Icons.event),
         title: Text(appointment.title),
-        subtitle: Text('${appointment.type} · ${appointment.status}\n${appointment.appointmentDateTime}\n${appointment.placeName ?? ''}'),
+        subtitle: Text('${appointment.type} · ${appointment.status}\\n${appointment.appointmentDateTime}\\n${appointment.placeName ?? ''}'),
       ),
     );
   }
