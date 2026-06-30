@@ -4,6 +4,7 @@ public enum BusinessStatus
 {
     Pending = 1,
     Active = 2,
-    Suspended = 3,
-    Rejected = 4
+    Inactive = 3,
+    Suspended = 4,
+    Rejected = 5
 }

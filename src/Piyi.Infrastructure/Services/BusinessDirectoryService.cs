@@ -23,7 +23,7 @@ public sealed class BusinessDirectoryService : IBusinessDirectoryService
         var query = _dbContext.Businesses
             .AsNoTracking()
             .Include(x => x.BusinessType)
-            .Where(x => !x.IsDeleted && x.IsActive);
+            .Where(x => !x.IsDeleted)
 
         if (!string.IsNullOrWhiteSpace(search))
         {
@@ -74,8 +74,10 @@ public sealed class BusinessDirectoryService : IBusinessDirectoryService
             .Include(x => x.Photos)
             .Include(x => x.Services)
             .Include(x => x.Schedules)
-            .FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted && x.IsActive, cancellationToken);
-
+           .FirstOrDefaultAsync(x =>
+    x.Id == id &&
+    !x.IsDeleted,
+    cancellationToken);
         if (business is null)
             return Result<BusinessDetailResponse>.Failure("Negocio no encontrado.");
 

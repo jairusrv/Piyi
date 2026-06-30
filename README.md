@@ -1,20 +1,19 @@
-# Piyí - Sprint 03.03 Admin Business Create
+# Piyí - Sprint 03.03.1 Business Domain Fix
 
 ## Objetivo
 
-Agregar endpoints protegidos para que un administrador pueda crear y actualizar negocios.
-
-## Endpoints
+Corregir inconsistencia detectada en negocios:
 
 ```text
-POST /api/admin/businesses
-PUT  /api/admin/businesses/{id}
-PUT  /api/admin/businesses/{id}/verify
-PUT  /api/admin/businesses/{id}/activate
-PUT  /api/admin/businesses/{id}/deactivate
+Business no contiene una definición para IsActive
 ```
 
-Requieren JWT con rol `Admin`.
+## Qué corrige
+
+- Agrega `IsActive` a `Business`.
+- Deja `Business` alineado con el directorio público y Admin.
+- Actualiza `BusinessStatus`.
+- Actualiza `BusinessConfiguration`.
 
 ## Cómo aplicar
 
@@ -31,6 +30,11 @@ dotnet restore
 dotnet build
 ```
 
-## Nota
+Si ya tienes migraciones creadas, después de compilar crea migración:
 
-Si todavía no tienes un usuario Admin, luego agregaremos endpoint/seed temporal para promover tu usuario.
+```powershell
+dotnet ef migrations add AddBusinessIsActive `
+  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
+  --startup-project .\src\Piyi.API\Piyi.API.csproj `
+  --output-dir Data\Migrations
+```
