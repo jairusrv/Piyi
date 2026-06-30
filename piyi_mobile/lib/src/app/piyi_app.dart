@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:piyi_ui/piyi_ui.dart';
 import 'app_router.dart';
-import 'app_theme.dart';
-
-class PiyiApp extends ConsumerWidget {
-  const PiyiApp({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(appRouterProvider);
-
-    return MaterialApp.router(
-      title: 'Piyí',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      routerConfig: router,
-    );
-  }
-}
+class PiyiApp extends ConsumerWidget { const PiyiApp({super.key}); @override Widget build(BuildContext context, WidgetRef ref) { final router=ref.watch(appRouterProvider); return MaterialApp.router(title:'Piyí',debugShowCheckedModeBanner:false,theme:PiyiTheme.light,darkTheme:PiyiTheme.dark,themeMode:ThemeMode.system,routerConfig:router); }}

@@ -1,24 +1,19 @@
-# Piyí - Sprint 05.14 Flutter Push Diagnostics
+# Piyí - BETA Sprint 02
 
-## Objetivo
-
-Agregar pantalla de diagnóstico de notificaciones push.
+Design System + Dashboard Comercial.
 
 ## Incluye
-
-- Ver si Firebase está inicializado.
-- Ver token push actual.
-- Ver plataforma y deviceId local.
-- Registrar dispositivo desde diagnóstico.
-- Acceso desde Configuración.
+- Paquete interno packages/piyi_ui
+- Theme oficial light/dark
+- Colores, spacing, radius, shadows
+- Botones, cards, inputs, avatar, badges, tiles, stat cards, banner, empty/loading
+- Dashboard comercial renovado
+- Bottom navigation
 
 ## Aplicar
-
 Extraer sobre:
-
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 
 Luego:
-
 flutter pub get
 flutter run

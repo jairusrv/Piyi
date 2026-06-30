@@ -1,98 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:piyi_ui/piyi_ui.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/login_screen.dart';
 import '../../businesses/presentation/businesses_screen.dart';
+import '../../dashboard/presentation/dashboard_controller.dart';
 import '../../lost_pets/presentation/lost_pets_screen.dart';
 import '../../notifications/presentation/notifications_screen.dart';
 import '../../pets/presentation/pets_screen.dart';
 import '../../profile/presentation/profile_settings_screen.dart';
-
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
-
-  static const route = '/home';
-
-  Future<void> _logout(BuildContext context, WidgetRef ref) async {
-    await ref.read(authRepositoryProvider).logout();
-    if (context.mounted) context.go(LoginScreen.route);
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Piyí'),
-        actions: [
-          IconButton(
-            onPressed: () => context.go(NotificationsScreen.route),
-            icon: const Icon(Icons.notifications),
-          ),
-          IconButton(
-            onPressed: () => context.go(ProfileSettingsScreen.route),
-            icon: const Icon(Icons.settings),
-          ),
-          IconButton(onPressed: () => _logout(context, ref), icon: const Icon(Icons.logout)),
-        ],
-      ),
-      body: SafeArea(
-        minimum: const EdgeInsets.all(24),
-        child: ListView(
-          children: [
-            const Text('Hola 👋', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900)),
-            const SizedBox(height: 8),
-            const Text('El hogar digital de tus mascotas.', style: TextStyle(fontSize: 17)),
-            const SizedBox(height: 24),
-            _HomeCard(icon: '🐶', title: 'Mis mascotas', subtitle: 'Registra y administra tus mascotas.', onTap: () => context.go(PetsScreen.route)),
-            _HomeCard(icon: '📍', title: 'Mascotas perdidas', subtitle: 'Reportes y alertas por zona.', onTap: () => context.go(LostPetsScreen.route)),
-            _HomeCard(icon: '🏥', title: 'Servicios cercanos', subtitle: 'Veterinarias, groomers, tiendas y más.', onTap: () => context.go(BusinessesScreen.route)),
-            _HomeCard(icon: '🔔', title: 'Notificaciones', subtitle: 'Alertas y avisos importantes.', onTap: () => context.go(NotificationsScreen.route)),
-            _HomeCard(icon: '⚙️', title: 'Configuración', subtitle: 'Alertas, ubicación y preferencias.', onTap: () => context.go(ProfileSettingsScreen.route)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _HomeCard extends StatelessWidget {
-  const _HomeCard({required this.icon, required this.title, required this.subtitle, required this.onTap});
-
-  final String icon;
-  final String title;
-  final String subtitle;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Row(
-            children: [
-              Text(icon, style: const TextStyle(fontSize: 36)),
-              const SizedBox(width: 18),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
-                    const SizedBox(height: 4),
-                    Text(subtitle),
-                  ],
-                ),
-              ),
-              const Icon(Icons.chevron_right),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+class HomeScreen extends ConsumerStatefulWidget{const HomeScreen({super.key});static const route='/home';@override ConsumerState<HomeScreen> createState()=>_HomeScreenState();}
+class _HomeScreenState extends ConsumerState<HomeScreen>{int _selectedIndex=0;Future<void> _logout(BuildContext context) async{await ref.read(authRepositoryProvider).logout();if(context.mounted)context.go(LoginScreen.route);}void _onBottomTap(int index){setState(()=>_selectedIndex=index);switch(index){case 1:context.go(PetsScreen.route);break;case 2:context.go(BusinessesScreen.route);break;case 3:context.go(LostPetsScreen.route);break;case 4:context.go(ProfileSettingsScreen.route);break;}}
+@override Widget build(BuildContext context){final summaryAsync=ref.watch(dashboardSummaryProvider);final activities=ref.watch(dashboardActivitiesProvider);return Scaffold(appBar:PiyiAppBar(title:'Hola Jairo 👋',subtitle:'¿Cómo están tus mascotas hoy?',actions:[IconButton(onPressed:()=>context.go(NotificationsScreen.route),icon:const Icon(Icons.notifications)),IconButton(onPressed:()=>context.go(ProfileSettingsScreen.route),icon:const Icon(Icons.settings)),IconButton(onPressed:()=>_logout(context),icon:const Icon(Icons.logout))]),bottomNavigationBar:PiyiBottomNavigation(currentIndex:_selectedIndex,onTap:_onBottomTap),body:SafeArea(child:RefreshIndicator(onRefresh:() async{ref.invalidate(dashboardSummaryProvider);},child:ListView(padding:const EdgeInsets.all(PiyiSpacing.md),children:[PiyiBannerCard(icon:Icons.favorite,title:'Piyí Beta',subtitle:'Construyendo la app de mascotas más completa de Costa Rica.',color:PiyiColors.primary),const SizedBox(height:PiyiSpacing.xl),PiyiSection(title:'Resumen',child:summaryAsync.when(data:(summary)=>GridView.count(crossAxisCount:2,shrinkWrap:true,physics:const NeverScrollableScrollPhysics(),mainAxisSpacing:PiyiSpacing.md,crossAxisSpacing:PiyiSpacing.md,childAspectRatio:1.55,children:[PiyiStatCard(icon:Icons.pets,title:'Mascotas',value:'${summary.petsCount}',color:PiyiColors.primary,onTap:()=>context.go(PetsScreen.route)),PiyiStatCard(icon:Icons.location_on,title:'Perdidas',value:'${summary.lostPetsCount}',color:PiyiColors.error,onTap:()=>context.go(LostPetsScreen.route)),PiyiStatCard(icon:Icons.notifications,title:'Alertas',value:'${summary.notificationsCount}',color:PiyiColors.warning,onTap:()=>context.go(NotificationsScreen.route)),PiyiStatCard(icon:Icons.store,title:'Negocios',value:'${summary.businessesCount}',color:PiyiColors.secondary,onTap:()=>context.go(BusinessesScreen.route))]),error:(e,_)=>PiyiEmptyState(icon:Icons.error_outline,title:'No pudimos cargar el resumen',message:'$e',actionLabel:'Reintentar',onAction:()=>ref.invalidate(dashboardSummaryProvider)),loading:()=>GridView.count(crossAxisCount:2,shrinkWrap:true,physics:const NeverScrollableScrollPhysics(),mainAxisSpacing:PiyiSpacing.md,crossAxisSpacing:PiyiSpacing.md,childAspectRatio:1.55,children:const[PiyiLoadingCard(),PiyiLoadingCard(),PiyiLoadingCard(),PiyiLoadingCard()]))),const SizedBox(height:PiyiSpacing.xl),PiyiSection(title:'Accesos rápidos',child:Column(children:[PiyiTile(icon:Icons.pets,title:'Mis mascotas',subtitle:'Registra y administra tus mascotas.',color:PiyiColors.primary,onTap:()=>context.go(PetsScreen.route)),const SizedBox(height:PiyiSpacing.sm),PiyiTile(icon:Icons.location_on,title:'Mascotas perdidas',subtitle:'Reportes, alertas y avistamientos.',color:PiyiColors.error,onTap:()=>context.go(LostPetsScreen.route)),const SizedBox(height:PiyiSpacing.sm),PiyiTile(icon:Icons.store,title:'Servicios cercanos',subtitle:'Veterinarias, groomers, tiendas y hoteles.',color:PiyiColors.secondary,onTap:()=>context.go(BusinessesScreen.route)),const SizedBox(height:PiyiSpacing.sm),PiyiTile(icon:Icons.settings,title:'Configuración',subtitle:'Alertas por zona, dispositivos y perfil.',color:PiyiColors.info,onTap:()=>context.go(ProfileSettingsScreen.route))])),const SizedBox(height:PiyiSpacing.xl),PiyiSection(title:'Actividad reciente',actionLabel:'Ver alertas',onActionTap:()=>context.go(NotificationsScreen.route),child:Column(children:activities.map((a)=>Padding(padding:const EdgeInsets.only(bottom:PiyiSpacing.sm),child:PiyiTile(icon:_iconFromName(a.iconName),title:a.title,subtitle:a.subtitle,color:PiyiColors.primary))).toList())),const SizedBox(height:PiyiSpacing.xl)]))));}
+IconData _iconFromName(String name){switch(name){case 'notifications':return Icons.notifications;case 'phone':return Icons.phone_android;case 'pets':default:return Icons.pets;}}
 }
