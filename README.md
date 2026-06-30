@@ -1,28 +1,21 @@
-# Piyí - Sprint 02.01 Pets Base
+# Piyí - Sprint 02.02 Pet Catalogs
 
 ## Objetivo
 
-Implementar el primer módulo central de Piyí: mascotas.
+Agregar catálogos básicos para el registro de mascotas.
 
 Incluye:
 
-- Crear mascota.
-- Listar mis mascotas.
-- Ver detalle de mascota.
-- Actualizar mascota.
-- Eliminar mascota con soft delete.
+- Listar especies.
+- Listar razas por especie.
+- Endpoint público para catálogos.
 
 ## Endpoints
 
 ```text
-GET    /api/pets
-GET    /api/pets/{id}
-POST   /api/pets
-PUT    /api/pets/{id}
-DELETE /api/pets/{id}
+GET /api/catalogs/species
+GET /api/catalogs/species/{speciesId}/breeds
 ```
-
-Todos requieren JWT.
 
 ## Cómo aplicar
 
@@ -39,12 +32,6 @@ dotnet restore
 dotnet build
 ```
 
-## Prueba manual
+## Nota
 
-1. Registrar usuario.
-2. Login.
-3. Autorizar Swagger con Bearer Token.
-4. Crear una mascota.
-5. Listar mascotas.
-6. Editar mascota.
-7. Eliminar mascota.
+Estos endpoints no requieren JWT porque la pantalla de registro de mascota necesita cargar catálogos de forma simple.

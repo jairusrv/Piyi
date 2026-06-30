@@ -28,6 +28,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPetService, PetService>();
+        services.AddScoped<ICatalogService, CatalogService>();
 
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? new JwtSettings();
         var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
