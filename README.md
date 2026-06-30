@@ -1,13 +1,14 @@
-# Piyí - Sprint 01.01.1 Auth Users Fix
+# Piyí - Sprint 01.03 User Profile
 
 ## Objetivo
 
-Corregir errores detectados en Sprint 01.01:
+Completar el módulo base de usuario autenticado.
 
-- `User` no tenía `PhoneNumber`.
-- `User` no tenía `IsActive`.
-- `CreatedAt` usa `DateTimeOffset` y el DTO esperaba `DateTime`.
-- `ReviewConfiguration` tenía `HasCheckConstraint` obsoleto.
+Incluye:
+
+- `GET /api/users/me`
+- `PUT /api/users/me`
+- `PUT /api/users/change-password`
 
 ## Cómo aplicar
 
@@ -22,6 +23,28 @@ Luego ejecutar:
 ```powershell
 dotnet restore
 dotnet build
+dotnet run --project .\src\Piyi.API\Piyi.API.csproj
 ```
 
-Si compila, continuamos con migración inicial.
+## Pruebas
+
+1. Registrar usuario en `/api/auth/register`.
+2. Iniciar sesión en `/api/auth/login`.
+3. Copiar token.
+4. En Swagger usar `Authorize` con:
+
+```text
+Bearer TU_TOKEN
+```
+
+5. Probar:
+
+```text
+GET /api/users/me
+PUT /api/users/me
+PUT /api/users/change-password
+```
+
+## Nota
+
+Este sprint depende de que Sprint 01.01.1 ya esté aplicado.
