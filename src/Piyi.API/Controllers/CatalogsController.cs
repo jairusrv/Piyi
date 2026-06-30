@@ -18,7 +18,6 @@ public sealed class CatalogsController : ControllerBase
     public async Task<IActionResult> GetSpecies(CancellationToken cancellationToken)
     {
         var result = await _catalogService.GetSpeciesAsync(cancellationToken);
-
         return Ok(result.Value);
     }
 
@@ -30,6 +29,13 @@ public sealed class CatalogsController : ControllerBase
         if (result.IsFailure)
             return NotFound(new { message = result.Error });
 
+        return Ok(result.Value);
+    }
+
+    [HttpGet("business-types")]
+    public async Task<IActionResult> GetBusinessTypes(CancellationToken cancellationToken)
+    {
+        var result = await _catalogService.GetBusinessTypesAsync(cancellationToken);
         return Ok(result.Value);
     }
 }

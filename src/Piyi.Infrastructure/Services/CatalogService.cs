@@ -61,4 +61,22 @@ public sealed class CatalogService : ICatalogService
 
         return Result<IReadOnlyList<BreedResponse>>.Success(items);
     }
+
+    public async Task<Result<IReadOnlyList<BusinessTypeResponse>>> GetBusinessTypesAsync(CancellationToken cancellationToken = default)
+    {
+        var items = await _dbContext.BusinessTypes
+            .AsNoTracking()
+            .Where(x => !x.IsDeleted)
+            .OrderBy(x => x.Name)
+            .Select(x => new BusinessTypeResponse
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Code = x.Code,
+                Icon = x.Icon
+            })
+            .ToListAsync(cancellationToken);
+
+        return Result<IReadOnlyList<BusinessTypeResponse>>.Success(items);
+    }
 }

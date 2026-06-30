@@ -8,4 +8,6 @@ public interface ICatalogService
     Task<Result<IReadOnlyList<SpeciesResponse>>> GetSpeciesAsync(CancellationToken cancellationToken = default);
 
     Task<Result<IReadOnlyList<BreedResponse>>> GetBreedsBySpeciesAsync(Guid speciesId, CancellationToken cancellationToken = default);
+
+    Task<Result<IReadOnlyList<BusinessTypeResponse>>> GetBusinessTypesAsync(CancellationToken cancellationToken = default);
 }

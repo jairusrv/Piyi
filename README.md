@@ -1,42 +1,28 @@
-# Piyí - Sprint 02.05 Pet Appointments
+# Piyí - Sprint 03.01 Business Directory Base
 
 ## Objetivo
 
-Agregar citas para mascotas: veterinaria, grooming, hotel, paseo, entrenamiento u otro servicio.
+Agregar la primera versión pública del directorio de negocios.
 
-## Endpoints
+Incluye:
 
-```text
-GET    /api/pets/{petId}/appointments
-GET    /api/pets/{petId}/appointments/{appointmentId}
-POST   /api/pets/{petId}/appointments
-PUT    /api/pets/{petId}/appointments/{appointmentId}
-DELETE /api/pets/{petId}/appointments/{appointmentId}
-PUT    /api/pets/{petId}/appointments/{appointmentId}/complete
-PUT    /api/pets/{petId}/appointments/{appointmentId}/cancel
-```
+- Listar tipos de negocio.
+- Buscar negocios por texto.
+- Ver detalle básico de negocio.
 
-Todos requieren JWT.
-
-## Nota de dominio
-
-Este sprint agrega una nueva entidad:
+## Endpoints públicos
 
 ```text
-PetAppointment
+GET /api/catalogs/business-types
+GET /api/businesses
+GET /api/businesses/{id}
 ```
 
-Si ya tienes migración inicial creada, debes crear una nueva migración:
+## Ejemplos
 
-```powershell
-dotnet ef migrations add AddPetAppointments `
-  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
-  --startup-project .\src\Piyi.API\Piyi.API.csproj `
-  --output-dir Data\Migrations
-
-dotnet ef database update `
-  --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
-  --startup-project .\src\Piyi.API\Piyi.API.csproj
+```text
+GET /api/businesses?search=veterinaria
+GET /api/businesses?businessTypeId=GUID
 ```
 
 ## Cómo aplicar
@@ -53,3 +39,7 @@ Luego:
 dotnet restore
 dotnet build
 ```
+
+## Nota
+
+Este sprint es intencionalmente simple y público. La creación/edición/aprobación de negocios quedará para el Admin.
