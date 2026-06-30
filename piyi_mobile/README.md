@@ -1,19 +1,28 @@
-# Piyí - BETA Sprint 02
+# Piyí - BETA Sprint 03
 
-Design System + Dashboard Comercial.
+## Dashboard Comercial v2 + Componentes faltantes
 
-## Incluye
-- Paquete interno packages/piyi_ui
-- Theme oficial light/dark
-- Colores, spacing, radius, shadows
-- Botones, cards, inputs, avatar, badges, tiles, stat cards, banner, empty/loading
-- Dashboard comercial renovado
-- Bottom navigation
+Este sprint agrega:
 
-## Aplicar
+- Componentes nuevos en `piyi_ui`
+- Dashboard más profesional
+- Acciones rápidas en grid
+- Timeline de actividad reciente
+- Tarjetas de recordatorios
+- Tarjetas de alertas
+- Home renovado sobre Design System
+
+## Cómo aplicar
+
 Extraer sobre:
+
+```powershell
 C:\Users\jairo\Documents\Piyi\piyi_mobile
+```
 
 Luego:
+
+```powershell
 flutter pub get
 flutter run
+```
