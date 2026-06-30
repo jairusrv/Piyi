@@ -1,31 +1,23 @@
-# Piyí - Sprint 03.05 Admin Developer Tools
+# Piyí - Sprint 04.01 Lost Pets Base
 
 ## Objetivo
 
-Agregar herramientas temporales de desarrollo para poder probar endpoints de administrador.
+Agregar módulo base de mascotas perdidas.
 
-Incluye:
-
-- Promover usuario a Admin por correo.
-- Endpoint solo disponible en Development.
-
-## Endpoint
+## Endpoints públicos
 
 ```text
-POST /api/dev/users/promote-admin
+GET /api/lost-pets
+GET /api/lost-pets/{id}
 ```
 
-Body:
+## Endpoints protegidos
 
-```json
-{
-  "email": "tu-correo@correo.com"
-}
+```text
+POST /api/pets/{petId}/lost-pets
+PUT  /api/lost-pets/{id}/found
+PUT  /api/lost-pets/{id}/close
 ```
-
-## Importante
-
-Este controller queda protegido para ambiente Development. No debe usarse en producción.
 
 ## Cómo aplicar
 
@@ -40,13 +32,4 @@ Luego:
 ```powershell
 dotnet restore
 dotnet build
-dotnet run --project .\src\Piyi.API\Piyi.API.csproj
 ```
-
-## Flujo de prueba
-
-1. Registrar usuario.
-2. Ejecutar `POST /api/dev/users/promote-admin`.
-3. Hacer login nuevamente.
-4. Usar token nuevo.
-5. Probar endpoints `/api/admin/...`.
