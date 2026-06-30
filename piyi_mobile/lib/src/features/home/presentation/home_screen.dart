@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/login_screen.dart';
+import '../../pets/presentation/pets_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -43,24 +44,27 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Aquí empezará el hogar digital de tus mascotas.',
+              'El hogar digital de tus mascotas.',
               style: TextStyle(fontSize: 17),
             ),
             const SizedBox(height: 24),
             _HomeCard(
               icon: '🐶',
               title: 'Mis mascotas',
-              subtitle: 'Próximo sprint: listar y registrar mascotas.',
+              subtitle: 'Registra y administra tus mascotas.',
+              onTap: () => context.go(PetsScreen.route),
             ),
             _HomeCard(
               icon: '📍',
               title: 'Mascotas perdidas',
               subtitle: 'Reportes y alertas por zona.',
+              onTap: () {},
             ),
             _HomeCard(
               icon: '🏥',
               title: 'Servicios cercanos',
               subtitle: 'Veterinarias, groomers, tiendas y más.',
+              onTap: () {},
             ),
           ],
         ),
@@ -74,42 +78,49 @@ class _HomeCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
+    required this.onTap,
   });
 
   final String icon;
   final String title;
   final String subtitle;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Row(
-          children: [
-            Text(
-              icon,
-              style: const TextStyle(fontSize: 36),
-            ),
-            const SizedBox(width: 18),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(subtitle),
-                ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              Text(
+                icon,
+                style: const TextStyle(fontSize: 36),
               ),
-            ),
-          ],
+              const SizedBox(width: 18),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(subtitle),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
         ),
       ),
     );

@@ -1,66 +1,43 @@
-# Piyí - Sprint 05.01 Flutter Mobile Foundation
+# Piyí - Sprint 05.02 Flutter Pets
 
 ## Objetivo
 
-Crear la base inicial de la app móvil Flutter.
+Agregar módulo de mascotas a la app Flutter.
 
-Este sprint incluye:
+Incluye:
 
-- Estructura de carpetas.
-- Tema visual base de Piyí.
-- Rutas principales.
-- Cliente HTTP base.
-- Configuración de API.
-- Pantallas iniciales:
-  - Splash
-  - Login
-  - Register
-  - Home
+- Listar mis mascotas.
+- Crear mascota.
+- Cargar especies.
+- Cargar razas por especie.
+- Navegación desde Home.
+- Pantalla de detalle básica.
 
-## Cómo crear el proyecto Flutter
+## Cómo aplicar
 
-Desde:
+Extraer sobre:
 
 ```powershell
-C:\Users\jairo\Documents\Piyi
+C:\Users\jairo\Documents\Piyi\piyi_mobile
 ```
 
-Ejecutar:
+Luego:
 
 ```powershell
-flutter create Piyi.Mobile
-```
-
-Luego copiar el contenido de este ZIP dentro de:
-
-```powershell
-C:\Users\jairo\Documents\Piyi\Piyi.Mobile
-```
-
-Después ejecutar:
-
-```powershell
-cd C:\Users\jairo\Documents\Piyi\Piyi.Mobile
 flutter pub get
 flutter run
 ```
 
-## Paquetes usados
+## Requisitos
 
-```yaml
-flutter_riverpod
-dio
-go_router
-flutter_secure_storage
-google_fonts
-```
-
-## Nota
-
-En Android emulator, `localhost` apunta al emulador, no a tu PC. Por eso usamos:
+Backend corriendo en:
 
 ```text
 http://10.0.2.2:5105
 ```
 
-Para celular físico, luego cambiaremos la URL por la IP local de tu computadora o por el API publicado.
+Si usas celular físico, cambia la URL en:
+
+```text
+lib/src/core/config/api_config.dart
+```
