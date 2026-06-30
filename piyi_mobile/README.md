@@ -1,17 +1,14 @@
-# Piyí - Sprint 05.02 Flutter Pets
+# Piyí - Sprint 05.03 Flutter QR & Health REAL
 
 ## Objetivo
 
-Agregar módulo de mascotas a la app Flutter.
+Agregar al detalle de mascota:
 
-Incluye:
-
-- Listar mis mascotas.
-- Crear mascota.
-- Cargar especies.
-- Cargar razas por especie.
-- Navegación desde Home.
-- Pantalla de detalle básica.
+- Información general
+- QR
+- Vacunas
+- Recordatorios
+- Citas
 
 ## Cómo aplicar
 
@@ -26,18 +23,4 @@ Luego:
 ```powershell
 flutter pub get
 flutter run
-```
-
-## Requisitos
-
-Backend corriendo en:
-
-```text
-http://10.0.2.2:5105
-```
-
-Si usas celular físico, cambia la URL en:
-
-```text
-lib/src/core/config/api_config.dart
 ```

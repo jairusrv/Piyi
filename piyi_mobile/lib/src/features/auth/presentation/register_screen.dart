@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:dio/dio.dart';
 import '../../home/presentation/home_screen.dart';
 import '../data/auth_repository.dart';
 
@@ -49,8 +49,27 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
       if (!mounted) return;
       context.go(HomeScreen.route);
+    } on DioException catch (e) {
+      final data = e.response?.data;
+
+      String message = 'No se pudo registrar.';
+
+      if (data is Map && data['message'] != null) {
+        message = data['message'].toString();
+      } else if (data != null) {
+        message = data.toString();
+      } else {
+        message = e.message ?? message;
+      }
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
     } catch (e) {
       if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('No se pudo registrar: $e')),
       );
@@ -84,7 +103,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'Correo electrónico'),
+              decoration:
+                  const InputDecoration(labelText: 'Correo electrónico'),
             ),
             const SizedBox(height: 16),
             TextField(
