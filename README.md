@@ -1,29 +1,32 @@
-# Piyí - Sprint 03.01 Business Directory Base
+# Piyí - Sprint 03.02 Business Profile Detail
 
 ## Objetivo
 
-Agregar la primera versión pública del directorio de negocios.
-
-Incluye:
-
-- Listar tipos de negocio.
-- Buscar negocios por texto.
-- Ver detalle básico de negocio.
+Ampliar el directorio de negocios para que el usuario vea información útil de veterinarias, groomers, tiendas, hoteles, paseadores y otros servicios.
 
 ## Endpoints públicos
 
 ```text
-GET /api/catalogs/business-types
 GET /api/businesses
 GET /api/businesses/{id}
 ```
 
-## Ejemplos
+## Información incluida
 
-```text
-GET /api/businesses?search=veterinaria
-GET /api/businesses?businessTypeId=GUID
-```
+- Descripción
+- Teléfono
+- WhatsApp
+- Email
+- Website
+- Redes sociales
+- Dirección
+- País / Región / Ciudad
+- Latitud / Longitud
+- Logo
+- Estado verificado
+- Servicios
+- Fotos
+- Horarios
 
 ## Cómo aplicar
 
@@ -42,4 +45,4 @@ dotnet build
 
 ## Nota
 
-Este sprint es intencionalmente simple y público. La creación/edición/aprobación de negocios quedará para el Admin.
+Este sprint solo mejora lectura pública. La administración de negocios vendrá en el panel Admin.
