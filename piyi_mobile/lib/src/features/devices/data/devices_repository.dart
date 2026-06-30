@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/device/device_identity_service.dart';
+import '../../../core/firebase/push_token_service.dart';
 import '../../../core/network/api_client.dart';
 import 'device_models.dart';
 
@@ -9,6 +10,7 @@ final devicesRepositoryProvider = Provider<DevicesRepository>((ref) {
   return DevicesRepository(
     dio: ref.watch(dioProvider),
     identityService: ref.watch(deviceIdentityServiceProvider),
+    pushTokenService: ref.watch(pushTokenServiceProvider),
   );
 });
 
@@ -16,11 +18,14 @@ class DevicesRepository {
   DevicesRepository({
     required Dio dio,
     required DeviceIdentityService identityService,
+    required PushTokenService pushTokenService,
   })  : _dio = dio,
-        _identityService = identityService;
+        _identityService = identityService,
+        _pushTokenService = pushTokenService;
 
   final Dio _dio;
   final DeviceIdentityService _identityService;
+  final PushTokenService _pushTokenService;
 
   Future<List<UserDevice>> getMyDevices() async {
     final response = await _dio.get('/api/users/me/devices');
@@ -33,7 +38,7 @@ class DevicesRepository {
     final deviceIdentifier = await _identityService.getOrCreateDeviceIdentifier();
     final platform = await _identityService.getPlatform();
     final deviceName = await _identityService.getDeviceName();
-    final pushToken = await _identityService.getDevelopmentPushToken();
+    final pushToken = await _pushTokenService.getPushToken();
 
     final response = await _dio.post(
       '/api/users/me/devices',

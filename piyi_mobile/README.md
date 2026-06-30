@@ -1,20 +1,26 @@
-# Piyí - Sprint 05.12 Flutter Device Registration
+# Piyí - Sprint 05.13 Flutter Firebase Base
 
 ## Objetivo
 
-Registrar dispositivo móvil en backend para preparar notificaciones push.
+Preparar Flutter para Firebase Cloud Messaging sin romper desarrollo local.
 
 ## Incluye
 
-- Pantalla de dispositivos.
-- Registro de dispositivo.
-- Token push temporal de desarrollo.
-- Listado de dispositivos.
-- Desactivar dispositivo.
-- Consumo de:
-  - GET /api/users/me/devices
-  - POST /api/users/me/devices
-  - DELETE /api/users/me/devices/{deviceId}
+- Dependencias Firebase.
+- Inicialización segura de Firebase.
+- Servicio para obtener token FCM.
+- Fallback a token DEV si Firebase no está configurado.
+- Registro de dispositivo actualizado.
+
+## Importante
+
+Este sprint compila aunque Firebase aún no esté configurado oficialmente, porque tiene fallback.
+
+Más adelante agregaremos:
+- firebase_options.dart generado por FlutterFire CLI.
+- google-services.json.
+- permisos Android.
+- recepción de notificaciones en foreground/background.
 
 ## Aplicar
 
