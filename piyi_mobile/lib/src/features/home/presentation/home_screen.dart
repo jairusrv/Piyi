@@ -6,6 +6,7 @@ import '../../auth/data/auth_repository.dart';
 import '../../auth/presentation/login_screen.dart';
 import '../../businesses/presentation/businesses_screen.dart';
 import '../../lost_pets/presentation/lost_pets_screen.dart';
+import '../../notifications/presentation/notifications_screen.dart';
 import '../../pets/presentation/pets_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -24,6 +25,10 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Piyí'),
         actions: [
+          IconButton(
+            onPressed: () => context.go(NotificationsScreen.route),
+            icon: const Icon(Icons.notifications),
+          ),
           IconButton(onPressed: () => _logout(context, ref), icon: const Icon(Icons.logout)),
         ],
       ),
@@ -38,6 +43,7 @@ class HomeScreen extends ConsumerWidget {
             _HomeCard(icon: '🐶', title: 'Mis mascotas', subtitle: 'Registra y administra tus mascotas.', onTap: () => context.go(PetsScreen.route)),
             _HomeCard(icon: '📍', title: 'Mascotas perdidas', subtitle: 'Reportes y alertas por zona.', onTap: () => context.go(LostPetsScreen.route)),
             _HomeCard(icon: '🏥', title: 'Servicios cercanos', subtitle: 'Veterinarias, groomers, tiendas y más.', onTap: () => context.go(BusinessesScreen.route)),
+            _HomeCard(icon: '🔔', title: 'Notificaciones', subtitle: 'Alertas y avisos importantes.', onTap: () => context.go(NotificationsScreen.route)),
           ],
         ),
       ),

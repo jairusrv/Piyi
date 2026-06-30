@@ -10,6 +10,7 @@ import '../features/lost_pets/presentation/lost_pet_detail_screen.dart';
 import '../features/lost_pets/presentation/lost_pets_screen.dart';
 import '../features/lost_pets/presentation/report_lost_pet_screen.dart';
 import '../features/lost_pets/presentation/report_sighting_screen.dart';
+import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/pets/presentation/create_pet_screen.dart';
 import '../features/pets/presentation/pet_detail_screen.dart';
 import '../features/pets/presentation/pets_screen.dart';
@@ -47,6 +48,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: BusinessDetailScreen.route,
         builder: (context, state) => BusinessDetailScreen(businessId: state.pathParameters['id']!),
       ),
+      GoRoute(path: NotificationsScreen.route, builder: (context, state) => const NotificationsScreen()),
     ],
   );
 });

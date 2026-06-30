@@ -1,18 +1,21 @@
-# Piyí - Sprint 05.08 Flutter Business Directory
-
-## Objetivo
-
-Agregar directorio de negocios en Flutter.
+# Piyí - Sprint 05.09 + 05.10 Flutter Actions & Notifications
 
 ## Incluye
 
-- Pantalla de negocios.
-- Detalle del negocio.
-- Filtro por búsqueda.
+Sprint 05.09:
+- Llamar negocio.
+- Abrir WhatsApp.
+- Abrir Google Maps con ubicación/dirección.
+
+Sprint 05.10:
+- Pantalla de notificaciones internas.
+- Listar notificaciones.
+- Marcar como leída.
 - Acceso desde Home.
-- Consumo de:
-  - GET /api/businesses
-  - GET /api/businesses/{id}
+
+## Importante
+
+Agrega `url_launcher` al pubspec.yaml.
 
 ## Aplicar
 

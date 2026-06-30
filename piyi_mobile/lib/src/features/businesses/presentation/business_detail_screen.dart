@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/external_launcher.dart';
 import 'businesses_controller.dart';
 
 class BusinessDetailScreen extends ConsumerWidget {
@@ -68,7 +69,13 @@ class BusinessDetailScreen extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          await ExternalLauncher.callPhone(business.phone);
+                        } catch (e) {
+                          _showError(context, 'No se pudo llamar.');
+                        }
+                      },
                       icon: const Icon(Icons.phone),
                       label: const Text('Llamar'),
                     ),
@@ -76,7 +83,13 @@ class BusinessDetailScreen extends ConsumerWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          await ExternalLauncher.openWhatsApp(business.whatsApp ?? business.phone);
+                        } catch (e) {
+                          _showError(context, 'No se pudo abrir WhatsApp.');
+                        }
+                      },
                       icon: const Icon(Icons.chat),
                       label: const Text('WhatsApp'),
                     ),
@@ -85,7 +98,17 @@ class BusinessDetailScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               FilledButton.icon(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    await ExternalLauncher.openMaps(
+                      latitude: business.latitude,
+                      longitude: business.longitude,
+                      query: business.address ?? business.name,
+                    );
+                  } catch (e) {
+                    _showError(context, 'No se pudo abrir el mapa.');
+                  }
+                },
                 icon: const Icon(Icons.directions),
                 label: const Text('Cómo llegar'),
               ),
@@ -162,6 +185,10 @@ class BusinessDetailScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  static void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   static String _dayName(int day) {
