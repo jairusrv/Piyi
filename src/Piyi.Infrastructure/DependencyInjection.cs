@@ -37,6 +37,8 @@ public static class DependencyInjection
         services.AddScoped<IAdminBusinessDetailService, AdminBusinessDetailService>();
         services.AddScoped<ILostPetService, LostPetService>();
         services.AddScoped<ILostPetSightingService, LostPetSightingService>();
+        services.AddScoped<IUserAlertSettingService, UserAlertSettingService>();
+        services.AddScoped<ILostPetAlertCandidateService, LostPetAlertCandidateService>();
 
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? new JwtSettings();
         var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);

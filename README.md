@@ -1,37 +1,36 @@
-# Piyí - Sprint 04.03 Lost Pet Sightings
+# Piyí - Sprint 04.04 Location Alerts Base
 
 ## Objetivo
 
-Agregar avistamientos para mascotas perdidas.
+Preparar la base de alertas por zona para mascotas perdidas.
 
-Permite que un usuario reporte que cree haber visto una mascota perdida, incluyendo ubicación, comentario y foto opcional.
+Este sprint NO envía push notifications todavía. Deja lista la estructura para:
 
-## Endpoints públicos/protegidos
+- Guardar zona de alerta del usuario.
+- Activar/desactivar alertas.
+- Consultar configuración actual.
+- Detectar usuarios candidatos a recibir alerta por cercanía.
+- Endpoint admin/dev para simular candidatos.
 
-Crear avistamiento:
+## Endpoints protegidos
+
+Usuario:
 
 ```text
-POST /api/lost-pets/{lostPetId}/sightings
+GET /api/users/me/alert-settings
+PUT /api/users/me/alert-settings
 ```
 
-Listar avistamientos:
+Admin/Dev:
 
 ```text
-GET /api/lost-pets/{lostPetId}/sightings
-```
-
-Administrar avistamiento por dueño del reporte:
-
-```text
-PUT /api/lost-pets/{lostPetId}/sightings/{sightingId}/confirm
-PUT /api/lost-pets/{lostPetId}/sightings/{sightingId}/discard
-DELETE /api/lost-pets/{lostPetId}/sightings/{sightingId}
+GET /api/dev/lost-pets/{lostPetId}/alert-candidates
 ```
 
 ## Nueva entidad
 
 ```text
-LostPetSighting
+UserAlertSetting
 ```
 
 ## Si ya tienes migraciones
@@ -39,7 +38,7 @@ LostPetSighting
 Crear migración:
 
 ```powershell
-dotnet ef migrations add AddLostPetSightings `
+dotnet ef migrations add AddUserAlertSettings `
   --project .\src\Piyi.Infrastructure\Piyi.Infrastructure.csproj `
   --startup-project .\src\Piyi.API\Piyi.API.csproj `
   --output-dir Data\Migrations

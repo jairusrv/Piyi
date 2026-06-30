@@ -12,6 +12,7 @@ public sealed class PiyiDbContext : DbContext
     }
 
     public DbSet<User> Users => Set<User>();
+    public DbSet<UserAlertSetting> UserAlertSettings => Set<UserAlertSetting>();
     public DbSet<AuthProvider> AuthProviders => Set<AuthProvider>();
     public DbSet<Pet> Pets => Set<Pet>();
     public DbSet<Species> Species => Set<Species>();
