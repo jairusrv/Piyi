@@ -1,0 +1,32 @@
+# PATCH MANUAL RECOMENDADO
+
+En tu AuthRepository actual, después de login exitoso, asegúrate de guardar el token usando AuthTokenStore.
+
+Ejemplo:
+
+```dart
+final token = response.data['token'] ?? response.data['accessToken'];
+
+await ref.read(authTokenStoreProvider).saveAccessToken(token);
+```
+
+Si hay refresh token:
+
+```dart
+await ref.read(authTokenStoreProvider).saveRefreshToken(refreshToken);
+```
+
+En logout, llama:
+
+```dart
+await ref.read(sessionManagerProvider).logout();
+```
+
+Si tu AuthRepository ya usa FlutterSecureStorage, asegúrate de guardar también con estas claves:
+
+```dart
+access_token
+piyi_access_token
+```
+
+Así SplashScreen podrá detectar la sesión.

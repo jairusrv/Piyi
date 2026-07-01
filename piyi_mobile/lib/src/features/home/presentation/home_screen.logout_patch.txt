@@ -1,0 +1,21 @@
+# PATCH MANUAL RECOMENDADO PARA LOGOUT
+
+En HomeScreen, cambia la función logout para limpiar sesión con SessionManager:
+
+```dart
+import '../../auth/data/session_manager.dart';
+```
+
+Luego:
+
+```dart
+Future<void> _logout(BuildContext context) async {
+  await ref.read(sessionManagerProvider).logout();
+
+  if (context.mounted) {
+    context.go(LoginScreen.route);
+  }
+}
+```
+
+Esto evita que la app vuelva a entrar automáticamente después de cerrar sesión.

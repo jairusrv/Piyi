@@ -1,16 +1,26 @@
-# Piyí - BETA Hotfix 09.1 Compile Fix
+# Piyí - BETA Sprint 12
 
-Corrige errores después de aplicar Maps + Uploads.
+## Sesión persistente tipo Uber / DiDi
 
-## Corrige
+Objetivo:
 
-- map_markers_controller.dart faltante.
-- map_repository.dart faltante.
-- map_marker_models.dart faltante.
-- petsProvider alias.
-- breedsBySpeciesProvider alias.
-- createPet con photoUrl.
-- DioExceptionType.transformTimeout.
+El usuario NO debe iniciar sesión cada vez que abre la app.
+
+Debe ir automáticamente al Home cuando existe token guardado.
+
+Solo vuelve al login cuando:
+
+- No existe token.
+- El usuario toca Cerrar sesión.
+- Más adelante: token expirado o servidor rechaza token.
+
+## Incluye
+
+- AuthTokenStore
+- SessionManager
+- SplashScreen inteligente
+- Logout limpio
+- Documentación
 
 ## Aplicar
 
