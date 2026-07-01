@@ -184,12 +184,9 @@ public sealed class BusinessReviewService : IBusinessReviewService
 
     private static BusinessReviewDto ToDto(BusinessReview review)
     {
-        var userName =
-            review.User is null
-                ? null
-                : string.IsNullOrWhiteSpace(review.User.FullName)
-                    ? review.User.Email
-                    : review.User.FullName;
+        // Tu entidad User actual no tiene FullName.
+        // Usamos Email como nombre visible temporal.
+        var userName = review.User?.Email;
 
         return new BusinessReviewDto(
             review.Id,
