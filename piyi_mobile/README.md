@@ -1,27 +1,21 @@
-# Piyí - BETA Sprint 07
+# Piyí - Sprint 08A
 
-## Pulido profesional de Negocios y Servicios Cercanos
+## Google Maps + Mi ubicación
 
 Incluye:
+- google_maps_flutter
+- geolocator
+- permission_handler
+- MapScreen
+- Servicio de ubicación
+- Permisos Android
+- Ruta /map
 
-- BusinessesScreen renovado.
-- BusinessDetailScreen renovado.
-- Búsqueda profesional.
-- Empty/loading/error states.
-- Acciones externas: llamar, WhatsApp y cómo llegar.
-- UI consistente con piyi_ui.
+Aplicar sobre:
 
-## Aplicar
-
-Extraer sobre:
-
-```powershell
 C:\Users\jairo\Documents\Piyi\piyi_mobile
-```
 
 Luego:
 
-```powershell
 flutter pub get
 flutter run
-```
