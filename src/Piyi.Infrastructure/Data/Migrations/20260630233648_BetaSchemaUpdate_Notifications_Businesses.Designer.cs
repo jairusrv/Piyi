@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Piyi.Infrastructure.Data;
@@ -11,9 +12,11 @@ using Piyi.Infrastructure.Data;
 namespace Piyi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(PiyiDbContext))]
-    partial class PiyiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260630233648_BetaSchemaUpdate_Notifications_Businesses")]
+    partial class BetaSchemaUpdate_Notifications_Businesses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

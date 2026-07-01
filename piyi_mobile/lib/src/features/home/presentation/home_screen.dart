@@ -99,39 +99,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               PiyiSection(
                 title: 'Tu resumen',
                 child: summaryAsync.when(
-                  data: (summary) => PiyiQuickActionGrid(
-                    items: [
-                      PiyiQuickActionItem(
-                        icon: Icons.pets,
-                        title: 'Mascotas',
-                        subtitle: 'Tus perfiles registrados',
-                        color: PiyiColors.primary,
-                        badge: '${summary.petsCount}',
-                        onTap: () => context.go(PetsScreen.route),
-                      ),
-                      PiyiQuickActionItem(
-                        icon: Icons.location_on,
-                        title: 'Perdidas',
-                        subtitle: 'Reportes activos',
-                        color: PiyiColors.error,
-                        badge: '${summary.lostPetsCount}',
-                        onTap: () => context.go(LostPetsScreen.route),
-                      ),
-                      PiyiQuickActionItem(
-                        icon: Icons.notifications,
-                        title: 'Alertas',
-                        subtitle: 'Sin leer',
-                        color: PiyiColors.warning,
-                        badge: '${summary.notificationsCount}',
-                        onTap: () => context.go(NotificationsScreen.route),
-                      ),
-                      PiyiQuickActionItem(
-                        icon: Icons.store,
-                        title: 'Negocios',
-                        subtitle: 'Servicios registrados',
-                        color: PiyiColors.secondary,
-                        badge: '${summary.businessesCount}',
-                        onTap: () => context.go(BusinessesScreen.route),
+                  data: (summary) => Column(
+                    children: [
+                      if (summary.hasPartialErrors) ...[
+                        PiyiAlertCard(
+                          title: 'Algunos datos no cargaron',
+                          subtitle: 'La app sigue funcionando. Revisa migraciones o endpoints pendientes.',
+                          actionLabel: 'Actualizar',
+                          onTap: () => ref.invalidate(dashboardSummaryProvider),
+                        ),
+                        const SizedBox(height: PiyiSpacing.md),
+                      ],
+                      PiyiQuickActionGrid(
+                        items: [
+                          PiyiQuickActionItem(
+                            icon: Icons.pets,
+                            title: 'Mascotas',
+                            subtitle: summary.petsError ?? 'Tus perfiles registrados',
+                            color: summary.petsError == null ? PiyiColors.primary : PiyiColors.error,
+                            badge: '${summary.petsCount}',
+                            onTap: () => context.go(PetsScreen.route),
+                          ),
+                          PiyiQuickActionItem(
+                            icon: Icons.location_on,
+                            title: 'Perdidas',
+                            subtitle: summary.lostPetsError ?? 'Reportes activos',
+                            color: PiyiColors.error,
+                            badge: '${summary.lostPetsCount}',
+                            onTap: () => context.go(LostPetsScreen.route),
+                          ),
+                          PiyiQuickActionItem(
+                            icon: Icons.notifications,
+                            title: 'Alertas',
+                            subtitle: summary.notificationsError ?? 'Sin leer',
+                            color: summary.notificationsError == null ? PiyiColors.warning : PiyiColors.error,
+                            badge: '${summary.notificationsCount}',
+                            onTap: () => context.go(NotificationsScreen.route),
+                          ),
+                          PiyiQuickActionItem(
+                            icon: Icons.store,
+                            title: 'Negocios',
+                            subtitle: summary.businessesError ?? 'Servicios registrados',
+                            color: summary.businessesError == null ? PiyiColors.secondary : PiyiColors.error,
+                            badge: '${summary.businessesCount}',
+                            onTap: () => context.go(BusinessesScreen.route),
+                          ),
+                        ],
                       ),
                     ],
                   ),

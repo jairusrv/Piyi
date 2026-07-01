@@ -6,6 +6,8 @@ export 'src/tokens/piyi_spacing.dart';
 export 'src/tokens/piyi_radius.dart';
 export 'src/tokens/piyi_shadows.dart';
 
+export 'src/feedback/piyi_snack_bar.dart';
+
 export 'src/widgets/piyi_activity_timeline.dart';
 export 'src/widgets/piyi_alert_card.dart';
 export 'src/widgets/piyi_app_bar.dart';
