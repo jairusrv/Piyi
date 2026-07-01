@@ -1,21 +1,16 @@
-# Piyí - Sprint 08A
+# Piyí - Sprint 08C
 
-## Google Maps + Mi ubicación
+## BottomSheet, filtros y clustering simple
 
 Incluye:
-- google_maps_flutter
-- geolocator
-- permission_handler
-- MapScreen
-- Servicio de ubicación
-- Permisos Android
-- Ruta /map
+- Filtros de mapa
+- BottomSheet profesional
+- Cluster simple visual por tipo
+- Widget de filtro
 
 Aplicar sobre:
-
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 
 Luego:
-
 flutter pub get
 flutter run
