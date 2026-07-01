@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Piyi.Application.Abstractions;
 using Piyi.Contracts.Maps;
+using Piyi.Domain.Enums;
 using Piyi.Infrastructure.Data;
 
 namespace Piyi.Infrastructure.Services;
@@ -18,7 +19,7 @@ public sealed class MapService : IMapService
     {
         return await _db.LostPets
             .AsNoTracking()
-            .Where(x => !x.IsDeleted && x.Status == "Active" && x.LastSeenLatitude != null && x.LastSeenLongitude != null)
+            .Where(x => !x.IsDeleted && x.Status == LostPetStatus.Active && x.LastSeenLatitude != null && x.LastSeenLongitude != null)
             .OrderByDescending(x => x.CreatedAt)
             .Select(x => new LostPetMapMarkerDto(
                 x.Id,
