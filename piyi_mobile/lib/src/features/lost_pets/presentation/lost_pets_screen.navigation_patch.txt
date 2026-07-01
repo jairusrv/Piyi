@@ -1,0 +1,24 @@
+# PATCH RECOMENDADO
+
+En pantallas internas como LostPetsScreen, BusinessesScreen, PetsScreen o MapScreen,
+usar un AppBar con botón volver.
+
+Ejemplo:
+
+```dart
+import '../../../core/navigation/piyi_navigation_helper.dart';
+```
+
+Luego en Scaffold:
+
+```dart
+appBar: AppBar(
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () => PiyiNavigationHelper.backOrHome(context),
+  ),
+  title: const Text('Mascotas perdidas'),
+),
+```
+
+Esto evita que el usuario quede atrapado en pantallas internas.

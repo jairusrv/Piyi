@@ -1,0 +1,31 @@
+# PATCH RECOMENDADO
+
+En ReportSightingScreen reemplazar latitud/longitud manual por ubicación actual.
+
+Agregar estado:
+
+```dart
+Position? _selectedPosition;
+```
+
+Agregar botón:
+
+```dart
+PiyiUseCurrentLocationButton(
+  onLocation: (position) {
+    setState(() {
+      _selectedPosition = position;
+      _latitudeController.text = position.latitude.toString();
+      _longitudeController.text = position.longitude.toString();
+    });
+    PiyiSnackBar.success(context, 'Ubicación tomada correctamente.');
+  },
+),
+```
+
+Validar:
+
+```dart
+final latitude = _selectedPosition?.latitude ?? num.tryParse(_latitudeController.text.trim());
+final longitude = _selectedPosition?.longitude ?? num.tryParse(_longitudeController.text.trim());
+```

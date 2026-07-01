@@ -1,0 +1,17 @@
+# PATCH RECOMENDADO
+
+Agregar botón volver:
+
+```dart
+import '../../../core/navigation/piyi_navigation_helper.dart';
+```
+
+```dart
+appBar: AppBar(
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () => PiyiNavigationHelper.backOrHome(context),
+  ),
+  title: const Text('Mis mascotas'),
+),
+```

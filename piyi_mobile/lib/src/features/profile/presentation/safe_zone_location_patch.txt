@@ -1,0 +1,30 @@
+# PATCH RECOMENDADO PARA ZONA SEGURA
+
+Cualquier función tipo 'Activa tu zona segura' debe usar GPS actual.
+
+Flujo recomendado:
+
+1. Pedir permiso de ubicación.
+2. Tomar lat/lng actual.
+3. Guardar zona segura con radio configurable:
+   - 1 km
+   - 3 km
+   - 5 km
+   - 10 km
+
+No pedir coordenadas manualmente al usuario.
+
+Ejemplo:
+
+```dart
+PiyiUseCurrentLocationButton(
+  label: 'Activar zona segura aquí',
+  onLocation: (position) async {
+    await repository.saveSafeZone(
+      latitude: position.latitude,
+      longitude: position.longitude,
+      radiusKm: 3,
+    );
+  },
+)
+```
