@@ -23,7 +23,7 @@ class PiyiPageScaffold extends StatelessWidget {
   final VoidCallback? onBack;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {

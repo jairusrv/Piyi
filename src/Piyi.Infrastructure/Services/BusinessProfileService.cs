@@ -179,7 +179,8 @@ public sealed class BusinessProfileService : IBusinessProfileService
 
         try
         {
-            return JsonSerializer.Deserialize<List<string>>(json) ?? Array.Empty<string>();
+            var result = JsonSerializer.Deserialize<List<string>>(json);
+            return result is null ? Array.Empty<string>() : result;
         }
         catch
         {

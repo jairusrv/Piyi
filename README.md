@@ -1,28 +1,11 @@
-# Piyí - BETA Sprint 16
+# Piyí - Hotfix 16.1
 
-## Perfil Público Profesional del Negocio
+Corrige:
 
-Este sprint convierte cada negocio/proveedor en una ficha pública más completa dentro de Piyí.
+- BusinessProfileService.cs error `List<string> ?? string[]`
+- PiyiPageScaffold SafeArea.minimum con EdgeInsetsGeometry
 
-## Incluye Backend
-
-- Entity `BusinessProfile`
-- EF Configuration
-- DTOs
-- IBusinessProfileService
-- BusinessProfileService
-- BusinessProfilesController
-
-## Incluye Flutter
-
-- BusinessProfile model
-- BusinessProfileRepository
-- BusinessProfileController
-- BusinessProfileScreen
-- Patch para router
-- Patch para abrir perfil desde BusinessDetail
-
-## Aplicar Backend
+## Aplicar
 
 Extraer sobre:
 
@@ -30,14 +13,9 @@ Extraer sobre:
 C:\Users\jairo\Documents\Piyi
 ```
 
-Aplicar parches manuales indicados:
-
-```text
-src/Piyi.Infrastructure/DependencyInjection.BUSINESS_PROFILE_PATCH.txt
-src/Piyi.Infrastructure/Data/PiyiDbContext.BUSINESS_PROFILE_PATCH.txt
-```
-
 Luego:
+
+Backend:
 
 ```powershell
 dotnet build
@@ -45,23 +23,10 @@ dotnet ef migrations add BetaBusinessPublicProfile --project .\src\Piyi.Infrastr
 dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
 ```
 
-## Aplicar Flutter
-
-Los archivos dentro de `piyi_mobile` van sobre:
+Flutter:
 
 ```powershell
-C:\Users\jairo\Documents\Piyi\piyi_mobile
-```
-
-Luego aplicar:
-
-```text
-piyi_mobile/lib/src/app/app_router.business_profile_patch.txt
-```
-
-Después:
-
-```powershell
+cd C:\Users\jairo\Documents\Piyi\piyi_mobile
 flutter pub get
 flutter run
 ```
