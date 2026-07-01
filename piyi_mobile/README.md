@@ -1,20 +1,34 @@
-# Piyí - BETA Sprint 14
+# Piyí - BETA Sprint 15
 
-## Ubicación actual para zona segura y reportes
+## Flutter Catálogo Informativo Pro
 
-Objetivo:
+Este sprint agrega la UI móvil para buscar productos/servicios ofrecidos por proveedores Pro.
 
-No pedir latitud/longitud manualmente al usuario.
+## Importante
 
-La app debe usar la ubicación actual del celular con permisos.
+NO es marketplace transaccional.
 
-## Incluye
+No incluye:
 
-- CurrentLocationService
-- CurrentLocationController
-- PiyiUseCurrentLocationButton
-- Widget de resumen de ubicación
-- Parches para zona segura, reporte de mascota perdida y avistamientos
+- carrito
+- checkout
+- delivery
+- órdenes
+- comisiones
+
+Sí incluye:
+
+- búsqueda
+- precio referencial
+- foto
+- marca
+- SKU
+- código de barras
+- disponibilidad
+- contacto directo con proveedor
+- llamar
+- WhatsApp
+- cómo llegar
 
 ## Aplicar
 
@@ -24,7 +38,14 @@ Extraer sobre:
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 ```
 
-Luego:
+Luego revisar:
+
+```text
+lib/src/app/app_router.catalog_patch.txt
+lib/src/features/home/presentation/home_catalog_patch.txt
+```
+
+Después:
 
 ```powershell
 flutter pub get

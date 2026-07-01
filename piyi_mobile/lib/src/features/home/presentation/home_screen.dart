@@ -11,6 +11,7 @@ import '../../lost_pets/presentation/lost_pets_screen.dart';
 import '../../notifications/presentation/notifications_screen.dart';
 import '../../pets/presentation/pets_screen.dart';
 import '../../profile/presentation/profile_settings_screen.dart';
+import '../../catalog/presentation/catalog_search_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -90,12 +91,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               PiyiBannerCard(
                 icon: Icons.pets,
                 title: 'Cuida, protege y encuentra',
-                subtitle: 'Todo lo importante de tus mascotas en un solo lugar.',
+                subtitle:
+                    'Todo lo importante de tus mascotas en un solo lugar.',
                 color: PiyiColors.primary,
                 onTap: () => context.go(PetsScreen.route),
               ),
               const SizedBox(height: PiyiSpacing.xl),
-
               PiyiSection(
                 title: 'Tu resumen',
                 child: summaryAsync.when(
@@ -104,7 +105,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       if (summary.hasPartialErrors) ...[
                         PiyiAlertCard(
                           title: 'Algunos datos no cargaron',
-                          subtitle: 'La app sigue funcionando. Revisa migraciones o endpoints pendientes.',
+                          subtitle:
+                              'La app sigue funcionando. Revisa migraciones o endpoints pendientes.',
                           actionLabel: 'Actualizar',
                           onTap: () => ref.invalidate(dashboardSummaryProvider),
                         ),
@@ -115,15 +117,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           PiyiQuickActionItem(
                             icon: Icons.pets,
                             title: 'Mascotas',
-                            subtitle: summary.petsError ?? 'Tus perfiles registrados',
-                            color: summary.petsError == null ? PiyiColors.primary : PiyiColors.error,
+                            subtitle:
+                                summary.petsError ?? 'Tus perfiles registrados',
+                            color: summary.petsError == null
+                                ? PiyiColors.primary
+                                : PiyiColors.error,
                             badge: '${summary.petsCount}',
                             onTap: () => context.go(PetsScreen.route),
                           ),
                           PiyiQuickActionItem(
                             icon: Icons.location_on,
                             title: 'Perdidas',
-                            subtitle: summary.lostPetsError ?? 'Reportes activos',
+                            subtitle:
+                                summary.lostPetsError ?? 'Reportes activos',
                             color: PiyiColors.error,
                             badge: '${summary.lostPetsCount}',
                             onTap: () => context.go(LostPetsScreen.route),
@@ -132,15 +138,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             icon: Icons.notifications,
                             title: 'Alertas',
                             subtitle: summary.notificationsError ?? 'Sin leer',
-                            color: summary.notificationsError == null ? PiyiColors.warning : PiyiColors.error,
+                            color: summary.notificationsError == null
+                                ? PiyiColors.warning
+                                : PiyiColors.error,
                             badge: '${summary.notificationsCount}',
                             onTap: () => context.go(NotificationsScreen.route),
                           ),
                           PiyiQuickActionItem(
                             icon: Icons.store,
                             title: 'Negocios',
-                            subtitle: summary.businessesError ?? 'Servicios registrados',
-                            color: summary.businessesError == null ? PiyiColors.secondary : PiyiColors.error,
+                            subtitle: summary.businessesError ??
+                                'Servicios registrados',
+                            color: summary.businessesError == null
+                                ? PiyiColors.secondary
+                                : PiyiColors.error,
                             badge: '${summary.businessesCount}',
                             onTap: () => context.go(BusinessesScreen.route),
                           ),
@@ -164,9 +175,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: PiyiSpacing.xl),
-
               PiyiSection(
                 title: 'Accesos rápidos',
                 child: Column(
@@ -196,6 +205,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiTile(
+                      icon: Icons.inventory_2,
+                      title: 'Catálogo',
+                      subtitle:
+                          'Busca productos y servicios de proveedores Pro.',
+                      color: PiyiColors.primary,
+                      onTap: () => context.go(CatalogSearchScreen.route),
+                    ),
+                    PiyiTile(
                       icon: Icons.settings,
                       title: 'Perfil y configuración',
                       subtitle: 'Alertas por zona y dispositivos.',
@@ -205,9 +222,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ],
                 ),
               ),
-
               const SizedBox(height: PiyiSpacing.xl),
-
               PiyiSection(
                 title: 'Próximos recordatorios',
                 actionLabel: 'Ver mascotas',
@@ -227,9 +242,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   }).toList(),
                 ),
               ),
-
               const SizedBox(height: PiyiSpacing.xl),
-
               PiyiSection(
                 title: 'Actividad reciente',
                 actionLabel: 'Notificaciones',
@@ -247,16 +260,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: PiyiSpacing.xl),
-
               PiyiAlertCard(
                 title: 'Activa tu zona segura',
-                subtitle: 'Recibe alertas cuando una mascota se pierda cerca de ti.',
+                subtitle:
+                    'Recibe alertas cuando una mascota se pierda cerca de ti.',
                 actionLabel: 'Configurar',
                 onTap: () => context.go(ProfileSettingsScreen.route),
               ),
-
               const SizedBox(height: PiyiSpacing.xl),
             ],
           ),

@@ -1,0 +1,19 @@
+# PATCH HOME
+
+Agregar acceso rápido al catálogo:
+
+```dart
+PiyiTile(
+  icon: Icons.inventory_2,
+  title: 'Catálogo',
+  subtitle: 'Busca productos y servicios de proveedores Pro.',
+  color: PiyiColors.primary,
+  onTap: () => context.go(CatalogSearchScreen.route),
+),
+```
+
+Import:
+
+```dart
+import '../../catalog/presentation/catalog_search_screen.dart';
+```
