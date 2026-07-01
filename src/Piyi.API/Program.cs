@@ -41,6 +41,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseCors("PiyiCors");
 app.UseAuthorization();
+app.UseStaticFiles();
 app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new
