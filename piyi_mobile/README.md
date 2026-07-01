@@ -1,24 +1,21 @@
-# Piyí - Sprint 08B
+# Piyí - Sprint 08A
 
-## Marcadores de mascotas y negocios
+## Google Maps + Mi ubicación
 
 Incluye:
-- Endpoints backend /api/map/lost-pets y /api/map/businesses
-- DTOs
-- Service
-- Controller
-- Repository Flutter
-- Marcadores en Google Maps
+- google_maps_flutter
+- geolocator
+- permission_handler
+- MapScreen
+- Servicio de ubicación
+- Permisos Android
+- Ruta /map
 
-Aplicar backend sobre:
-C:\Users\jairo\Documents\Piyi
+Aplicar sobre:
 
-Aplicar Flutter sobre:
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 
 Luego:
-dotnet build
-dotnet ef migrations add BetaMapEndpoints --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
-dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
+
 flutter pub get
 flutter run
