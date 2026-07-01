@@ -1,40 +1,24 @@
-# Piyí - Sprint 04.07 Push Queue Processor
+# Piyí - Sprint 08B
 
-## Objetivo
+## Marcadores de mascotas y negocios
 
-Agregar procesador base de cola push.
+Incluye:
+- Endpoints backend /api/map/lost-pets y /api/map/businesses
+- DTOs
+- Service
+- Controller
+- Repository Flutter
+- Marcadores en Google Maps
 
-Este sprint todavía NO integra Firebase real. Agrega:
-
-- `IPushSender`
-- `FakePushSender`
-- `IPushQueueProcessorService`
-- Procesamiento de cola pendiente
-- Marcado de envíos como `Sent` o `Failed`
-- Endpoint Development para procesar manualmente
-
-## Endpoints Development
-
-```text
-POST /api/dev/push-queue/process
-GET  /api/dev/push-queue/pending
-```
-
-## Cómo aplicar
-
-Extraer sobre:
-
-```powershell
+Aplicar backend sobre:
 C:\Users\jairo\Documents\Piyi
-```
+
+Aplicar Flutter sobre:
+C:\Users\jairo\Documents\Piyi\piyi_mobile
 
 Luego:
-
-```powershell
-dotnet restore
 dotnet build
-```
-
-## Próximo paso
-
-Después de esto podemos integrar Firebase Admin SDK real o iniciar Flutter Mobile.
+dotnet ef migrations add BetaMapEndpoints --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
+dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
+flutter pub get
+flutter run
