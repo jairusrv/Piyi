@@ -1,4 +1,4 @@
-using Piyi.Domain.Common;
+﻿using Piyi.Domain.Common;
 using Piyi.Domain.Enums;
 
 namespace Piyi.Domain.Entities;
@@ -42,6 +42,7 @@ public sealed class Business : BaseEntity
     public string? LogoUrl { get; set; }
 
     public bool IsVerified { get; set; }
+    public bool IsProviderPro { get; set; } = false;
 
     public bool IsActive { get; set; } = true;
 
@@ -59,3 +60,4 @@ public sealed class Business : BaseEntity
 
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 }
+

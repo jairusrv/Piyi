@@ -1,0 +1,7 @@
+Agregar DbSet si tu DbContext no usa Set<T>() dinámicamente:
+
+public DbSet<BusinessCatalogItem> BusinessCatalogItems => Set<BusinessCatalogItem>();
+
+Y confirmar que OnModelCreating aplique configuraciones:
+
+modelBuilder.ApplyConfigurationsFromAssembly(typeof(PiyiDbContext).Assembly);

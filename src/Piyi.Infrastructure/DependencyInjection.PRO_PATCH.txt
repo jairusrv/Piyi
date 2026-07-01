@@ -1,0 +1,8 @@
+Agregar:
+
+services.AddScoped<IBusinessCatalogService, BusinessCatalogService>();
+
+Usings necesarios:
+
+using Piyi.Application.Abstractions;
+using Piyi.Infrastructure.Services;

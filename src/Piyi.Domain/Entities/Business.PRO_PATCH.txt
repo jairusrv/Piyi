@@ -1,0 +1,7 @@
+Agregar esta propiedad en Business.cs:
+
+public bool IsProviderPro { get; set; } = false;
+
+Nota:
+Si ya existe una propiedad similar para plan/pago, puedes mapearla después.
+Por ahora esta bandera permite controlar quién puede publicar catálogo.
