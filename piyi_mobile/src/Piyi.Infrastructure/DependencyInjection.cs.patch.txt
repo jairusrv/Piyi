@@ -1,0 +1,7 @@
+Agregar en AddInfrastructure:
+
+services.AddScoped<IMapService, MapService>();
+
+y confirmar using:
+using Piyi.Application.Abstractions;
+using Piyi.Infrastructure.Services;
