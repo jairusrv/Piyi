@@ -1,0 +1,18 @@
+# PATCH ROUTER
+
+Agregar import:
+
+```dart
+import '../features/business_profiles/presentation/business_profile_screen.dart';
+```
+
+Agregar ruta:
+
+```dart
+GoRoute(
+  path: BusinessProfileScreen.route,
+  builder: (context, state) => BusinessProfileScreen(
+    businessId: state.pathParameters['businessId']!,
+  ),
+),
+```

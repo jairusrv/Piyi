@@ -1,0 +1,17 @@
+# PATCH BUSINESS DETAIL
+
+Agregar import:
+
+```dart
+import '../../business_profiles/presentation/business_profile_screen.dart';
+```
+
+Agregar botón:
+
+```dart
+PiyiSecondaryButton(
+  label: 'Ver perfil completo',
+  icon: Icons.store,
+  onPressed: () => context.go(BusinessProfileScreen.path(business.id)),
+),
+```
