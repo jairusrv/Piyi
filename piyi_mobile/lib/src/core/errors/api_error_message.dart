@@ -41,6 +41,7 @@ class ApiErrorMessage {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
+      case DioExceptionType.transformTimeout:
         return 'El servidor tardó demasiado en responder.';
       case DioExceptionType.connectionError:
         return 'No se pudo conectar con el servidor.';

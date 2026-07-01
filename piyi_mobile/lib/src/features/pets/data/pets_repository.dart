@@ -15,8 +15,8 @@ class PetsRepository {
 
   Future<List<Pet>> getMyPets() async {
     final response = await _dio.get('/api/pets');
-
     final data = response.data as List<dynamic>;
+
     return data
         .map((item) => Pet.fromJson(item as Map<String, dynamic>))
         .toList();
@@ -35,6 +35,7 @@ class PetsRepository {
     String sex = 'Unknown',
     num? weightKg,
     bool isSterilized = false,
+    String? photoUrl,
   }) async {
     final response = await _dio.post(
       '/api/pets',
@@ -48,7 +49,7 @@ class PetsRepository {
         'weightKg': weightKg,
         'isSterilized': isSterilized,
         'microchipNumber': null,
-        'photoUrl': null,
+        'photoUrl': photoUrl,
       },
     );
 
@@ -57,8 +58,8 @@ class PetsRepository {
 
   Future<List<Species>> getSpecies() async {
     final response = await _dio.get('/api/catalogs/species');
-
     final data = response.data as List<dynamic>;
+
     return data
         .map((item) => Species.fromJson(item as Map<String, dynamic>))
         .toList();
@@ -66,8 +67,8 @@ class PetsRepository {
 
   Future<List<Breed>> getBreeds(String speciesId) async {
     final response = await _dio.get('/api/catalogs/species/$speciesId/breeds');
-
     final data = response.data as List<dynamic>;
+
     return data
         .map((item) => Breed.fromJson(item as Map<String, dynamic>))
         .toList();
