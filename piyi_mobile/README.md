@@ -1,17 +1,18 @@
-# Piyí - BETA Sprint 04
+# Piyí - BETA Sprint 05
 
-## Dashboard resiliente + manejo profesional de errores
+## Pulido profesional del módulo Mascotas
 
-Este sprint mejora estabilidad real de la app.
+Este sprint mejora visualmente el módulo de mascotas usando `piyi_ui`.
 
 ## Incluye
 
-- Dashboard tolerante a errores parciales.
-- Si Businesses falla, Pets igual carga.
-- Si Notifications falla, LostPets igual carga.
-- Helper `ApiErrorMessage`.
-- `PiyiSnackBar` reusable.
-- Home renovado para no romperse por un solo endpoint.
+- PetsScreen renovado.
+- CreatePetScreen renovado.
+- PetDetailScreen más profesional.
+- Empty states.
+- Loading states.
+- Manejo de errores con ApiErrorMessage.
+- Snackbars con PiyiSnackBar.
 
 ## Aplicar
 

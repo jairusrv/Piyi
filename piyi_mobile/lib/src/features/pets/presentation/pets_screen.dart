@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/errors/api_error_message.dart';
 import 'create_pet_screen.dart';
 import 'pet_detail_screen.dart';
 import 'pets_controller.dart';
@@ -13,11 +15,17 @@ class PetsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final petsAsync = ref.watch(petsListProvider);
+    final petsAsync = ref.watch(petsProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mis mascotas'),
+        actions: [
+          IconButton(
+            onPressed: () => ref.invalidate(petsProvider),
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.go(CreatePetScreen.route),
@@ -25,54 +33,84 @@ class PetsScreen extends ConsumerWidget {
         label: const Text('Agregar'),
       ),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: petsAsync.when(
           data: (pets) {
             if (pets.isEmpty) {
-              return const Center(
-                child: Text(
-                  'Aún no tienes mascotas registradas.\nAgrega la primera 🐾',
-                  textAlign: TextAlign.center,
-                ),
+              return PiyiEmptyState(
+                icon: Icons.pets,
+                title: 'Aún no tienes mascotas',
+                message: 'Registra tu primera mascota para gestionar su salud, QR, recordatorios y alertas.',
+                actionLabel: 'Registrar mascota',
+                onAction: () => context.go(CreatePetScreen.route),
               );
             }
 
             return RefreshIndicator(
-              onRefresh: () async {
-                ref.invalidate(petsListProvider);
-              },
-              child: ListView.builder(
+              onRefresh: () async => ref.invalidate(petsProvider),
+              child: ListView.separated(
                 itemCount: pets.length,
+                separatorBuilder: (_, __) => const SizedBox(height: PiyiSpacing.sm),
                 itemBuilder: (context, index) {
                   final pet = pets[index];
 
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: Text(pet.name.isEmpty ? '🐾' : pet.name[0]),
-                      ),
-                      title: Text(
-                        pet.name,
-                        style: const TextStyle(fontWeight: FontWeight.w800),
-                      ),
-                      subtitle: Text(
-                        '${pet.speciesName}${pet.breedName == null ? '' : ' · ${pet.breedName}'}',
-                      ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () => context.go(PetDetailScreen.path(pet.id)),
+                  return PiyiCard(
+                    onTap: () => context.go(PetDetailScreen.path(pet.id)),
+                    padding: const EdgeInsets.all(PiyiSpacing.md),
+                    child: Row(
+                      children: [
+                        PiyiAvatar(
+                          imageUrl: pet.photoUrl,
+                          name: pet.name,
+                          size: 62,
+                          icon: Icons.pets,
+                        ),
+                        const SizedBox(width: PiyiSpacing.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      pet.name,
+                                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                                    ),
+                                  ),
+                                  PiyiBadge(label: pet.status),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${pet.speciesName}${pet.breedName == null ? '' : ' · ${pet.breedName}'}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                pet.color == null || pet.color!.isEmpty ? 'Color no indicado' : pet.color!,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right),
+                      ],
                     ),
                   );
                 },
               ),
             );
           },
-          error: (error, _) => Center(
-            child: Text('Error cargando mascotas: $error'),
+          error: (error, _) => PiyiEmptyState(
+            icon: Icons.error_outline,
+            title: 'No pudimos cargar tus mascotas',
+            message: ApiErrorMessage.fromObject(error),
+            actionLabel: 'Reintentar',
+            onAction: () => ref.invalidate(petsProvider),
           ),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          loading: () => const PiyiLoadingList(itemCount: 5),
         ),
       ),
     );

@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
-import '../data/pet_models.dart';
+import '../../../core/errors/api_error_message.dart';
 import '../data/pets_repository.dart';
 import 'pets_controller.dart';
 import 'pets_screen.dart';
@@ -20,9 +22,10 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
   final _nameController = TextEditingController();
   final _colorController = TextEditingController();
   final _weightController = TextEditingController();
+  final _photoUrlController = TextEditingController();
 
-  Species? _selectedSpecies;
-  Breed? _selectedBreed;
+  String _speciesId = '';
+  String _breedId = '';
   String _sex = 'Unknown';
   bool _isSterilized = false;
   bool _isLoading = false;
@@ -32,14 +35,20 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
     _nameController.dispose();
     _colorController.dispose();
     _weightController.dispose();
+    _photoUrlController.dispose();
     super.dispose();
   }
 
-  Future<void> _save() async {
-    if (_selectedSpecies == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Selecciona una especie.')),
-      );
+  Future<void> _submit() async {
+    final name = _nameController.text.trim();
+
+    if (name.isEmpty) {
+      PiyiSnackBar.warning(context, 'El nombre de la mascota es requerido.');
+      return;
+    }
+
+    if (_speciesId.isEmpty) {
+      PiyiSnackBar.warning(context, 'Selecciona una especie.');
       return;
     }
 
@@ -47,134 +56,177 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
 
     try {
       await ref.read(petsRepositoryProvider).createPet(
-            name: _nameController.text.trim(),
-            speciesId: _selectedSpecies!.id,
-            breedId: _selectedBreed?.id,
-            color: _colorController.text.trim().isEmpty
-                ? null
-                : _colorController.text.trim(),
+            name: name,
+            speciesId: _speciesId,
+            breedId: _breedId.isEmpty ? null : _breedId,
             sex: _sex,
+            color: _emptyToNull(_colorController.text),
             weightKg: num.tryParse(_weightController.text.trim()),
+            photoUrl: _emptyToNull(_photoUrlController.text),
             isSterilized: _isSterilized,
           );
 
-      ref.invalidate(petsListProvider);
+      ref.invalidate(petsProvider);
 
       if (!mounted) return;
+
+      PiyiSnackBar.success(context, 'Mascota registrada correctamente.');
       context.go(PetsScreen.route);
+    } on DioException catch (e) {
+      if (!mounted) return;
+      PiyiSnackBar.error(context, ApiErrorMessage.fromDio(e, fallback: 'No se pudo registrar la mascota.'));
     } catch (e) {
       if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se pudo guardar: $e')),
-      );
+      PiyiSnackBar.error(context, ApiErrorMessage.fromObject(e));
     } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
+      if (mounted) setState(() => _isLoading = false);
     }
+  }
+
+  String? _emptyToNull(String value) {
+    final clean = value.trim();
+    return clean.isEmpty ? null : clean;
   }
 
   @override
   Widget build(BuildContext context) {
     final speciesAsync = ref.watch(speciesProvider);
-    final breedsAsync = _selectedSpecies == null
-        ? null
-        : ref.watch(breedsProvider(_selectedSpecies!.id));
+    final breedsAsync = _speciesId.isEmpty
+        ? const AsyncValue.data([])
+        : ref.watch(breedsBySpeciesProvider(_speciesId));
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agregar mascota'),
-      ),
+      appBar: AppBar(title: const Text('Registrar mascota')),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: ListView(
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nombre'),
+            PiyiBannerCard(
+              icon: Icons.pets,
+              title: 'Nueva mascota',
+              subtitle: 'Crea su perfil digital para salud, QR, recordatorios y alertas.',
+              color: PiyiColors.primary,
             ),
-            const SizedBox(height: 16),
-            speciesAsync.when(
-              data: (species) => DropdownButtonFormField<Species>(
-                value: _selectedSpecies,
-                decoration: const InputDecoration(labelText: 'Especie'),
-                items: species
-                    .map(
-                      (item) => DropdownMenuItem(
-                        value: item,
-                        child: Text(item.name),
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiSection(
+              title: 'Datos principales',
+              child: Column(
+                children: [
+                  PiyiTextField(
+                    controller: _nameController,
+                    label: 'Nombre',
+                    hint: 'Ej: Luna, Max, Nala...',
+                    icon: Icons.pets,
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  speciesAsync.when(
+                    data: (species) => DropdownButtonFormField<String>(
+                      value: _speciesId.isEmpty ? null : _speciesId,
+                      decoration: const InputDecoration(
+                        labelText: 'Especie',
+                        prefixIcon: Icon(Icons.category),
                       ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedSpecies = value;
-                    _selectedBreed = null;
-                  });
-                },
+                      items: species
+                          .map((item) => DropdownMenuItem<String>(value: item.id, child: Text(item.name)))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _speciesId = value ?? '';
+                          _breedId = '';
+                        });
+                      },
+                    ),
+                    error: (error, _) => PiyiAlertCard(
+                      title: 'No pudimos cargar especies',
+                      subtitle: ApiErrorMessage.fromObject(error),
+                      actionLabel: 'Reintentar',
+                      onTap: () => ref.invalidate(speciesProvider),
+                    ),
+                    loading: () => const PiyiLoadingCard(),
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  breedsAsync.when(
+                    data: (breeds) => DropdownButtonFormField<String>(
+                      value: _breedId.isEmpty ? null : _breedId,
+                      decoration: const InputDecoration(
+                        labelText: 'Raza',
+                        prefixIcon: Icon(Icons.cruelty_free),
+                      ),
+                      items: breeds
+                          .map((item) => DropdownMenuItem<String>(value: item.id, child: Text(item.name)))
+                          .toList(),
+                      onChanged: (value) => setState(() => _breedId = value ?? ''),
+                    ),
+                    error: (error, _) => PiyiAlertCard(
+                      title: 'No pudimos cargar razas',
+                      subtitle: ApiErrorMessage.fromObject(error),
+                      actionLabel: 'Reintentar',
+                      onTap: () => ref.invalidate(breedsBySpeciesProvider(_speciesId)),
+                    ),
+                    loading: () => const PiyiLoadingCard(),
+                  ),
+                ],
               ),
-              error: (error, _) => Text('Error cargando especies: $error'),
-              loading: () => const Center(child: CircularProgressIndicator()),
             ),
-            const SizedBox(height: 16),
-            if (breedsAsync != null)
-              breedsAsync.when(
-                data: (breeds) => DropdownButtonFormField<Breed>(
-                  value: _selectedBreed,
-                  decoration: const InputDecoration(labelText: 'Raza'),
-                  items: breeds
-                      .map(
-                        (item) => DropdownMenuItem(
-                          value: item,
-                          child: Text(item.name),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() => _selectedBreed = value);
-                  },
-                ),
-                error: (error, _) => Text('Error cargando razas: $error'),
-                loading: () => const Center(child: CircularProgressIndicator()),
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiSection(
+              title: 'Detalles',
+              child: Column(
+                children: [
+                  DropdownButtonFormField<String>(
+                    value: _sex,
+                    decoration: const InputDecoration(labelText: 'Sexo', prefixIcon: Icon(Icons.wc)),
+                    items: const [
+                      DropdownMenuItem(value: 'Unknown', child: Text('No indicado')),
+                      DropdownMenuItem(value: 'Male', child: Text('Macho')),
+                      DropdownMenuItem(value: 'Female', child: Text('Hembra')),
+                    ],
+                    onChanged: (value) => setState(() => _sex = value ?? 'Unknown'),
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  PiyiTextField(
+                    controller: _colorController,
+                    label: 'Color',
+                    hint: 'Ej: Negro, café, blanco...',
+                    icon: Icons.palette,
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  PiyiTextField(
+                    controller: _weightController,
+                    label: 'Peso en kg',
+                    hint: 'Ej: 8.5',
+                    icon: Icons.monitor_weight,
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  PiyiTextField(
+                    controller: _photoUrlController,
+                    label: 'URL de foto',
+                    hint: 'Temporal mientras agregamos subida real',
+                    icon: Icons.image,
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  SwitchListTile(
+                    value: _isSterilized,
+                    title: const Text('Esterilizada/o'),
+                    subtitle: const Text('Indica si ya fue esterilizada/o.'),
+                    onChanged: (value) => setState(() => _isSterilized = value),
+                  ),
+                ],
               ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _colorController,
-              decoration: const InputDecoration(labelText: 'Color'),
             ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              value: _sex,
-              decoration: const InputDecoration(labelText: 'Sexo'),
-              items: const [
-                DropdownMenuItem(value: 'Unknown', child: Text('No indicar')),
-                DropdownMenuItem(value: 'Male', child: Text('Macho')),
-                DropdownMenuItem(value: 'Female', child: Text('Hembra')),
-              ],
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() => _sex = value);
-              },
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiPrimaryButton(
+              label: 'Guardar mascota',
+              icon: Icons.save,
+              isLoading: _isLoading,
+              onPressed: _submit,
             ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _weightController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Peso kg'),
-            ),
-            const SizedBox(height: 8),
-            SwitchListTile(
-              value: _isSterilized,
-              title: const Text('Esterilizada/o'),
-              onChanged: (value) {
-                setState(() => _isSterilized = value);
-              },
-            ),
-            const SizedBox(height: 24),
-            FilledButton(
-              onPressed: _isLoading ? null : _save,
-              child: Text(_isLoading ? 'Guardando...' : 'Guardar mascota'),
+            const SizedBox(height: PiyiSpacing.md),
+            PiyiSecondaryButton(
+              label: 'Cancelar',
+              icon: Icons.close,
+              onPressed: () => context.go(PetsScreen.route),
             ),
           ],
         ),
