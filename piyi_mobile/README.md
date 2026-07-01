@@ -1,14 +1,15 @@
-# Piyí - BETA Sprint 05
+# Piyí - BETA Sprint 06
 
-## Pulido profesional del módulo Mascotas
+## Pulido profesional de Mascotas Perdidas
 
-Este sprint mejora visualmente el módulo de mascotas usando `piyi_ui`.
+Este sprint mejora visualmente el módulo de mascotas perdidas y avistamientos.
 
 ## Incluye
 
-- PetsScreen renovado.
-- CreatePetScreen renovado.
-- PetDetailScreen más profesional.
+- LostPetsScreen renovado.
+- LostPetDetailScreen renovado.
+- ReportLostPetScreen renovado.
+- ReportSightingScreen renovado.
 - Empty states.
 - Loading states.
 - Manejo de errores con ApiErrorMessage.

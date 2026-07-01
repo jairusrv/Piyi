@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/errors/api_error_message.dart';
 import 'lost_pet_sightings_controller.dart';
 import 'lost_pets_controller.dart';
 import 'report_sighting_screen.dart';
@@ -22,106 +24,145 @@ class LostPetDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Reporte')),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: detailAsync.when(
-          data: (report) => ListView(
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
+          data: (report) => RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(lostPetDetailProvider(lostPetId));
+              ref.invalidate(lostPetSightingsProvider(lostPetId));
+            },
+            child: ListView(
+              children: [
+                PiyiBannerCard(
+                  icon: Icons.location_on,
+                  title: report.petName.isEmpty ? 'Mascota perdida' : report.petName,
+                  subtitle: report.lastSeenAddress ?? 'Última ubicación no indicada',
+                  color: PiyiColors.error,
+                ),
+                const SizedBox(height: PiyiSpacing.md),
+                PiyiCard(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 48,
-                        backgroundImage: report.petPhotoUrl == null ? null : NetworkImage(report.petPhotoUrl!),
-                        child: report.petPhotoUrl == null ? const Text('🐾', style: TextStyle(fontSize: 36)) : null,
+                      PiyiAvatar(
+                        imageUrl: report.petPhotoUrl,
+                        name: report.petName,
+                        size: 92,
+                        icon: Icons.pets,
                       ),
-                      const SizedBox(height: 16),
-                      Text(report.petName, textAlign: TextAlign.center, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900)),
-                      const SizedBox(height: 6),
-                      Text('${report.speciesName}${report.breedName == null ? '' : ' · ${report.breedName}'}', textAlign: TextAlign.center),
+                      const SizedBox(height: PiyiSpacing.md),
+                      Text(
+                        report.title,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(height: PiyiSpacing.xs),
+                      Text(
+                        '${report.speciesName}${report.breedName == null ? '' : ' · ${report.breedName}'}',
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      const PiyiBadge(label: 'Reporte activo', color: PiyiColors.error),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              _InfoCard(icon: Icons.campaign, title: report.title, subtitle: report.description),
-              _InfoCard(icon: Icons.location_on, title: 'Último lugar visto', subtitle: report.lastSeenAddress ?? 'No indicado'),
-              _InfoCard(icon: Icons.color_lens, title: 'Color', subtitle: report.color ?? 'No indicado'),
-              _InfoCard(icon: Icons.phone, title: 'Contacto', subtitle: report.contactPhone ?? 'No indicado'),
-              _InfoCard(icon: Icons.card_giftcard, title: 'Recompensa', subtitle: report.rewardAmount == null ? 'No indicada' : '₡${report.rewardAmount}'),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                onPressed: () => context.go(ReportSightingScreen.path(lostPetId)),
-                icon: const Icon(Icons.visibility),
-                label: const Text('Creo que la vi'),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Avistamientos',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(height: 8),
-              sightingsAsync.when(
-                data: (items) {
-                  if (items.isEmpty) {
-                    return const Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(18),
-                        child: Text('Aún no hay avistamientos reportados.'),
+                const SizedBox(height: PiyiSpacing.md),
+                PiyiSection(
+                  title: 'Información del reporte',
+                  child: Column(
+                    children: [
+                      PiyiTile(
+                        icon: Icons.campaign,
+                        title: 'Descripción',
+                        subtitle: report.description,
+                        color: PiyiColors.error,
                       ),
-                    );
-                  }
-
-                  return Column(
-                    children: items.map((sighting) {
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        child: ListTile(
-                          leading: const Icon(Icons.place),
-                          title: Text(sighting.address ?? 'Ubicación reportada'),
-                          subtitle: Text(
-                            '${sighting.observation ?? 'Sin observación'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}\nEstado: ${sighting.status}',
-                          ),
-                          isThreeLine: true,
-                        ),
-                      );
-                    }).toList(),
-                  );
-                },
-                error: (error, _) => Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(18),
-                    child: Text('Error cargando avistamientos: $error'),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.location_on,
+                        title: 'Último lugar visto',
+                        subtitle: report.lastSeenAddress ?? 'No indicado',
+                        color: PiyiColors.error,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.color_lens,
+                        title: 'Color',
+                        subtitle: report.color ?? 'No indicado',
+                        color: PiyiColors.primary,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.phone,
+                        title: 'Contacto',
+                        subtitle: report.contactPhone ?? 'No indicado',
+                        color: PiyiColors.secondary,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.card_giftcard,
+                        title: 'Recompensa',
+                        subtitle: report.rewardAmount == null ? 'No indicada' : '₡${report.rewardAmount}',
+                        color: PiyiColors.warning,
+                      ),
+                    ],
                   ),
                 ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-              ),
-            ],
+                const SizedBox(height: PiyiSpacing.md),
+                PiyiPrimaryButton(
+                  label: 'Creo que la vi',
+                  icon: Icons.visibility,
+                  onPressed: () => context.go(ReportSightingScreen.path(lostPetId)),
+                ),
+                const SizedBox(height: PiyiSpacing.xl),
+                PiyiSection(
+                  title: 'Avistamientos',
+                  child: sightingsAsync.when(
+                    data: (items) {
+                      if (items.isEmpty) {
+                        return const PiyiEmptyState(
+                          icon: Icons.visibility_off,
+                          title: 'Sin avistamientos',
+                          message: 'Aún nadie ha reportado haber visto esta mascota.',
+                        );
+                      }
+
+                      return Column(
+                        children: items.map((sighting) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
+                            child: PiyiTile(
+                              icon: Icons.place,
+                              title: sighting.address ?? 'Ubicación reportada',
+                              subtitle:
+                                  '${sighting.observation ?? 'Sin observación'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}',
+                              color: PiyiColors.error,
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    },
+                    error: (error, _) => PiyiEmptyState(
+                      icon: Icons.error_outline,
+                      title: 'No pudimos cargar avistamientos',
+                      message: ApiErrorMessage.fromObject(error),
+                      actionLabel: 'Reintentar',
+                      onAction: () => ref.invalidate(lostPetSightingsProvider(lostPetId)),
+                    ),
+                    loading: () => const PiyiLoadingList(itemCount: 3),
+                  ),
+                ),
+              ],
+            ),
           ),
-          error: (error, _) => Center(child: Text('Error: $error')),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, _) => PiyiEmptyState(
+            icon: Icons.error_outline,
+            title: 'No pudimos cargar el reporte',
+            message: ApiErrorMessage.fromObject(error),
+            actionLabel: 'Reintentar',
+            onAction: () => ref.invalidate(lostPetDetailProvider(lostPetId)),
+          ),
+          loading: () => const PiyiLoadingList(itemCount: 5),
         ),
-      ),
-    );
-  }
-}
-
-class _InfoCard extends StatelessWidget {
-  const _InfoCard({required this.icon, required this.title, required this.subtitle});
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w900)),
-        subtitle: Text(subtitle),
       ),
     );
   }

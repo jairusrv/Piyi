@@ -2,16 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/errors/api_error_message.dart';
 import 'lost_pet_detail_screen.dart';
 import 'lost_pet_sightings_controller.dart';
 import '../data/lost_pet_sightings_repository.dart';
 
 class ReportSightingScreen extends ConsumerStatefulWidget {
-  const ReportSightingScreen({
-    super.key,
-    required this.lostPetId,
-  });
+  const ReportSightingScreen({super.key, required this.lostPetId});
 
   static const route = '/lost-pets/:lostPetId/report-sighting';
   static String path(String lostPetId) => '/lost-pets/$lostPetId/report-sighting';
@@ -46,9 +45,7 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
     final longitude = num.tryParse(_longitudeController.text.trim());
 
     if (latitude == null || longitude == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Latitud y longitud son requeridas.')),
-      );
+      PiyiSnackBar.warning(context, 'Latitud y longitud son requeridas.');
       return;
     }
 
@@ -68,26 +65,14 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Avistamiento reportado correctamente.')),
-      );
-
+      PiyiSnackBar.success(context, 'Avistamiento reportado correctamente.');
       context.go(LostPetDetailScreen.path(widget.lostPetId));
     } on DioException catch (e) {
-      final data = e.response?.data;
-      var message = 'No se pudo reportar el avistamiento.';
-
-      if (data is Map && data['message'] != null) {
-        message = data['message'].toString();
-      } else if (data != null) {
-        message = data.toString();
-      }
-
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      PiyiSnackBar.error(context, ApiErrorMessage.fromDio(e));
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+      PiyiSnackBar.error(context, ApiErrorMessage.fromObject(e));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -105,79 +90,78 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
         title: const Text('Reportar avistamiento'),
       ),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: ListView(
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  children: [
-                    const Icon(Icons.visibility, size: 56),
-                    const SizedBox(height: 12),
-                    const Text(
-                      '¿Crees que la viste?',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Comparte la ubicación y detalles para ayudar al dueño.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.75)),
-                    ),
-                  ],
-                ),
-              ),
+            PiyiBannerCard(
+              icon: Icons.visibility,
+              title: '¿Crees que la viste?',
+              subtitle: 'Comparte la ubicación y detalles para ayudar al dueño.',
+              color: PiyiColors.error,
             ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _latitudeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Latitud'),
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiSection(
+              title: 'Ubicación',
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PiyiTextField(
+                          controller: _latitudeController,
+                          label: 'Latitud',
+                          icon: Icons.my_location,
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      const SizedBox(width: PiyiSpacing.sm),
+                      Expanded(
+                        child: PiyiTextField(
+                          controller: _longitudeController,
+                          label: 'Longitud',
+                          icon: Icons.explore,
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: TextField(
-                    controller: _longitudeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Longitud'),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  PiyiTextField(
+                    controller: _addressController,
+                    label: 'Lugar',
+                    hint: 'Ej: Frente al supermercado, parque...',
+                    icon: Icons.place,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _addressController,
-              decoration: const InputDecoration(
-                labelText: 'Lugar',
-                hintText: 'Ej: Frente al supermercado, parque, calle...',
+                ],
               ),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _observationController,
-              maxLines: 4,
-              decoration: const InputDecoration(
-                labelText: 'Observación',
-                hintText: 'Qué viste, hacia dónde iba, comportamiento, collar...',
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiSection(
+              title: 'Detalles',
+              child: Column(
+                children: [
+                  PiyiTextField(
+                    controller: _observationController,
+                    label: 'Observación',
+                    hint: 'Qué viste, hacia dónde iba, collar...',
+                    icon: Icons.notes,
+                    maxLines: 4,
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  PiyiTextField(
+                    controller: _photoUrlController,
+                    label: 'URL de foto opcional',
+                    icon: Icons.image,
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _photoUrlController,
-              decoration: const InputDecoration(
-                labelText: 'URL de foto opcional',
-              ),
-            ),
-            const SizedBox(height: 24),
-            FilledButton.icon(
-              onPressed: _isLoading ? null : _submit,
-              icon: const Icon(Icons.send),
-              label: Text(_isLoading ? 'Enviando...' : 'Enviar avistamiento'),
+            const SizedBox(height: PiyiSpacing.xl),
+            PiyiPrimaryButton(
+              label: 'Enviar avistamiento',
+              icon: Icons.send,
+              isLoading: _isLoading,
+              onPressed: _submit,
             ),
           ],
         ),

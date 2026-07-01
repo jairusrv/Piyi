@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/errors/api_error_message.dart';
 import 'lost_pet_detail_screen.dart';
 import 'lost_pets_controller.dart';
 
@@ -45,73 +47,151 @@ class _LostPetsScreenState extends ConsumerState<LostPetsScreen> {
     final lostPetsAsync = ref.watch(lostPetsListProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Mascotas perdidas')),
+      appBar: AppBar(
+        title: const Text('Mascotas perdidas'),
+        actions: [
+          IconButton(
+            onPressed: () => ref.invalidate(lostPetsListProvider),
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
+      ),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: Column(
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(child: TextField(controller: _cityController, decoration: const InputDecoration(labelText: 'Ciudad'))),
-                        const SizedBox(width: 10),
-                        Expanded(child: TextField(controller: _regionController, decoration: const InputDecoration(labelText: 'Provincia'))),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(child: FilledButton.icon(onPressed: _applyFilter, icon: const Icon(Icons.search), label: const Text('Buscar'))),
-                        const SizedBox(width: 10),
-                        IconButton(onPressed: _clearFilter, icon: const Icon(Icons.clear)),
-                      ],
-                    ),
-                  ],
-                ),
+            PiyiBannerCard(
+              icon: Icons.location_on,
+              title: 'Ayudemos a encontrarlas',
+              subtitle: 'Consulta reportes activos y colabora con avistamientos.',
+              color: PiyiColors.error,
+            ),
+            const SizedBox(height: PiyiSpacing.md),
+            PiyiCard(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PiyiTextField(
+                          controller: _cityController,
+                          label: 'Ciudad',
+                          icon: Icons.location_city,
+                        ),
+                      ),
+                      const SizedBox(width: PiyiSpacing.sm),
+                      Expanded(
+                        child: PiyiTextField(
+                          controller: _regionController,
+                          label: 'Provincia',
+                          icon: Icons.map,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: PiyiSpacing.sm),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PiyiPrimaryButton(
+                          label: 'Buscar',
+                          icon: Icons.search,
+                          onPressed: _applyFilter,
+                        ),
+                      ),
+                      const SizedBox(width: PiyiSpacing.sm),
+                      IconButton(
+                        onPressed: _clearFilter,
+                        icon: const Icon(Icons.clear),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: PiyiSpacing.md),
             Expanded(
               child: lostPetsAsync.when(
                 data: (items) {
                   if (items.isEmpty) {
-                    return const Center(child: Text('No hay reportes activos en este momento.', textAlign: TextAlign.center));
+                    return PiyiEmptyState(
+                      icon: Icons.pets,
+                      title: 'No hay reportes activos',
+                      message: 'Cuando una mascota sea reportada como perdida aparecerá aquí.',
+                      actionLabel: 'Actualizar',
+                      onAction: () => ref.invalidate(lostPetsListProvider),
+                    );
                   }
 
                   return RefreshIndicator(
                     onRefresh: () async => ref.invalidate(lostPetsListProvider),
-                    child: ListView.builder(
+                    child: ListView.separated(
                       itemCount: items.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: PiyiSpacing.sm),
                       itemBuilder: (context, index) {
                         final item = items[index];
 
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: item.petPhotoUrl == null ? null : NetworkImage(item.petPhotoUrl!),
-                              child: item.petPhotoUrl == null ? const Text('🐾') : null,
-                            ),
-                            title: Text(
-                              item.petName.isEmpty ? item.title : item.petName,
-                              style: const TextStyle(fontWeight: FontWeight.w900),
-                            ),
-                            subtitle: Text('${item.title}\n${item.lastSeenAddress ?? 'Ubicación no indicada'}'),
-                            isThreeLine: true,
-                            trailing: const Icon(Icons.chevron_right),
-                            onTap: () => context.go(LostPetDetailScreen.path(item.id)),
+                        return PiyiCard(
+                          onTap: () => context.go(LostPetDetailScreen.path(item.id)),
+                          child: Row(
+                            children: [
+                              PiyiAvatar(
+                                imageUrl: item.petPhotoUrl,
+                                name: item.petName,
+                                size: 64,
+                                icon: Icons.pets,
+                              ),
+                              const SizedBox(width: PiyiSpacing.md),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            item.petName.isEmpty ? item.title : item.petName,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ),
+                                        const PiyiBadge(label: 'Perdida', color: PiyiColors.error),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      item.title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      item.lastSeenAddress ?? 'Ubicación no indicada',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.chevron_right),
+                            ],
                           ),
                         );
                       },
                     ),
                   );
                 },
-                error: (error, _) => Center(child: Text('Error: $error')),
-                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, _) => PiyiEmptyState(
+                  icon: Icons.error_outline,
+                  title: 'No pudimos cargar reportes',
+                  message: ApiErrorMessage.fromObject(error),
+                  actionLabel: 'Reintentar',
+                  onAction: () => ref.invalidate(lostPetsListProvider),
+                ),
+                loading: () => const PiyiLoadingList(itemCount: 5),
               ),
             ),
           ],
