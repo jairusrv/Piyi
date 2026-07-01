@@ -4,10 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
-import '../../../core/utils/external_launcher.dart';
 import '../../businesses/presentation/business_detail_screen.dart';
 import '../../lost_pets/presentation/lost_pet_detail_screen.dart';
-import 'map_cache_controller.dart';
 import 'map_controller.dart';
 import 'map_filter_controller.dart';
 import 'map_markers_controller.dart';
@@ -39,13 +37,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     );
   }
 
-  void _refreshMap() {
-    ref.invalidate(lostPetMapMarkersProvider);
-    ref.invalidate(businessMapMarkersProvider);
-    ref.read(mapLastRefreshProvider.notifier).state = DateTime.now();
-    PiyiSnackBar.success(context, 'Mapa actualizado.');
-  }
-
   void _openFilters() {
     showModalBottomSheet(
       context: context,
@@ -54,32 +45,25 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     );
   }
 
-  Future<void> _navigateTo(num latitude, num longitude, String label) async {
-    try {
-      await ExternalLauncher.openMaps(
-        latitude: latitude,
-        longitude: longitude,
-        query: label,
-      );
-    } catch (_) {
-      if (mounted) PiyiSnackBar.error(context, 'No se pudo abrir Google Maps.');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final positionAsync = ref.watch(currentPositionProvider);
     final lostPetsAsync = ref.watch(lostPetMapMarkersProvider);
     final businessesAsync = ref.watch(businessMapMarkersProvider);
     final filter = ref.watch(mapLayerFilterProvider);
-    final lastRefresh = ref.watch(mapLastRefreshProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mapa Piyí'),
         actions: [
           IconButton(onPressed: _openFilters, icon: const Icon(Icons.filter_alt)),
-          IconButton(onPressed: _refreshMap, icon: const Icon(Icons.refresh)),
+          IconButton(
+            onPressed: () {
+              ref.invalidate(lostPetMapMarkersProvider);
+              ref.invalidate(businessMapMarkersProvider);
+            },
+            icon: const Icon(Icons.refresh),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -111,7 +95,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                           Navigator.pop(context);
                           context.go(LostPetDetailScreen.path(item.id));
                         },
-                        onNavigate: () => _navigateTo(item.latitude, item.longitude, item.petName),
                       ),
                     ),
                   ),
@@ -140,7 +123,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                           Navigator.pop(context);
                           context.go(BusinessDetailScreen.path(item.id));
                         },
-                        onNavigate: () => _navigateTo(item.latitude, item.longitude, item.name),
                       ),
                     ),
                   ),
@@ -167,13 +149,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   padding: const EdgeInsets.all(PiyiSpacing.sm),
                   child: Row(
                     children: [
-                      const Icon(Icons.map),
+                      const Icon(Icons.info_outline),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          lastRefresh == null
-                              ? 'Mostrando ${markers.length} puntos'
-                              : 'Mostrando ${markers.length} puntos · actualizado',
+                          'Mostrando ${markers.length} puntos',
                           style: const TextStyle(fontWeight: FontWeight.w800),
                         ),
                       ),

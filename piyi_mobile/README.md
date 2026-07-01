@@ -1,12 +1,16 @@
-# Piyí - Sprint 08D
+# Piyí - Sprint 08C
 
-## Navegación GPS + optimización
+## BottomSheet, filtros y clustering simple
 
 Incluye:
-- Navegación a Google Maps desde marcadores.
-- Cache simple de datos del mapa.
-- Botón refrescar optimizado.
-- ExternalLauncher mejorado.
+- Filtros de mapa
+- BottomSheet profesional
+- Cluster simple visual por tipo
+- Widget de filtro
 
 Aplicar sobre:
 C:\Users\jairo\Documents\Piyi\piyi_mobile
+
+Luego:
+flutter pub get
+flutter run
