@@ -1,0 +1,7 @@
+Agregar si tu DbContext declara DbSet explícitos:
+
+public DbSet<BusinessReview> BusinessReviews => Set<BusinessReview>();
+
+Verificar que existe:
+
+modelBuilder.ApplyConfigurationsFromAssembly(typeof(PiyiDbContext).Assembly);

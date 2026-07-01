@@ -1,0 +1,25 @@
+# PATCH PARA BusinessProfileScreen
+
+Agregar import:
+
+```dart
+import '../../business_reviews/presentation/business_reviews_widgets.dart';
+```
+
+Dentro del ListView, antes del final, agregar:
+
+```dart
+const SizedBox(height: PiyiSpacing.xl),
+PiyiSection(
+  title: 'Reseñas',
+  child: Column(
+    children: [
+      BusinessReviewSummaryCard(businessId: businessId),
+      const SizedBox(height: PiyiSpacing.md),
+      CreateBusinessReviewCard(businessId: businessId),
+      const SizedBox(height: PiyiSpacing.md),
+      BusinessReviewsList(businessId: businessId),
+    ],
+  ),
+),
+```

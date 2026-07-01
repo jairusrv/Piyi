@@ -1,0 +1,8 @@
+Agregar en AddInfrastructure:
+
+services.AddScoped<IBusinessReviewService, BusinessReviewService>();
+
+Usings si hacen falta:
+
+using Piyi.Application.Abstractions;
+using Piyi.Infrastructure.Services;
