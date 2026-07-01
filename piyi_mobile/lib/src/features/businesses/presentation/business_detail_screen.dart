@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/errors/api_error_message.dart';
 import '../../../core/utils/external_launcher.dart';
 import 'businesses_controller.dart';
 
 class BusinessDetailScreen extends ConsumerWidget {
-  const BusinessDetailScreen({
-    super.key,
-    required this.businessId,
-  });
+  const BusinessDetailScreen({super.key, required this.businessId});
 
   static const route = '/businesses/:id';
   static String path(String id) => '/businesses/$id';
@@ -22,21 +21,29 @@ class BusinessDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Negocio')),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16),
+        minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: businessAsync.when(
-          data: (business) => ListView(
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
+          data: (business) => RefreshIndicator(
+            onRefresh: () async => ref.invalidate(businessDetailProvider(businessId)),
+            child: ListView(
+              children: [
+                PiyiBannerCard(
+                  icon: Icons.store,
+                  title: business.name,
+                  subtitle: business.businessTypeName ?? 'Servicio para mascotas',
+                  color: PiyiColors.secondary,
+                ),
+                const SizedBox(height: PiyiSpacing.md),
+                PiyiCard(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 48,
-                        backgroundImage: business.logoUrl == null ? null : NetworkImage(business.logoUrl!),
-                        child: business.logoUrl == null ? const Icon(Icons.store, size: 42) : null,
+                      PiyiAvatar(
+                        imageUrl: business.logoUrl,
+                        name: business.name,
+                        size: 92,
+                        icon: Icons.store,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: PiyiSpacing.md),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -44,151 +51,218 @@ class BusinessDetailScreen extends ConsumerWidget {
                             child: Text(
                               business.name,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
                             ),
                           ),
                           if (business.isVerified) ...[
-                            const SizedBox(width: 6),
-                            const Icon(Icons.verified),
+                            const SizedBox(width: 8),
+                            const Icon(Icons.verified, color: PiyiColors.success),
                           ],
                         ],
                       ),
-                      const SizedBox(height: 6),
-                      Text(business.businessTypeName ?? 'Servicio para mascotas'),
+                      const SizedBox(height: PiyiSpacing.xs),
+                      Text(
+                        business.description ?? 'Sin descripción',
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              if (business.description != null)
-                _InfoCard(icon: Icons.info, title: 'Descripción', subtitle: business.description!),
-              _InfoCard(icon: Icons.location_on, title: 'Dirección', subtitle: business.address ?? 'No indicada'),
-              _InfoCard(icon: Icons.location_city, title: 'Zona', subtitle: '${business.city ?? ''} ${business.region ?? ''} ${business.country ?? ''}'.trim()),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: () async {
-                        try {
-                          await ExternalLauncher.callPhone(business.phone);
-                        } catch (e) {
-                          _showError(context, 'No se pudo llamar.');
-                        }
-                      },
-                      icon: const Icon(Icons.phone),
-                      label: const Text('Llamar'),
-                    ),
+                const SizedBox(height: PiyiSpacing.md),
+                PiyiSection(
+                  title: 'Contacto rápido',
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: PiyiPrimaryButton(
+                              label: 'Llamar',
+                              icon: Icons.phone,
+                              onPressed: () async {
+                                try {
+                                  await ExternalLauncher.callPhone(business.phone);
+                                } catch (_) {
+                                  if (context.mounted) {
+                                    PiyiSnackBar.error(context, 'No se pudo abrir el marcador.');
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: PiyiSpacing.sm),
+                          Expanded(
+                            child: PiyiSecondaryButton(
+                              label: 'WhatsApp',
+                              icon: Icons.chat,
+                              onPressed: () async {
+                                try {
+                                  await ExternalLauncher.openWhatsApp(business.whatsApp ?? business.phone);
+                                } catch (_) {
+                                  if (context.mounted) {
+                                    PiyiSnackBar.error(context, 'No se pudo abrir WhatsApp.');
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiSecondaryButton(
+                        label: 'Cómo llegar',
+                        icon: Icons.directions,
+                        onPressed: () async {
+                          try {
+                            await ExternalLauncher.openMaps(
+                              latitude: business.latitude,
+                              longitude: business.longitude,
+                              query: business.address ?? business.name,
+                            );
+                          } catch (_) {
+                            if (context.mounted) {
+                              PiyiSnackBar.error(context, 'No se pudo abrir Google Maps.');
+                            }
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: () async {
-                        try {
-                          await ExternalLauncher.openWhatsApp(business.whatsApp ?? business.phone);
-                        } catch (e) {
-                          _showError(context, 'No se pudo abrir WhatsApp.');
-                        }
-                      },
-                      icon: const Icon(Icons.chat),
-                      label: const Text('WhatsApp'),
+                ),
+                const SizedBox(height: PiyiSpacing.xl),
+                PiyiSection(
+                  title: 'Información',
+                  child: Column(
+                    children: [
+                      PiyiTile(
+                        icon: Icons.location_on,
+                        title: 'Dirección',
+                        subtitle: business.address ?? 'No indicada',
+                        color: PiyiColors.secondary,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.location_city,
+                        title: 'Zona',
+                        subtitle: _zoneText(business.city, business.region, business.country),
+                        color: PiyiColors.info,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.phone,
+                        title: 'Teléfono',
+                        subtitle: business.phone ?? 'No indicado',
+                        color: PiyiColors.primary,
+                      ),
+                      const SizedBox(height: PiyiSpacing.sm),
+                      PiyiTile(
+                        icon: Icons.email,
+                        title: 'Email',
+                        subtitle: business.email ?? 'No indicado',
+                        color: PiyiColors.warning,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: PiyiSpacing.xl),
+                PiyiSection(
+                  title: 'Servicios',
+                  child: business.services.isEmpty
+                      ? const PiyiEmptyState(
+                          icon: Icons.pets,
+                          title: 'Sin servicios registrados',
+                          message: 'Este negocio aún no ha agregado servicios.',
+                        )
+                      : Column(
+                          children: business.services.map((service) {
+                            final price = service.priceFrom == null
+                                ? 'Precio no indicado'
+                                : 'Desde ₡${service.priceFrom}${service.priceTo == null ? '' : ' hasta ₡${service.priceTo}'}';
+
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
+                              child: PiyiTile(
+                                icon: Icons.pets,
+                                title: service.name,
+                                subtitle: '${service.description ?? 'Sin descripción'}\n$price',
+                                color: PiyiColors.primary,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                ),
+                const SizedBox(height: PiyiSpacing.xl),
+                PiyiSection(
+                  title: 'Horario',
+                  child: business.schedules.isEmpty
+                      ? const PiyiEmptyState(
+                          icon: Icons.schedule,
+                          title: 'Horario no indicado',
+                          message: 'Este negocio aún no ha registrado su horario.',
+                        )
+                      : Column(
+                          children: business.schedules.map((schedule) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
+                              child: PiyiTile(
+                                icon: Icons.schedule,
+                                title: _dayName(schedule.dayOfWeek),
+                                subtitle: schedule.isClosed
+                                    ? 'Cerrado'
+                                    : '${schedule.opensAt ?? ''} - ${schedule.closesAt ?? ''}',
+                                color: schedule.isClosed ? PiyiColors.error : PiyiColors.success,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                ),
+                if (business.photos.isNotEmpty) ...[
+                  const SizedBox(height: PiyiSpacing.xl),
+                  PiyiSection(
+                    title: 'Fotos',
+                    child: SizedBox(
+                      height: 140,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: business.photos.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: PiyiSpacing.sm),
+                        itemBuilder: (context, index) {
+                          final photo = business.photos[index];
+
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(PiyiRadius.xl),
+                            child: Image.network(
+                              photo.photoUrl,
+                              width: 140,
+                              height: 140,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 10),
-              FilledButton.icon(
-                onPressed: () async {
-                  try {
-                    await ExternalLauncher.openMaps(
-                      latitude: business.latitude,
-                      longitude: business.longitude,
-                      query: business.address ?? business.name,
-                    );
-                  } catch (e) {
-                    _showError(context, 'No se pudo abrir el mapa.');
-                  }
-                },
-                icon: const Icon(Icons.directions),
-                label: const Text('Cómo llegar'),
-              ),
-              const SizedBox(height: 20),
-              const Text('Servicios', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              if (business.services.isEmpty)
-                const Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(18),
-                    child: Text('Este negocio aún no tiene servicios registrados.'),
-                  ),
-                )
-              else
-                ...business.services.map((service) {
-                  final price = service.priceFrom == null
-                      ? ''
-                      : 'Desde ₡${service.priceFrom}${service.priceTo == null ? '' : ' hasta ₡${service.priceTo}'}';
-
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    child: ListTile(
-                      leading: const Icon(Icons.pets),
-                      title: Text(service.name, style: const TextStyle(fontWeight: FontWeight.w900)),
-                      subtitle: Text('${service.description ?? ''}${price.isEmpty ? '' : '\n$price'}'),
-                    ),
-                  );
-                }),
-              const SizedBox(height: 20),
-              const Text('Horario', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              if (business.schedules.isEmpty)
-                const Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(18),
-                    child: Text('Horario no indicado.'),
-                  ),
-                )
-              else
-                ...business.schedules.map((schedule) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    child: ListTile(
-                      leading: const Icon(Icons.schedule),
-                      title: Text(_dayName(schedule.dayOfWeek)),
-                      subtitle: Text(schedule.isClosed ? 'Cerrado' : '${schedule.opensAt ?? ''} - ${schedule.closesAt ?? ''}'),
-                    ),
-                  );
-                }),
-              if (business.photos.isNotEmpty) ...[
-                const SizedBox(height: 20),
-                const Text('Fotos', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
-                const SizedBox(height: 8),
-                SizedBox(
-                  height: 130,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: business.photos.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 10),
-                    itemBuilder: (context, index) {
-                      final photo = business.photos[index];
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(18),
-                        child: Image.network(photo.photoUrl, width: 130, height: 130, fit: BoxFit.cover),
-                      );
-                    },
-                  ),
-                ),
+                const SizedBox(height: PiyiSpacing.xl),
               ],
-            ],
+            ),
           ),
-          error: (error, _) => Center(child: Text('Error: $error')),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, _) => PiyiEmptyState(
+            icon: Icons.error_outline,
+            title: 'No pudimos cargar el negocio',
+            message: ApiErrorMessage.fromObject(error),
+            actionLabel: 'Reintentar',
+            onAction: () => ref.invalidate(businessDetailProvider(businessId)),
+          ),
+          loading: () => const PiyiLoadingList(itemCount: 5),
         ),
       ),
     );
   }
 
-  static void _showError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  static String _zoneText(String? city, String? region, String? country) {
+    final text = '${city ?? ''} ${region ?? ''} ${country ?? ''}'.trim();
+    return text.isEmpty ? 'No indicada' : text;
   }
 
   static String _dayName(int day) {
@@ -210,31 +284,5 @@ class BusinessDetailScreen extends ConsumerWidget {
       default:
         return 'Día';
     }
-  }
-}
-
-class _InfoCard extends StatelessWidget {
-  const _InfoCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    if (subtitle.trim().isEmpty) return const SizedBox.shrink();
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w900)),
-        subtitle: Text(subtitle),
-      ),
-    );
   }
 }

@@ -1,19 +1,15 @@
-# Piyí - BETA Sprint 06
+# Piyí - BETA Sprint 07
 
-## Pulido profesional de Mascotas Perdidas
+## Pulido profesional de Negocios y Servicios Cercanos
 
-Este sprint mejora visualmente el módulo de mascotas perdidas y avistamientos.
+Incluye:
 
-## Incluye
-
-- LostPetsScreen renovado.
-- LostPetDetailScreen renovado.
-- ReportLostPetScreen renovado.
-- ReportSightingScreen renovado.
-- Empty states.
-- Loading states.
-- Manejo de errores con ApiErrorMessage.
-- Snackbars con PiyiSnackBar.
+- BusinessesScreen renovado.
+- BusinessDetailScreen renovado.
+- Búsqueda profesional.
+- Empty/loading/error states.
+- Acciones externas: llamar, WhatsApp y cómo llegar.
+- UI consistente con piyi_ui.
 
 ## Aplicar
 
