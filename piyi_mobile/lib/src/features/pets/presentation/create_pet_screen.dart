@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
 import '../../../core/errors/api_error_message.dart';
+import '../../uploads/data/uploads_repository.dart';
 import '../data/pets_repository.dart';
 import 'pets_controller.dart';
 import 'pets_screen.dart';
@@ -22,8 +26,10 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
   final _nameController = TextEditingController();
   final _colorController = TextEditingController();
   final _weightController = TextEditingController();
-  final _photoUrlController = TextEditingController();
 
+  final _picker = ImagePicker();
+
+  XFile? _selectedImage;
   String _speciesId = '';
   String _breedId = '';
   String _sex = 'Unknown';
@@ -35,8 +41,26 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
     _nameController.dispose();
     _colorController.dispose();
     _weightController.dispose();
-    _photoUrlController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImage() async {
+    final image = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 82,
+      maxWidth: 1600,
+    );
+
+    if (image == null) return;
+
+    setState(() => _selectedImage = image);
+  }
+
+  Future<String?> _uploadSelectedImage() async {
+    if (_selectedImage == null) return null;
+
+    final result = await ref.read(uploadsRepositoryProvider).uploadImage(_selectedImage!.path);
+    return result.url;
   }
 
   Future<void> _submit() async {
@@ -55,6 +79,8 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
     setState(() => _isLoading = true);
 
     try {
+      final photoUrl = await _uploadSelectedImage();
+
       await ref.read(petsRepositoryProvider).createPet(
             name: name,
             speciesId: _speciesId,
@@ -62,7 +88,7 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
             sex: _sex,
             color: _emptyToNull(_colorController.text),
             weightKg: num.tryParse(_weightController.text.trim()),
-            photoUrl: _emptyToNull(_photoUrlController.text),
+            photoUrl: photoUrl,
             isSterilized: _isSterilized,
           );
 
@@ -104,10 +130,34 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
             PiyiBannerCard(
               icon: Icons.pets,
               title: 'Nueva mascota',
-              subtitle: 'Crea su perfil digital para salud, QR, recordatorios y alertas.',
+              subtitle: 'Crea su perfil digital con foto real.',
               color: PiyiColors.primary,
             ),
             const SizedBox(height: PiyiSpacing.xl),
+
+            PiyiSection(
+              title: 'Foto',
+              child: PiyiCard(
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 54,
+                      backgroundImage: _selectedImage == null ? null : FileImage(File(_selectedImage!.path)),
+                      child: _selectedImage == null ? const Icon(Icons.pets, size: 42) : null,
+                    ),
+                    const SizedBox(height: PiyiSpacing.md),
+                    PiyiSecondaryButton(
+                      label: _selectedImage == null ? 'Seleccionar foto' : 'Cambiar foto',
+                      icon: Icons.image,
+                      onPressed: _pickImage,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: PiyiSpacing.xl),
+
             PiyiSection(
               title: 'Datos principales',
               child: Column(
@@ -168,7 +218,9 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
                 ],
               ),
             ),
+
             const SizedBox(height: PiyiSpacing.xl),
+
             PiyiSection(
               title: 'Detalles',
               child: Column(
@@ -199,13 +251,6 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
                     keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: PiyiSpacing.sm),
-                  PiyiTextField(
-                    controller: _photoUrlController,
-                    label: 'URL de foto',
-                    hint: 'Temporal mientras agregamos subida real',
-                    icon: Icons.image,
-                  ),
-                  const SizedBox(height: PiyiSpacing.sm),
                   SwitchListTile(
                     value: _isSterilized,
                     title: const Text('Esterilizada/o'),
@@ -215,9 +260,11 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
                 ],
               ),
             ),
+
             const SizedBox(height: PiyiSpacing.xl),
+
             PiyiPrimaryButton(
-              label: 'Guardar mascota',
+              label: _selectedImage == null ? 'Guardar mascota' : 'Subir foto y guardar',
               icon: Icons.save,
               isLoading: _isLoading,
               onPressed: _submit,

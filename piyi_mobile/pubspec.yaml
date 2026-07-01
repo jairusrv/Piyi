@@ -25,6 +25,7 @@ dependencies:
   google_maps_flutter: ^2.9.0
   geolocator: ^13.0.1
   permission_handler: ^11.3.1
+  image_picker: ^1.1.2
 
   piyi_ui:
     path: packages/piyi_ui

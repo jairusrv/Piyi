@@ -1,24 +1,50 @@
-# Piyí - Sprint 08B
+# Piyí - BETA Sprint 09
 
-## Marcadores de mascotas y negocios
+## Subida real de fotografías
 
-Incluye:
-- Endpoints backend /api/map/lost-pets y /api/map/businesses
-- DTOs
-- Service
-- Controller
-- Repository Flutter
-- Marcadores en Google Maps
+Este sprint agrega carga real de imágenes al API y Flutter.
 
-Aplicar backend sobre:
+## Incluye
+
+Backend:
+- UploadsController
+- POST /api/uploads/images
+- Guardado local en wwwroot/uploads/images
+- Retorna URL pública
+
+Flutter:
+- image_picker
+- UploadsRepository
+- CreatePetScreen con selección/subida de foto
+
+## Aplicar backend
+
+Extraer sobre:
+
+```powershell
 C:\Users\jairo\Documents\Piyi
+```
 
-Aplicar Flutter sobre:
+IMPORTANTE: revisar Program.cs y agregar:
+
+```csharp
+app.UseStaticFiles();
+```
+
+Debe ir antes de `app.MapControllers();`.
+
+## Aplicar Flutter
+
+El contenido de `piyi_mobile` se copia sobre:
+
+```powershell
 C:\Users\jairo\Documents\Piyi\piyi_mobile
+```
 
 Luego:
+
+```powershell
 dotnet build
-dotnet ef migrations add BetaMapEndpoints --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
-dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
 flutter pub get
 flutter run
+```
