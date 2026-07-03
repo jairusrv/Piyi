@@ -1,0 +1,43 @@
+# PATCH AuthRepository
+
+En tu método login, después de recibir respuesta exitosa del API, guarda sesión así:
+
+```dart
+import 'auth_session_manager.dart';
+```
+
+Si `AuthRepository` tiene acceso a `Ref ref`:
+
+```dart
+await ref.read(authSessionManagerProvider).saveLoginResponse(
+  response.data as Map<String, dynamic>,
+);
+```
+
+Si AuthRepository NO tiene `ref`, entonces inyecta `AuthSessionManager`
+o guarda manualmente:
+
+```dart
+await const AuthSessionStore().saveSession(
+  accessToken: response.data['token'] ?? response.data['accessToken'],
+  refreshToken: response.data['refreshToken'],
+);
+```
+
+En logout:
+
+```dart
+await ref.read(authSessionManagerProvider).logout();
+```
+
+El objetivo es que el token quede guardado con la clave:
+
+```text
+access_token
+```
+
+o:
+
+```text
+piyi_access_token
+```

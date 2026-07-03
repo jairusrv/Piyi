@@ -1,0 +1,24 @@
+# PATCH Logout
+
+En HomeScreen o donde tengas cerrar sesión:
+
+Import:
+
+```dart
+import '../../auth/data/auth_session_manager.dart';
+import '../../auth/presentation/login_screen.dart';
+```
+
+Logout:
+
+```dart
+Future<void> _logout(BuildContext context) async {
+  await ref.read(authSessionManagerProvider).logout();
+
+  if (context.mounted) {
+    context.go(LoginScreen.route);
+  }
+}
+```
+
+Esto garantiza que si el usuario toca cerrar sesión, no vuelva a entrar automáticamente.

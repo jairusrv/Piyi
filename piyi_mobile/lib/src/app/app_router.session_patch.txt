@@ -1,0 +1,26 @@
+# PATCH Router
+
+Asegúrate de que el router inicia en SplashScreen.
+
+Import:
+
+```dart
+import '../features/splash/presentation/splash_screen.dart';
+```
+
+Ruta:
+
+```dart
+GoRoute(
+  path: SplashScreen.route,
+  builder: (context, state) => const SplashScreen(),
+),
+```
+
+Y el initialLocation debe ser:
+
+```dart
+initialLocation: SplashScreen.route,
+```
+
+Si ya existe SplashScreen, reemplázalo por el de este sprint.

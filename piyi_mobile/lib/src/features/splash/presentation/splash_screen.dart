@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
-import '../../auth/data/session_manager.dart';
+import '../../auth/data/auth_session_manager.dart';
 import '../../auth/presentation/login_screen.dart';
 import '../../home/presentation/home_screen.dart';
 
@@ -26,7 +26,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _resolveSession() async {
     await Future<void>.delayed(const Duration(milliseconds: 650));
 
-    final hasSession = await ref.read(sessionManagerProvider).hasValidStoredSession();
+    final hasSession = await ref
+        .read(authSessionManagerProvider)
+        .hasStoredSession();
 
     if (!mounted) return;
 
@@ -49,15 +51,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 112,
-                  height: 112,
+                  width: 116,
+                  height: 116,
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.18),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.pets,
-                    size: 64,
+                    size: 68,
                     color: Colors.white,
                   ),
                 ),
@@ -66,13 +68,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   'Piyí',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 42,
+                    fontSize: 44,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: PiyiSpacing.sm),
                 Text(
-                  'Cuidando lo que más quieres',
+                  'El hogar digital de tus mascotas',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.92),

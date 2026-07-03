@@ -1,0 +1,30 @@
+# PATCH ApiClient / Dio
+
+Si tienes un archivo tipo:
+
+```text
+lib/src/core/network/api_client.dart
+```
+
+agrega el interceptor:
+
+```dart
+import '../../features/auth/data/auth_session_store.dart';
+import 'auth_session_interceptor.dart';
+```
+
+Donde creas Dio:
+
+```dart
+final dio = Dio(...);
+dio.interceptors.add(AuthSessionInterceptor(ref.watch(authSessionStoreProvider)));
+return dio;
+```
+
+Esto agrega automáticamente:
+
+```text
+Authorization: Bearer TOKEN
+```
+
+a todas las solicitudes.

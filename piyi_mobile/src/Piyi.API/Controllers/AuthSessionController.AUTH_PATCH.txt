@@ -1,0 +1,36 @@
+# BACKEND PATCH OPCIONAL
+
+Este sprint se enfoca en Flutter. Para backend refresh/logout, adapta esto a tu AuthService actual.
+
+Crear controlador real si ya tienes servicio de tokens:
+
+```csharp
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Piyi.Contracts.Auth;
+
+namespace Piyi.API.Controllers;
+
+[ApiController]
+[Route("api/auth/session")]
+public sealed class AuthSessionController : ControllerBase
+{
+    [HttpPost("refresh")]
+    [AllowAnonymous]
+    public IActionResult Refresh(RefreshTokenRequest request)
+    {
+        // TODO: conectar con tu Jwt/AuthService real.
+        return BadRequest(new { message = "Refresh token aún no implementado en AuthService." });
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public IActionResult Logout(LogoutRequest request)
+    {
+        // TODO: invalidar refresh token si lo guardas en BD.
+        return Ok(new { message = "Sesión cerrada." });
+    }
+}
+```
+
+Más adelante, Sprint 18A.2 puede agregar refresh tokens persistidos en BD.

@@ -12,8 +12,10 @@ final dioProvider = Provider<Dio>((ref) {
       baseUrl: ApiConfig.baseUrl,
       connectTimeout: const Duration(seconds: 20),
       receiveTimeout: const Duration(seconds: 20),
+      sendTimeout: const Duration(seconds: 20),
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     ),
   );
@@ -23,11 +25,14 @@ final dioProvider = Provider<Dio>((ref) {
       onRequest: (options, handler) async {
         final token = await storage.getToken();
 
-        if (token != null && token.isNotEmpty) {
+        if (token != null && token.trim().isNotEmpty) {
           options.headers['Authorization'] = 'Bearer $token';
         }
 
         handler.next(options);
+      },
+      onError: (error, handler) async {
+        handler.next(error);
       },
     ),
   );

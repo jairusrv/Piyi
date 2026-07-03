@@ -1,34 +1,8 @@
-# Piyí - BETA Sprint 15
+# Piyí - BETA Sprint 18A COMPLETO
 
-## Flutter Catálogo Informativo Pro
+## Sesión persistente lista, sin parches manuales
 
-Este sprint agrega la UI móvil para buscar productos/servicios ofrecidos por proveedores Pro.
-
-## Importante
-
-NO es marketplace transaccional.
-
-No incluye:
-
-- carrito
-- checkout
-- delivery
-- órdenes
-- comisiones
-
-Sí incluye:
-
-- búsqueda
-- precio referencial
-- foto
-- marca
-- SKU
-- código de barras
-- disponibilidad
-- contacto directo con proveedor
-- llamar
-- WhatsApp
-- cómo llegar
+Este ZIP ya trae los archivos finales. No hay archivos `.patch.txt`.
 
 ## Aplicar
 
@@ -38,16 +12,22 @@ Extraer sobre:
 C:\Users\jairo\Documents\Piyi\piyi_mobile
 ```
 
-Luego revisar:
-
-```text
-lib/src/app/app_router.catalog_patch.txt
-lib/src/features/home/presentation/home_catalog_patch.txt
-```
-
-Después:
+Luego ejecutar:
 
 ```powershell
+cd C:\Users\jairo\Documents\Piyi\piyi_mobile
+flutter clean
+Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
 flutter pub get
 flutter run
 ```
+
+## Prueba
+
+1. Inicia sesión.
+2. Cierra la app completamente.
+3. Ábrela otra vez.
+4. Debe entrar directo al Home.
+5. Toca cerrar sesión.
+6. Debe volver al Login.
