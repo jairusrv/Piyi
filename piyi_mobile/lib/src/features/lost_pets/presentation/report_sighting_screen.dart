@@ -5,9 +5,13 @@ import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
 import '../../../core/errors/api_error_message.dart';
+import '../../../core/navigation/piyi_navigation_helper.dart';
+import '../../location/data/current_location_result.dart';
+import '../../location/presentation/widgets/piyi_current_location_card.dart';
+import '../../location/presentation/widgets/piyi_use_current_location_button.dart';
+import '../data/lost_pet_sightings_repository.dart';
 import 'lost_pet_detail_screen.dart';
 import 'lost_pet_sightings_controller.dart';
-import '../data/lost_pet_sightings_repository.dart';
 
 class ReportSightingScreen extends ConsumerStatefulWidget {
   const ReportSightingScreen({super.key, required this.lostPetId});
@@ -22,18 +26,15 @@ class ReportSightingScreen extends ConsumerStatefulWidget {
 }
 
 class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
-  final _latitudeController = TextEditingController();
-  final _longitudeController = TextEditingController();
   final _addressController = TextEditingController();
   final _observationController = TextEditingController();
   final _photoUrlController = TextEditingController();
 
+  CurrentLocationResult? _location;
   bool _isLoading = false;
 
   @override
   void dispose() {
-    _latitudeController.dispose();
-    _longitudeController.dispose();
     _addressController.dispose();
     _observationController.dispose();
     _photoUrlController.dispose();
@@ -41,11 +42,8 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
   }
 
   Future<void> _submit() async {
-    final latitude = num.tryParse(_latitudeController.text.trim());
-    final longitude = num.tryParse(_longitudeController.text.trim());
-
-    if (latitude == null || longitude == null) {
-      PiyiSnackBar.warning(context, 'Latitud y longitud son requeridas.');
+    if (_location == null) {
+      PiyiSnackBar.warning(context, 'Usa tu ubicación actual para reportar el avistamiento.');
       return;
     }
 
@@ -54,9 +52,9 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
     try {
       await ref.read(lostPetSightingsRepositoryProvider).createSighting(
             lostPetId: widget.lostPetId,
-            latitude: latitude,
-            longitude: longitude,
-            address: _emptyToNull(_addressController.text),
+            latitude: _location!.latitude,
+            longitude: _location!.longitude,
+            address: _emptyToNull(_addressController.text) ?? _location!.address ?? _location!.placeLabel,
             observation: _emptyToNull(_observationController.text),
             photoUrl: _emptyToNull(_photoUrlController.text),
           );
@@ -85,86 +83,54 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reportar avistamiento'),
-      ),
-      body: SafeArea(
-        minimum: const EdgeInsets.all(PiyiSpacing.md),
-        child: ListView(
-          children: [
-            PiyiBannerCard(
-              icon: Icons.visibility,
-              title: '¿Crees que la viste?',
-              subtitle: 'Comparte la ubicación y detalles para ayudar al dueño.',
-              color: PiyiColors.error,
-            ),
-            const SizedBox(height: PiyiSpacing.xl),
-            PiyiSection(
-              title: 'Ubicación',
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PiyiTextField(
-                          controller: _latitudeController,
-                          label: 'Latitud',
-                          icon: Icons.my_location,
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(width: PiyiSpacing.sm),
-                      Expanded(
-                        child: PiyiTextField(
-                          controller: _longitudeController,
-                          label: 'Longitud',
-                          icon: Icons.explore,
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: PiyiSpacing.sm),
-                  PiyiTextField(
-                    controller: _addressController,
-                    label: 'Lugar',
-                    hint: 'Ej: Frente al supermercado, parque...',
-                    icon: Icons.place,
-                  ),
+    return PiyiPageScaffold(
+      title: 'Reportar avistamiento',
+      onBack: () => PiyiNavigationHelper.backOrHome(context),
+      child: ListView(
+        children: [
+          PiyiBannerCard(
+            icon: Icons.visibility,
+            title: '¿Crees que la viste?',
+            subtitle: 'Usaremos tu ubicación actual para ayudar al dueño.',
+            color: PiyiColors.error,
+          ),
+          const SizedBox(height: PiyiSpacing.xl),
+          PiyiSection(
+            title: 'Ubicación',
+            child: Column(
+              children: [
+                PiyiUseCurrentLocationButton(
+                  label: 'Usar ubicación actual',
+                  onLocation: (location) {
+                    setState(() => _location = location);
+                    if (_addressController.text.trim().isEmpty) {
+                      _addressController.text = location.address ?? location.placeLabel;
+                    }
+                  },
+                ),
+                if (_location != null) ...[
+                  const SizedBox(height: PiyiSpacing.md),
+                  PiyiCurrentLocationCard(location: _location!, title: 'Lugar del avistamiento'),
                 ],
-              ),
+                const SizedBox(height: PiyiSpacing.sm),
+                PiyiTextField(controller: _addressController, label: 'Referencia del lugar', hint: 'Ej: Frente al supermercado...', icon: Icons.place),
+              ],
             ),
-            const SizedBox(height: PiyiSpacing.xl),
-            PiyiSection(
-              title: 'Detalles',
-              child: Column(
-                children: [
-                  PiyiTextField(
-                    controller: _observationController,
-                    label: 'Observación',
-                    hint: 'Qué viste, hacia dónde iba, collar...',
-                    icon: Icons.notes,
-                    maxLines: 4,
-                  ),
-                  const SizedBox(height: PiyiSpacing.sm),
-                  PiyiTextField(
-                    controller: _photoUrlController,
-                    label: 'URL de foto opcional',
-                    icon: Icons.image,
-                  ),
-                ],
-              ),
+          ),
+          const SizedBox(height: PiyiSpacing.xl),
+          PiyiSection(
+            title: 'Detalles',
+            child: Column(
+              children: [
+                PiyiTextField(controller: _observationController, label: 'Observación', hint: 'Qué viste, hacia dónde iba, collar...', icon: Icons.notes, maxLines: 4),
+                const SizedBox(height: PiyiSpacing.sm),
+                PiyiTextField(controller: _photoUrlController, label: 'URL de foto opcional', icon: Icons.image),
+              ],
             ),
-            const SizedBox(height: PiyiSpacing.xl),
-            PiyiPrimaryButton(
-              label: 'Enviar avistamiento',
-              icon: Icons.send,
-              isLoading: _isLoading,
-              onPressed: _submit,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: PiyiSpacing.xl),
+          PiyiPrimaryButton(label: 'Enviar avistamiento', icon: Icons.send, isLoading: _isLoading, onPressed: _submit),
+        ],
       ),
     );
   }

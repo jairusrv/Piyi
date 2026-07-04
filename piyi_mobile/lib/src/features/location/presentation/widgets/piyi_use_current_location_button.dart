@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../data/current_location_result.dart';
 import '../current_location_controller.dart';
 
 class PiyiUseCurrentLocationButton extends ConsumerWidget {
@@ -12,7 +12,7 @@ class PiyiUseCurrentLocationButton extends ConsumerWidget {
     this.label = 'Usar mi ubicación actual',
   });
 
-  final ValueChanged<Position> onLocation;
+  final ValueChanged<CurrentLocationResult> onLocation;
   final String label;
 
   @override
@@ -21,19 +21,24 @@ class PiyiUseCurrentLocationButton extends ConsumerWidget {
       label: label,
       icon: Icons.my_location,
       onPressed: () async {
-        final position = await ref.read(currentLocationProvider.future);
+        final location = await ref.read(currentLocationProvider.future);
 
-        if (position == null) {
+        if (location == null) {
           if (context.mounted) {
             PiyiSnackBar.warning(
               context,
-              'No pudimos obtener tu ubicación. Revisa permisos y GPS.',
+              'No pudimos obtener tu ubicación. Activa GPS y permisos.',
             );
           }
           return;
         }
 
-        onLocation(position);
+        ref.read(selectedCurrentLocationProvider.notifier).state = location;
+        onLocation(location);
+
+        if (context.mounted) {
+          PiyiSnackBar.success(context, 'Ubicación obtenida correctamente.');
+        }
       },
     );
   }

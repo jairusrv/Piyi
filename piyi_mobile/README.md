@@ -1,33 +1,23 @@
-# Piyí - BETA Sprint 18A COMPLETO
+# Piyí - BETA Sprint 18C COMPLETO
 
-## Sesión persistente lista, sin parches manuales
+## GPS, permisos y ubicación actual
 
-Este ZIP ya trae los archivos finales. No hay archivos `.patch.txt`.
+Sin parches manuales.
 
-## Aplicar
+## Aplica sobre
 
-Extraer sobre:
-
-```powershell
 C:\Users\jairo\Documents\Piyi\piyi_mobile
-```
 
-Luego ejecutar:
+## Luego
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi\piyi_mobile
-flutter clean
-Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
 flutter pub get
 flutter run
 ```
 
-## Prueba
+## Corrige
 
-1. Inicia sesión.
-2. Cierra la app completamente.
-3. Ábrela otra vez.
-4. Debe entrar directo al Home.
-5. Toca cerrar sesión.
-6. Debe volver al Login.
+- Reportar mascota perdida ya no pide latitud/longitud manual.
+- Reportar avistamiento ya no pide latitud/longitud manual.
+- Configuración de alertas usa ubicación actual del celular.

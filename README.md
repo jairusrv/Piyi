@@ -1,12 +1,8 @@
-# Piyí - Hotfix 17.1
+# Piyí - BETA Sprint 19A COMPLETO
 
-Corrige:
+## Notificaciones inteligentes por zona
 
-```text
-User no contiene una definición para FullName
-```
-
-El sistema de reseñas ahora usa `User.Email` como nombre visible temporal.
+Base para alertar cuando existan mascotas perdidas cerca de la zona segura del usuario.
 
 ## Aplicar
 
@@ -16,10 +12,18 @@ Extraer sobre:
 C:\Users\jairo\Documents\Piyi
 ```
 
-Luego:
+Backend:
 
 ```powershell
 dotnet build
-dotnet ef migrations add BetaBusinessReviewsRatings --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
+dotnet ef migrations add BetaSmartZoneNotifications --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
 dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
+```
+
+Flutter:
+
+```powershell
+cd C:\Users\jairo\Documents\Piyi\piyi_mobile
+flutter pub get
+flutter run
 ```

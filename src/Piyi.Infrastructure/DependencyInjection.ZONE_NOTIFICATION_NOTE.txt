@@ -1,0 +1,6 @@
+IMPORTANTE:
+Para usar el endpoint en runtime, registra el servicio en DependencyInjection.cs:
+
+services.AddScoped<IZoneNotificationService, ZoneNotificationService>();
+
+Si no lo haces, el build puede pasar pero el endpoint fallará por DI.
