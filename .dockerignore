@@ -1,0 +1,16 @@
+.git
+.github
+**/bin/
+**/obj/
+**/.dart_tool/
+**/build/
+**/.gradle/
+**/node_modules/
+piyi_mobile/android/.gradle/
+piyi_mobile/build/
+piyi_mobile/ios/Pods/
+piyi_mobile/macos/Pods/
+outputs/
+work/
+*.zip
+*.log
