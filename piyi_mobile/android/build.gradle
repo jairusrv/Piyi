@@ -24,3 +24,13 @@ subprojects { subproject ->
         }
     }
 }
+/*
+ * PIYI_KOTLIN_JVM_TARGET_FIX
+ */
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+}
