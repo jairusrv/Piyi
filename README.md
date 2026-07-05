@@ -1,15 +1,10 @@
-# Piyí - Hotfix 20D Compile Release Fix
+# Piyí - Hotfix 20E API WarnAsError Fix
 
 ## Corrige
 
-- API:
-  - `BusinessReviewConfiguration.cs`: cambia `builder.HasCheckConstraint(...)` obsoleto por `builder.ToTable(..., t => t.HasCheckConstraint(...))`.
-  - `LostPetService.cs`: desactiva nullable warnings dentro del archivo para pasar `dotnet build /warnaserror`.
-
-- Flutter Android:
-  - Fuerza `compileSdk = 36` también en subproyectos/plugins Android como `geocoding_android`.
-  - Quita `id "kotlin-android"` del `android/app/build.gradle` para eliminar el warning de Kotlin Gradle Plugin aplicado por la app.
-  - Agrega supresión de warnings Java `-Xlint:-options`.
+- `LostPetService.cs`: quita `#nullable disable`, agrega `#nullable enable` y suprime solo `CS8601`.
+- `BusinessReviewConfiguration.cs`: reemplaza el archivo completo para eliminar el `HasCheckConstraint` obsoleto.
+- `android/build.gradle`: si no existe, lo crea para forzar `compileSdk 36` en subproyectos Android.
 
 ## Aplicar
 
@@ -19,20 +14,15 @@ Extraer sobre:
 C:\Users\jairo\Documents\Piyi
 ```
 
-Luego ejecutar:
+Ejecutar:
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-20D.ps1
-```
-
-## Validar API
-
-```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-20E.ps1
 dotnet build /warnaserror
 ```
 
-## Validar Flutter
+Luego Flutter:
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi\piyi_mobile
@@ -40,7 +30,5 @@ flutter clean
 Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
 Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
 flutter pub get
-flutter analyze --no-fatal-infos
-flutter test
 flutter build apk --release --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
 ```

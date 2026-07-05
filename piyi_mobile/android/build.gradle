@@ -1,0 +1,26 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+subprojects { subproject ->
+    afterEvaluate {
+        if (subproject.plugins.hasPlugin("com.android.application") ||
+            subproject.plugins.hasPlugin("com.android.library")) {
+            if (subproject.hasProperty("android")) {
+                subproject.android.compileSdk = 36
+
+                subproject.android.compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
+            }
+        }
+
+        subproject.tasks.withType(JavaCompile).configureEach {
+            options.compilerArgs.add("-Xlint:-options")
+        }
+    }
+}

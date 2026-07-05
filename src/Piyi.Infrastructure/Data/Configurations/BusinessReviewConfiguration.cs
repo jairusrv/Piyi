@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Piyi.Domain.Entities;
 
@@ -8,7 +8,12 @@ public sealed class BusinessReviewConfiguration : IEntityTypeConfiguration<Busin
 {
     public void Configure(EntityTypeBuilder<BusinessReview> builder)
     {
-        builder.ToTable("BusinessReviews");
+        builder.ToTable("BusinessReviews", table =>
+        {
+            table.HasCheckConstraint(
+                "CK_BusinessReviews_Rating",
+                "\"Rating\" >= 1 AND \"Rating\" <= 5");
+        });
 
         builder.HasKey(x => x.Id);
 
@@ -33,7 +38,5 @@ public sealed class BusinessReviewConfiguration : IEntityTypeConfiguration<Busin
         builder.HasIndex(x => x.IsApproved);
         builder.HasIndex(x => x.IsReported);
         builder.HasIndex(x => x.IsDeleted);
-
-        builder.HasCheckConstraint("CK_BusinessReviews_Rating", "\"Rating\" >= 1 AND \"Rating\" <= 5");
     }
 }
