@@ -1,29 +1,26 @@
-# Piyí - BETA Sprint 19A COMPLETO
+# Piyí - Hotfix 20C Clean Build
 
-## Notificaciones inteligentes por zona
-
-Base para alertar cuando existan mascotas perdidas cerca de la zona segura del usuario.
+Corrige dependencias Flutter para resolver conflicto device_info_plus / flutter_secure_storage / win32.
 
 ## Aplicar
 
 Extraer sobre:
 
-```powershell
 C:\Users\jairo\Documents\Piyi
-```
 
-Backend:
+## Validar API
 
-```powershell
-dotnet build
-dotnet ef migrations add BetaSmartZoneNotifications --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
-dotnet ef database update --project .\src\Piyi.Infrastructure --startup-project .\src\Piyi.API
-```
+cd C:\Users\jairo\Documents\Piyi
+dotnet build /warnaserror
 
-Flutter:
+## Validar Flutter
 
-```powershell
 cd C:\Users\jairo\Documents\Piyi\piyi_mobile
+flutter clean
+Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
+Remove-Item pubspec.lock -Force -ErrorAction SilentlyContinue
 flutter pub get
-flutter run
-```
+flutter analyze --no-fatal-infos
+flutter test
+flutter build apk --release --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
