@@ -60,7 +60,7 @@ Future<_SafeCountResult> _safeCount(
 final dashboardActivitiesProvider = Provider<List<DashboardActivity>>((ref) {
   return const [
     DashboardActivity(
-      title: 'Piyi Beta esta activo',
+      title: 'Piyí Beta esta activo',
       subtitle:
           'Ya puedes probar mascotas, negocios y reportes de mascotas perdidas.',
       type: 'success',

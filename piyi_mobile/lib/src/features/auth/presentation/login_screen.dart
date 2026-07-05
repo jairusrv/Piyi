@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/errors/api_error_message.dart';
+import '../../../core/config/app_config.dart';
 import '../../home/presentation/home_screen.dart';
-import 'register_screen.dart';
 import '../data/auth_repository.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -29,26 +32,41 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Future<void> _login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      _showMessage('Ingresa correo y contrasena.');
+      return;
+    }
+
     setState(() => _isLoading = true);
 
     try {
       await ref.read(authRepositoryProvider).login(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
+            email: email,
+            password: password,
           );
 
       if (!mounted) return;
       context.go(HomeScreen.route);
-    } catch (e) {
+    } on DioException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se pudo iniciar sesión: $e')),
-      );
+      _showMessage(ApiErrorMessage.fromDio(e));
+    } catch (_) {
+      if (!mounted) return;
+      _showMessage('No se pudo iniciar sesion. Intenta de nuevo.');
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
     }
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -59,8 +77,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 48),
+            const Icon(Icons.pets, size: 56),
+            const SizedBox(height: 12),
             const Text(
-              '🐾 Piyí',
+              AppConfig.displayName,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 42,
@@ -78,7 +98,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                labelText: 'Correo electrónico',
+                labelText: 'Correo electronico',
               ),
             ),
             const SizedBox(height: 16),
@@ -86,7 +106,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: 'Contraseña',
+                labelText: 'Contrasena',
               ),
             ),
             const SizedBox(height: 24),

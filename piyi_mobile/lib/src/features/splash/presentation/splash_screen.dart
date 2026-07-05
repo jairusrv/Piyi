@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../auth/data/auth_session_manager.dart';
 import '../../auth/presentation/login_screen.dart';
 import '../../home/presentation/home_screen.dart';
@@ -26,9 +27,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _resolveSession() async {
     await Future<void>.delayed(const Duration(milliseconds: 650));
 
-    final hasSession = await ref
-        .read(authSessionManagerProvider)
-        .hasStoredSession();
+    final hasSession =
+        await ref.read(authSessionManagerProvider).hasStoredSession();
 
     if (!mounted) return;
 
@@ -65,7 +65,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 ),
                 const SizedBox(height: PiyiSpacing.xl),
                 const Text(
-                  'Piyí',
+                  AppConfig.displayName,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 44,

@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dio/dio.dart';
+
+import '../../../core/errors/api_error_message.dart';
 import '../../home/presentation/home_screen.dart';
 import '../data/auth_repository.dart';
 
@@ -34,50 +36,51 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Future<void> _register() async {
+    final firstName = _firstNameController.text.trim();
+    final lastName = _lastNameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (firstName.isEmpty ||
+        lastName.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty) {
+      _showMessage('Completa nombre, apellido, correo y contrasena.');
+      return;
+    }
+
     setState(() => _isLoading = true);
 
     try {
       await ref.read(authRepositoryProvider).register(
-            firstName: _firstNameController.text.trim(),
-            lastName: _lastNameController.text.trim(),
-            email: _emailController.text.trim(),
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
             phoneNumber: _phoneController.text.trim().isEmpty
                 ? null
                 : _phoneController.text.trim(),
-            password: _passwordController.text,
+            password: password,
           );
 
       if (!mounted) return;
       context.go(HomeScreen.route);
     } on DioException catch (e) {
-      final data = e.response?.data;
-
-      String message = 'No se pudo registrar.';
-
-      if (data is Map && data['message'] != null) {
-        message = data['message'].toString();
-      } else if (data != null) {
-        message = data.toString();
-      } else {
-        message = e.message ?? message;
-      }
-
       if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
-    } catch (e) {
+      _showMessage(ApiErrorMessage.fromDio(e));
+    } catch (_) {
       if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se pudo registrar: $e')),
-      );
+      _showMessage('No se pudo crear la cuenta. Intenta de nuevo.');
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
     }
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -104,19 +107,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration:
-                  const InputDecoration(labelText: 'Correo electrónico'),
+                  const InputDecoration(labelText: 'Correo electronico'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _phoneController,
               keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(labelText: 'Teléfono'),
+              decoration: const InputDecoration(labelText: 'Telefono'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Contraseña'),
+              decoration: const InputDecoration(labelText: 'Contrasena'),
             ),
             const SizedBox(height: 24),
             FilledButton(

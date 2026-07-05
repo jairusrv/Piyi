@@ -206,7 +206,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiTile(
                       icon: Icons.inventory_2,
-                      title: 'Catálogo',
+                      title: 'Catalogo',
                       subtitle:
                           'Busca productos y servicios de proveedores Pro.',
                       color: PiyiColors.primary,
@@ -214,7 +214,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     PiyiTile(
                       icon: Icons.settings,
-                      title: 'Perfil y configuración',
+                      title: 'Perfil y configuracion',
                       subtitle: 'Cuenta y preferencias basicas.',
                       color: PiyiColors.info,
                       onTap: () => context.go(ProfileSettingsScreen.route),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
+import '../core/config/app_config.dart';
 import 'app_router.dart';
 
 class PiyiApp extends ConsumerWidget {
@@ -12,7 +13,7 @@ class PiyiApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
-      title: 'Piyi',
+      title: AppConfig.displayName,
       debugShowCheckedModeBanner: false,
       theme: PiyiTheme.light,
       darkTheme: PiyiTheme.dark,
