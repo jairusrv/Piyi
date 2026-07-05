@@ -39,6 +39,12 @@ Jwt__ExpirationMinutes=1440
 
 Importante: usar `Jwt__SecretKey`, no `Jwt__Key`.
 
+La app mobile beta debe apuntar a:
+
+```text
+https://piyi.onrender.com
+```
+
 ## Neon
 
 Crear un proyecto PostgreSQL en Neon y copiar el connection string.
