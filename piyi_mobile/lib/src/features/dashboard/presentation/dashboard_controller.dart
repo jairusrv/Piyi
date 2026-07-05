@@ -14,13 +14,22 @@ class _SafeCountResult {
   final String? error;
 }
 
-final dashboardSummaryProvider = FutureProvider.autoDispose<DashboardSummary>((ref) async {
-  final pets = await _safeCount(() => ref.watch(petsRepositoryProvider).getMyPets());
-  final lostPets = await _safeCount(() => ref.watch(lostPetsPublicRepositoryProvider).getActive());
-  final notifications = await _safeCount(
-    () => ref.watch(notificationsRepositoryProvider).getMyNotifications(unreadOnly: true),
+final dashboardSummaryProvider =
+    FutureProvider.autoDispose<DashboardSummary>((ref) async {
+  final pets = await _safeCount(
+    () => ref.watch(petsRepositoryProvider).getMyPets(),
   );
-  final businesses = await _safeCount(() => ref.watch(businessesRepositoryProvider).search());
+  final lostPets = await _safeCount(
+    () => ref.watch(lostPetsPublicRepositoryProvider).getActive(),
+  );
+  final notifications = await _safeCount(
+    () => ref.watch(notificationsRepositoryProvider).getMyNotifications(
+          unreadOnly: true,
+        ),
+  );
+  final businesses = await _safeCount(
+    () => ref.watch(businessesRepositoryProvider).search(),
+  );
 
   return DashboardSummary(
     petsCount: pets.count,
@@ -34,7 +43,9 @@ final dashboardSummaryProvider = FutureProvider.autoDispose<DashboardSummary>((r
   );
 });
 
-Future<_SafeCountResult> _safeCount(Future<List<dynamic>> Function() loader) async {
+Future<_SafeCountResult> _safeCount(
+  Future<List<dynamic>> Function() loader,
+) async {
   try {
     final items = await loader();
     return _SafeCountResult(count: items.length);
@@ -49,19 +60,16 @@ Future<_SafeCountResult> _safeCount(Future<List<dynamic>> Function() loader) asy
 final dashboardActivitiesProvider = Provider<List<DashboardActivity>>((ref) {
   return const [
     DashboardActivity(
-      title: 'Piyí Beta está activo',
-      subtitle: 'Ya puedes probar mascotas, negocios, alertas y notificaciones.',
+      title: 'Piyi Beta esta activo',
+      subtitle:
+          'Ya puedes probar mascotas, negocios y reportes de mascotas perdidas.',
       type: 'success',
     ),
     DashboardActivity(
-      title: 'Configura tu zona',
-      subtitle: 'Activa alertas para mascotas perdidas cerca de ti.',
+      title: 'Reportes simples',
+      subtitle:
+          'Publica una mascota perdida y recibe avistamientos de la comunidad.',
       type: 'location',
-    ),
-    DashboardActivity(
-      title: 'Registra tu dispositivo',
-      subtitle: 'Prepara tu teléfono para recibir push notifications.',
-      type: 'phone',
     ),
   ];
 });
@@ -76,7 +84,7 @@ final dashboardRemindersProvider = Provider<List<DashboardReminder>>((ref) {
     ),
     DashboardReminder(
       title: 'Cita veterinaria',
-      subtitle: 'Agenda tus próximas citas desde el perfil de mascota.',
+      subtitle: 'Agenda tus proximas citas desde el perfil de mascota.',
       dateLabel: 'Nuevo',
       type: 'appointment',
     ),

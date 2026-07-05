@@ -59,7 +59,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       appBar: PiyiAppBar(
-        title: 'Hola Jairo 👋',
+        title: 'Hola Jairo',
         subtitle: 'Bienvenido nuevamente',
         actions: [
           IconButton(
@@ -215,7 +215,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     PiyiTile(
                       icon: Icons.settings,
                       title: 'Perfil y configuración',
-                      subtitle: 'Alertas por zona y dispositivos.',
+                      subtitle: 'Cuenta y preferencias basicas.',
                       color: PiyiColors.info,
                       onTap: () => context.go(ProfileSettingsScreen.route),
                     ),
@@ -262,11 +262,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiAlertCard(
-                title: 'Activa tu zona segura',
+                title: 'Completa el perfil de tus mascotas',
                 subtitle:
-                    'Recibe alertas cuando una mascota se pierda cerca de ti.',
-                actionLabel: 'Configurar',
-                onTap: () => context.go(ProfileSettingsScreen.route),
+                    'Fotos claras, color y contacto ayudan mas si alguna se pierde.',
+                actionLabel: 'Ver mascotas',
+                onTap: () => context.go(PetsScreen.route),
               ),
               const SizedBox(height: PiyiSpacing.xl),
             ],

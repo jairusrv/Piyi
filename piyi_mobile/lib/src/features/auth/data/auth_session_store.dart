@@ -93,7 +93,7 @@ class AuthSessionStore {
 
   Future<bool> hasSession() async {
     final session = await getSession();
-    return session?.hasAccessToken ?? false;
+    return session?.isValid ?? false;
   }
 
   Future<void> clearSession() async {

@@ -7,43 +7,13 @@ import '../../../core/errors/api_error_message.dart';
 import 'lost_pet_detail_screen.dart';
 import 'lost_pets_controller.dart';
 
-class LostPetsScreen extends ConsumerStatefulWidget {
+class LostPetsScreen extends ConsumerWidget {
   const LostPetsScreen({super.key});
 
   static const route = '/lost-pets';
 
   @override
-  ConsumerState<LostPetsScreen> createState() => _LostPetsScreenState();
-}
-
-class _LostPetsScreenState extends ConsumerState<LostPetsScreen> {
-  final _cityController = TextEditingController();
-  final _regionController = TextEditingController();
-
-  @override
-  void dispose() {
-    _cityController.dispose();
-    _regionController.dispose();
-    super.dispose();
-  }
-
-  void _applyFilter() {
-    ref.read(lostPetsFilterProvider.notifier).state = LostPetsFilter(
-      city: _cityController.text.trim().isEmpty ? null : _cityController.text.trim(),
-      region: _regionController.text.trim().isEmpty ? null : _regionController.text.trim(),
-    );
-    ref.invalidate(lostPetsListProvider);
-  }
-
-  void _clearFilter() {
-    _cityController.clear();
-    _regionController.clear();
-    ref.read(lostPetsFilterProvider.notifier).state = const LostPetsFilter();
-    ref.invalidate(lostPetsListProvider);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final lostPetsAsync = ref.watch(lostPetsListProvider);
 
     return Scaffold(
@@ -63,51 +33,15 @@ class _LostPetsScreenState extends ConsumerState<LostPetsScreen> {
             PiyiBannerCard(
               icon: Icons.location_on,
               title: 'Ayudemos a encontrarlas',
-              subtitle: 'Consulta reportes activos y colabora con avistamientos.',
+              subtitle: 'Reportes activos de la comunidad. Si viste una, abre el reporte y avisa.',
               color: PiyiColors.error,
             ),
             const SizedBox(height: PiyiSpacing.md),
-            PiyiCard(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PiyiTextField(
-                          controller: _cityController,
-                          label: 'Ciudad',
-                          icon: Icons.location_city,
-                        ),
-                      ),
-                      const SizedBox(width: PiyiSpacing.sm),
-                      Expanded(
-                        child: PiyiTextField(
-                          controller: _regionController,
-                          label: 'Provincia',
-                          icon: Icons.map,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: PiyiSpacing.sm),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PiyiPrimaryButton(
-                          label: 'Buscar',
-                          icon: Icons.search,
-                          onPressed: _applyFilter,
-                        ),
-                      ),
-                      const SizedBox(width: PiyiSpacing.sm),
-                      IconButton(
-                        onPressed: _clearFilter,
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            PiyiTile(
+              icon: Icons.info_outline,
+              title: 'Flujo simple',
+              subtitle: 'Publicar, ver detalles, reportar avistamiento y contactar.',
+              color: PiyiColors.info,
             ),
             const SizedBox(height: PiyiSpacing.md),
             Expanded(
