@@ -1,8 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../tokens/piyi_colors.dart';
-import '../tokens/piyi_radius.dart';
-class PiyiTheme { const PiyiTheme._();
- static ThemeData get light { final base=ThemeData(useMaterial3:true,colorScheme: ColorScheme.fromSeed(seedColor:PiyiColors.primary,primary:PiyiColors.primary,secondary:PiyiColors.secondary,error:PiyiColors.error,surface:PiyiColors.surface,background:PiyiColors.background),scaffoldBackgroundColor:PiyiColors.background); return base.copyWith(textTheme:GoogleFonts.poppinsTextTheme(base.textTheme).apply(bodyColor:PiyiColors.text,displayColor:PiyiColors.text),appBarTheme:const AppBarTheme(backgroundColor:PiyiColors.background,foregroundColor:PiyiColors.text,elevation:0),cardTheme:CardThemeData(elevation:0,color:PiyiColors.surface,surfaceTintColor:Colors.transparent,shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(PiyiRadius.xl))),filledButtonTheme:FilledButtonThemeData(style:FilledButton.styleFrom(backgroundColor:PiyiColors.primary,foregroundColor:Colors.white,minimumSize:const Size.fromHeight(52),shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(PiyiRadius.lg)))),inputDecorationTheme:InputDecorationTheme(filled:true,fillColor:PiyiColors.surface,border:OutlineInputBorder(borderRadius:BorderRadius.circular(PiyiRadius.lg),borderSide:BorderSide.none),focusedBorder:OutlineInputBorder(borderRadius:BorderRadius.circular(PiyiRadius.lg),borderSide:const BorderSide(color:PiyiColors.primary,width:1.5)))); }
- static ThemeData get dark { final base=ThemeData(useMaterial3:true,colorScheme:ColorScheme.fromSeed(seedColor:PiyiColors.primary,brightness:Brightness.dark,primary:PiyiColors.primary,secondary:PiyiColors.secondary,error:PiyiColors.error,surface:PiyiColors.darkSurface,background:PiyiColors.darkBackground),scaffoldBackgroundColor:PiyiColors.darkBackground); return base.copyWith(textTheme:GoogleFonts.poppinsTextTheme(base.textTheme).apply(bodyColor:PiyiColors.textLight,displayColor:PiyiColors.textLight),appBarTheme:const AppBarTheme(backgroundColor:PiyiColors.darkBackground,foregroundColor:PiyiColors.textLight,elevation:0),cardTheme:CardThemeData(elevation:0,color:PiyiColors.darkSurface,surfaceTintColor:Colors.transparent,shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(PiyiRadius.xl)))); }
+
+class PiyiTheme {
+  const PiyiTheme._();
+
+  static ThemeData get light {
+    final base = ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: PiyiColors.primary,
+        primary: PiyiColors.primary,
+        secondary: PiyiColors.secondary,
+        surface: PiyiColors.surface,
+        error: PiyiColors.error,
+      ),
+    );
+
+    return base.copyWith(
+      scaffoldBackgroundColor: PiyiColors.background,
+      textTheme: GoogleFonts.poppinsTextTheme(base.textTheme).apply(
+        bodyColor: PiyiColors.text,
+        displayColor: PiyiColors.text,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: PiyiColors.background,
+        foregroundColor: PiyiColors.text,
+        elevation: 0,
+        centerTitle: false,
+      ),
+      cardTheme: CardThemeData(
+        color: PiyiColors.surface,
+        elevation: 0,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(22),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide: const BorderSide(color: PiyiColors.primary, width: 1.8),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: PiyiColors.primary,
+          foregroundColor: Colors.white,
+          minimumSize: const Size.fromHeight(56),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+          textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
+  static ThemeData get dark {
+    final base = ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: PiyiColors.primary,
+        primary: PiyiColors.primary,
+        secondary: PiyiColors.secondary,
+        error: PiyiColors.error,
+      ),
+    );
+
+    return base.copyWith(
+      textTheme: GoogleFonts.poppinsTextTheme(base.textTheme),
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        centerTitle: false,
+      ),
+    );
+  }
 }

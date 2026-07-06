@@ -1,8 +1,8 @@
 name: piyi_mobile
-description: Piyí mobile app
+description: PiyÃ­ mobile app
 publish_to: 'none'
 
-version: 0.2.0+20
+version: 0.2.1+21
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -27,6 +27,7 @@ dependencies:
   geocoding: ^3.0.0
   permission_handler: ^11.3.1
   image_picker: ^1.1.2
+  package_info_plus: ^10.2.0
 
   piyi_ui:
     path: packages/piyi_ui
@@ -39,3 +40,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/brand/piyi_logo.png
+    - assets/brand/piyi_logo_square.png
