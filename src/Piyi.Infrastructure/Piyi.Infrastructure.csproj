@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="BCrypt.Net-Next" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Data\Seed\pet_catalog_seed.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

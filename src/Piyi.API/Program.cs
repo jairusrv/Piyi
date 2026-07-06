@@ -1,6 +1,7 @@
 using Piyi.Application;
 using Piyi.Infrastructure;
-using Serilog;
+
+using Piyi.Infrastructure.Data.Seed;using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,11 +42,26 @@ app.UseCors("PiyiCors");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<Piyi.Infrastructure.Data.PiyiDbContext>();
+
+    try
+    {
+        await PetCatalogSeeder.SeedAsync(dbContext);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Error seeding PiyÃ­ pet catalog.");
+    }
+}
+
 app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new
 {
-    service = "PiyÃ­ API",
+    service = "PiyÃƒÂ­ API",
     status = "OK",
     version = "0.0.1",
     timestamp = DateTimeOffset.UtcNow

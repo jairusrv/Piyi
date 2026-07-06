@@ -1,0 +1,169 @@
+{
+  "Perro": [
+    "Mestizo / Criollo",
+    "Labrador Retriever",
+    "Golden Retriever",
+    "Pastor Alemán",
+    "Poodle / Caniche",
+    "French Poodle",
+    "Chihuahua",
+    "Shih Tzu",
+    "Schnauzer",
+    "Beagle",
+    "Bulldog Francés",
+    "Bulldog Inglés",
+    "Yorkshire Terrier",
+    "Pomerania",
+    "Rottweiler",
+    "Pitbull",
+    "American Bully",
+    "Boxer",
+    "Dachshund / Salchicha",
+    "Cocker Spaniel",
+    "Border Collie",
+    "Husky Siberiano",
+    "Doberman",
+    "Pug",
+    "Maltés",
+    "Bichón Frisé",
+    "Akita",
+    "Dálmata",
+    "Gran Danés",
+    "San Bernardo",
+    "Otro"
+  ],
+  "Gato": [
+    "Mestizo / Doméstico común",
+    "Doméstico pelo corto",
+    "Doméstico pelo largo",
+    "Siamés",
+    "Persa",
+    "Maine Coon",
+    "Bengalí",
+    "Ragdoll",
+    "Sphynx",
+    "Azul Ruso",
+    "British Shorthair",
+    "Scottish Fold",
+    "Angora",
+    "Abisinio",
+    "Otro"
+  ],
+  "Ave": [
+    "Periquito",
+    "Canario",
+    "Agapornis",
+    "Ninfa / Cockatiel",
+    "Loro",
+    "Guacamaya",
+    "Cacatúa",
+    "Diamante mandarín",
+    "Paloma",
+    "Gallina de compañía",
+    "Otro"
+  ],
+  "Pez": [
+    "Betta",
+    "Goldfish",
+    "Guppy",
+    "Molly",
+    "Platy",
+    "Tetra",
+    "Disco",
+    "Cíclido",
+    "Pez ángel",
+    "Koi",
+    "Otro"
+  ],
+  "Conejo": [
+    "Común / Mestizo",
+    "Mini Lop",
+    "Holland Lop",
+    "Cabeza de león",
+    "Enano holandés",
+    "Rex",
+    "Belier",
+    "Angora",
+    "Otro"
+  ],
+  "Hámster": [
+    "Sirio / Dorado",
+    "Ruso",
+    "Roborovski",
+    "Chino",
+    "Campbell",
+    "Otro"
+  ],
+  "Cuy / Cobaya": [
+    "Americano",
+    "Peruano",
+    "Abisinio",
+    "Texel",
+    "Sheltie",
+    "Mestizo",
+    "Otro"
+  ],
+  "Hurón": [
+    "Sable",
+    "Albino",
+    "Champagne",
+    "Canela",
+    "Mestizo",
+    "Otro"
+  ],
+  "Tortuga": [
+    "Tortuga de orejas rojas",
+    "Tortuga de orejas amarillas",
+    "Tortuga rusa",
+    "Tortuga mediterránea",
+    "Tortuga sulcata",
+    "Tortuga de caja",
+    "Otro"
+  ],
+  "Reptil": [
+    "Iguana",
+    "Gecko leopardo",
+    "Dragón barbudo",
+    "Camaleón",
+    "Anolis",
+    "Otro"
+  ],
+  "Serpiente": [
+    "Pitón bola",
+    "Boa constrictor",
+    "Serpiente del maíz",
+    "Serpiente rey",
+    "Falsa coral",
+    "Otro"
+  ],
+  "Caballo": [
+    "Criollo",
+    "Pura Sangre",
+    "Cuarto de Milla",
+    "Andaluz",
+    "Paso Fino",
+    "Percherón",
+    "Pony",
+    "Otro"
+  ],
+  "Mini pig": [
+    "Vietnamita",
+    "Juliana",
+    "Gottingen",
+    "Mestizo",
+    "Otro"
+  ],
+  "Erizo": [
+    "Erizo pigmeo africano",
+    "Erizo europeo",
+    "Otro"
+  ],
+  "Chinchilla": [
+    "Gris estándar",
+    "Blanca",
+    "Beige",
+    "Black velvet",
+    "Mosaico",
+    "Otro"
+  ]
+}
