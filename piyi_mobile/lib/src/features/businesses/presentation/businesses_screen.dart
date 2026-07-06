@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
@@ -42,6 +43,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: PiyiBackButton.fallbackHome(context),
         title: const Text('Servicios cercanos'),
         actions: [
           IconButton(
@@ -57,7 +59,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
             PiyiBannerCard(
               icon: Icons.store,
               title: 'Servicios para mascotas',
-              subtitle: 'Encuentra veterinarias, grooming, hoteles, tiendas y más.',
+              subtitle: 'Encuentra veterinarias, grooming, hoteles, tiendas y mÃ¡s.',
               color: PiyiColors.secondary,
             ),
             const SizedBox(height: PiyiSpacing.md),
@@ -86,7 +88,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
                     return PiyiEmptyState(
                       icon: Icons.store_mall_directory,
                       title: 'No hay negocios registrados',
-                      message: 'Cuando registremos veterinarias, groomers y tiendas aparecerán aquí.',
+                      message: 'Cuando registremos veterinarias, groomers y tiendas aparecerÃ¡n aquÃ­.',
                       actionLabel: 'Actualizar',
                       onAction: () => ref.invalidate(businessesListProvider),
                     );
@@ -135,7 +137,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      item.address ?? item.city ?? 'Ubicación no indicada',
+                                      item.address ?? item.city ?? 'UbicaciÃ³n no indicada',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodySmall,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -30,7 +31,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   Future<void> _centerOnMe() async {
     final position = await ref.read(currentPositionProvider.future);
     if (position == null || _controller == null) {
-      if (mounted) PiyiSnackBar.warning(context, 'No pudimos obtener tu ubicación.');
+      if (mounted) PiyiSnackBar.warning(context, 'No pudimos obtener tu ubicaciÃ³n.');
       return;
     }
 
@@ -76,7 +77,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mapa Piyí'),
+        leading: PiyiBackButton.fallbackHome(context),
+        title: const Text('Mapa PiyÃ­'),
         actions: [
           IconButton(onPressed: _openFilters, icon: const Icon(Icons.filter_alt)),
           IconButton(onPressed: _refreshMap, icon: const Icon(Icons.refresh)),
@@ -173,7 +175,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                         child: Text(
                           lastRefresh == null
                               ? 'Mostrando ${markers.length} puntos'
-                              : 'Mostrando ${markers.length} puntos · actualizado',
+                              : 'Mostrando ${markers.length} puntos Â· actualizado',
                           style: const TextStyle(fontWeight: FontWeight.w800),
                         ),
                       ),

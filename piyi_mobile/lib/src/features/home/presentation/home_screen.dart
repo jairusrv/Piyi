@@ -60,7 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: PiyiAppBar(
         title: 'Hola Jairo',
-        subtitle: 'Bienvenido nuevamente',
+        subtitle: 'mente',
         actions: [
           IconButton(
             onPressed: () => context.go(NotificationsScreen.route),
@@ -177,7 +177,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiSection(
-                title: 'Accesos rápidos',
+                title: 'Accesos rÃ¡pidos',
                 child: Column(
                   children: [
                     PiyiTile(
@@ -224,7 +224,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiSection(
-                title: 'Próximos recordatorios',
+                title: 'PrÃ³ximos recordatorios',
                 actionLabel: 'Ver mascotas',
                 onActionTap: () => context.go(PetsScreen.route),
                 child: Column(

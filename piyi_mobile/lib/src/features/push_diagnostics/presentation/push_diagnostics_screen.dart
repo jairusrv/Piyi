@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -48,7 +49,8 @@ class _PushDiagnosticsScreenState extends ConsumerState<PushDiagnosticsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Diagnóstico push'),
+        leading: PiyiBackButton.fallbackHome(context),
+        title: const Text('DiagnÃ³stico push'),
         actions: [
           IconButton(
             onPressed: () => ref.invalidate(pushDiagnosticsProvider),
@@ -83,8 +85,8 @@ class _PushDiagnosticsScreenState extends ConsumerState<PushDiagnosticsScreen> {
                       const SizedBox(height: 8),
                       Text(
                         info.firebaseInitialized
-                            ? 'La app intentará usar token FCM real.'
-                            : 'La app usará token DEV temporal hasta configurar Firebase.',
+                            ? 'La app intentarÃ¡ usar token FCM real.'
+                            : 'La app usarÃ¡ token DEV temporal hasta configurar Firebase.',
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -124,7 +126,7 @@ class _PushDiagnosticsScreenState extends ConsumerState<PushDiagnosticsScreen> {
               OutlinedButton.icon(
                 onPressed: () => ref.invalidate(pushDiagnosticsProvider),
                 icon: const Icon(Icons.refresh),
-                label: const Text('Actualizar diagnóstico'),
+                label: const Text('Actualizar diagnÃ³stico'),
               ),
             ],
           ),

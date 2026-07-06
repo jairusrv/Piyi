@@ -89,7 +89,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
             const SizedBox(height: 12),
             const Text(
-              'Bienvenido de nuevo',
+              '',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),

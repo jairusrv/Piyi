@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
@@ -22,7 +23,9 @@ class LostPetDetailScreen extends ConsumerWidget {
     final sightingsAsync = ref.watch(lostPetSightingsProvider(lostPetId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Reporte')),
+      appBar: AppBar(
+        leading: PiyiBackButton.fallbackHome(context),
+        title: const Text('Reporte')),
       body: SafeArea(
         minimum: const EdgeInsets.all(PiyiSpacing.md),
         child: detailAsync.when(
@@ -36,7 +39,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                 PiyiBannerCard(
                   icon: Icons.location_on,
                   title: report.petName.isEmpty ? 'Mascota perdida' : report.petName,
-                  subtitle: report.lastSeenAddress ?? 'Última ubicación no indicada',
+                  subtitle: report.lastSeenAddress ?? 'Ãšltima ubicaciÃ³n no indicada',
                   color: PiyiColors.error,
                 ),
                 const SizedBox(height: PiyiSpacing.md),
@@ -57,7 +60,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: PiyiSpacing.xs),
                       Text(
-                        '${report.speciesName}${report.breedName == null ? '' : ' · ${report.breedName}'}',
+                        '${report.speciesName}${report.breedName == null ? '' : ' Â· ${report.breedName}'}',
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: PiyiSpacing.sm),
@@ -67,19 +70,19 @@ class LostPetDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.md),
                 PiyiSection(
-                  title: 'Información del reporte',
+                  title: 'InformaciÃ³n del reporte',
                   child: Column(
                     children: [
                       PiyiTile(
                         icon: Icons.campaign,
-                        title: 'Descripción',
+                        title: 'DescripciÃ³n',
                         subtitle: report.description,
                         color: PiyiColors.error,
                       ),
                       const SizedBox(height: PiyiSpacing.sm),
                       PiyiTile(
                         icon: Icons.location_on,
-                        title: 'Último lugar visto',
+                        title: 'Ãšltimo lugar visto',
                         subtitle: report.lastSeenAddress ?? 'No indicado',
                         color: PiyiColors.error,
                       ),
@@ -101,7 +104,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                       PiyiTile(
                         icon: Icons.card_giftcard,
                         title: 'Recompensa',
-                        subtitle: report.rewardAmount == null ? 'No indicada' : '₡${report.rewardAmount}',
+                        subtitle: report.rewardAmount == null ? 'No indicada' : 'â‚¡${report.rewardAmount}',
                         color: PiyiColors.warning,
                       ),
                     ],
@@ -122,7 +125,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                         return const PiyiEmptyState(
                           icon: Icons.visibility_off,
                           title: 'Sin avistamientos',
-                          message: 'Aún nadie ha reportado haber visto esta mascota.',
+                          message: 'AÃºn nadie ha reportado haber visto esta mascota.',
                         );
                       }
 
@@ -132,9 +135,9 @@ class LostPetDetailScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
                             child: PiyiTile(
                               icon: Icons.place,
-                              title: sighting.address ?? 'Ubicación reportada',
+                              title: sighting.address ?? 'UbicaciÃ³n reportada',
                               subtitle:
-                                  '${sighting.observation ?? 'Sin observación'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}',
+                                  '${sighting.observation ?? 'Sin observaciÃ³n'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}',
                               color: PiyiColors.error,
                             ),
                           );

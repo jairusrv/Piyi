@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
@@ -19,6 +20,7 @@ class PetsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: PiyiBackButton.fallbackHome(context),
         title: const Text('Mis mascotas'),
         actions: [
           IconButton(
@@ -39,7 +41,7 @@ class PetsScreen extends ConsumerWidget {
             if (pets.isEmpty) {
               return PiyiEmptyState(
                 icon: Icons.pets,
-                title: 'Aún no tienes mascotas',
+                title: 'AÃºn no tienes mascotas',
                 message: 'Registra tu primera mascota para gestionar su salud, QR, recordatorios y alertas.',
                 actionLabel: 'Registrar mascota',
                 onAction: () => context.go(CreatePetScreen.route),
@@ -83,7 +85,7 @@ class PetsScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                '${pet.speciesName}${pet.breedName == null ? '' : ' · ${pet.breedName}'}',
+                                '${pet.speciesName}${pet.breedName == null ? '' : ' Â· ${pet.breedName}'}',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

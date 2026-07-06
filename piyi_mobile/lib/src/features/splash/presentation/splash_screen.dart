@@ -1,94 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:piyi_ui/piyi_ui.dart';
 
-import '../../../core/config/app_config.dart';
-import '../../auth/data/auth_session_manager.dart';
-import '../../auth/presentation/login_screen.dart';
-import '../../home/presentation/home_screen.dart';
+import '../../../core/brand/piyi_brand.dart';
 
-class SplashScreen extends ConsumerStatefulWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   static const route = '/';
 
   @override
-  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends ConsumerState<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(_resolveSession);
-  }
-
-  Future<void> _resolveSession() async {
-    await Future<void>.delayed(const Duration(milliseconds: 650));
-
-    final hasSession =
-        await ref.read(authSessionManagerProvider).hasStoredSession();
-
-    if (!mounted) return;
-
-    if (hasSession) {
-      context.go(HomeScreen.route);
-    } else {
-      context.go(LoginScreen.route);
-    }
+    Future<void>.delayed(const Duration(milliseconds: 900), () {
+      if (!mounted) return;
+      context.go('/login');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: PiyiColors.primary,
+    return const Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(PiyiSpacing.xl),
+            padding: EdgeInsets.all(32),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  width: 116,
-                  height: 116,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.18),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.pets,
-                    size: 68,
-                    color: Colors.white,
-                  ),
+                Image(
+                  image: AssetImage(PiyiBrand.logoAsset),
+                  width: 230,
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(height: PiyiSpacing.xl),
-                const Text(
-                  AppConfig.displayName,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 44,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: PiyiSpacing.sm),
+                SizedBox(height: 18),
                 Text(
-                  'El hogar digital de tus mascotas',
+                  PiyiBrand.slogan,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.92),
+                    color: Color(0xFF31A997),
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: PiyiSpacing.xxl),
-                const SizedBox(
-                  width: 28,
-                  height: 28,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 3,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

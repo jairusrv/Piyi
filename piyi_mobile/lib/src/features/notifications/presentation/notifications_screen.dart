@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/navigation/piyi_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/notifications_repository.dart';
@@ -16,6 +17,7 @@ class NotificationsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: PiyiBackButton.fallbackHome(context),
         title: const Text('Notificaciones'),
         actions: [
           IconButton(
@@ -39,7 +41,7 @@ class NotificationsScreen extends ConsumerWidget {
                     child: Text(
                       unreadOnly
                           ? 'No tienes notificaciones sin leer.'
-                          : 'Aún no tienes notificaciones.',
+                          : 'AÃºn no tienes notificaciones.',
                       textAlign: TextAlign.center,
                     ),
                   ),

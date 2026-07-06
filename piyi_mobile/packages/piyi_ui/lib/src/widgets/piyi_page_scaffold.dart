@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../tokens/piyi_spacing.dart';
 
@@ -11,6 +12,7 @@ class PiyiPageScaffold extends StatelessWidget {
     this.onBack,
     this.padding = const EdgeInsets.all(PiyiSpacing.md),
     this.showBackButton = true,
+    this.fallbackRoute = '/home',
   });
 
   final String title;
@@ -19,35 +21,33 @@ class PiyiPageScaffold extends StatelessWidget {
   final VoidCallback? onBack;
   final EdgeInsetsGeometry padding;
   final bool showBackButton;
+  final String fallbackRoute;
 
-  void _goBack(BuildContext context) {
+  void _handleBack(BuildContext context) {
     if (onBack != null) {
       onBack!();
       return;
     }
 
     final navigator = Navigator.of(context);
+
     if (navigator.canPop()) {
       navigator.pop();
+      return;
     }
-  }
 
-  bool _canShowBack(BuildContext context) {
-    if (!showBackButton) return false;
-    if (onBack != null) return true;
-    return Navigator.of(context).canPop();
+    context.go(fallbackRoute);
   }
 
   @override
   Widget build(BuildContext context) {
-    final canBack = _canShowBack(context);
-
     return Scaffold(
       appBar: AppBar(
-        leading: canBack
+        leading: showBackButton
             ? IconButton(
+                tooltip: 'Volver',
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => _goBack(context),
+                onPressed: () => _handleBack(context),
               )
             : null,
         title: Text(title),
