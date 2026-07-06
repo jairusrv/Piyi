@@ -4,28 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'src/app/piyi_app.dart';
-import 'src/core/bootstrap/firebase_bootstrap.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    FlutterError.onError = (details) {
+    FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
+      debugPrint('PiyÃ­ FlutterError: ${details.exception}');
     };
-
-    await FirebaseBootstrap.tryInitialize();
 
     runApp(
       const ProviderScope(
         child: PiyiApp(),
       ),
     );
-  }, (error, stackTrace) {
-    debugPrint('Piyí startup error: $error');
+  }, (Object error, StackTrace stackTrace) {
+    debugPrint('PiyÃ­ startup error: $error');
     debugPrintStack(stackTrace: stackTrace);
+
     runApp(
-      MaterialApp(
+      const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: SafeArea(
@@ -33,7 +32,7 @@ Future<void> main() async {
               child: Padding(
                 padding: EdgeInsets.all(24),
                 child: Text(
-                  'No pudimos iniciar Piyí. Cerrá la app e intentá nuevamente.',
+                  'No pudimos iniciar PiyÃ­. CerrÃ¡ la app e intentÃ¡ nuevamente.',
                   textAlign: TextAlign.center,
                 ),
               ),
