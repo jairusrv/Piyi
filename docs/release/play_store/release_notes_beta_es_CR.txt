@@ -1,0 +1,10 @@
+Primera beta pública de Piyí.
+
+Incluye:
+- Registro e inicio de sesión.
+- Sesión persistente.
+- Registro de mascotas.
+- Mascotas perdidas MVP.
+- Negocios y servicios para mascotas.
+- Conexión al API público.
+- Mejoras de estabilidad Android.

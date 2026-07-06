@@ -1,0 +1,21 @@
+Nombre de la app:
+Piyí
+
+Descripción corta:
+Tu mascota, todo en un lugar.
+
+Descripción completa:
+Piyí ayuda a los dueños de mascotas a organizar información importante de sus mascotas y encontrar servicios cercanos de forma sencilla.
+
+Con Piyí puedes:
+- Registrar tus mascotas.
+- Consultar información básica de cuidado.
+- Reportar mascotas perdidas.
+- Ver reportes activos.
+- Encontrar negocios y servicios para mascotas.
+- Contactar proveedores directamente.
+
+Piyí está pensada para dueños responsables, veterinarias, groomers, tiendas de mascotas y servicios pet friendly.
+
+Versión beta:
+Esta versión está en pruebas. Algunas funciones pueden cambiar mientras mejoramos la experiencia.

@@ -1,0 +1,14 @@
+Archivos generados para Play Store:
+
+- app_icon_512.png
+  Requerido por Google Play como ícono de app.
+
+- feature_graphic_1024x500.png
+  Requerido/recomendado para ficha de Play Store.
+
+- promo_graphic_180x120.png
+  Opcional.
+
+Textos:
+- listing_es_CR.txt
+- release_notes_beta_es_CR.txt
