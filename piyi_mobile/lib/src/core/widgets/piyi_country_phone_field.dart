@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-class PiyiCountryPhoneValue {
-  const PiyiCountryPhoneValue({
-    required this.countryCode,
-    required this.dialCode,
-    required this.phone,
-  });
-
-  final String countryCode;
-  final String dialCode;
-  final String phone;
-
-  String get fullPhone => '$dialCode$phone';
-}
-
 class PiyiCountryPhoneField extends StatefulWidget {
   const PiyiCountryPhoneField({
     super.key,
@@ -62,6 +48,12 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
     ).$2;
   }
 
+  String get fullPhone {
+    final raw = widget.controller.text.trim();
+    if (raw.startsWith('+')) return raw;
+    return '$_dialCode$raw';
+  }
+
   Future<void> _selectCountry() async {
     final selected = await showModalBottomSheet<({String code, String flag, String name, String dial})>(
       context: context,
@@ -103,20 +95,21 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         labelText: widget.label,
+        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         prefixIcon: InkWell(
           onTap: _selectCountry,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           child: Padding(
             padding: const EdgeInsets.only(left: 14, right: 8),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(_flag, style: const TextStyle(fontSize: 24)),
-                const SizedBox(width: 6),
-                const Icon(Icons.arrow_drop_down),
-                const SizedBox(width: 6),
+                const SizedBox(width: 4),
+                const Icon(Icons.arrow_drop_down, size: 20),
+                const SizedBox(width: 4),
                 Text(_dialCode, style: const TextStyle(fontWeight: FontWeight.w800)),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
               ],
             ),
           ),

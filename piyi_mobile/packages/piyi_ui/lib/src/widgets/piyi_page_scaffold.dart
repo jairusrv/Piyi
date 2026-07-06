@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../tokens/piyi_spacing.dart';
-import 'piyi_back_button.dart';
 
 class PiyiPageScaffold extends StatelessWidget {
   const PiyiPageScaffold({
@@ -9,35 +8,56 @@ class PiyiPageScaffold extends StatelessWidget {
     required this.title,
     required this.child,
     this.actions,
-    this.showBackButton = true,
     this.onBack,
-    this.floatingActionButton,
-    this.bottomNavigationBar,
     this.padding = const EdgeInsets.all(PiyiSpacing.md),
+    this.showBackButton = true,
   });
 
   final String title;
   final Widget child;
   final List<Widget>? actions;
-  final bool showBackButton;
   final VoidCallback? onBack;
-  final Widget? floatingActionButton;
-  final Widget? bottomNavigationBar;
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
+  final bool showBackButton;
+
+  void _goBack(BuildContext context) {
+    if (onBack != null) {
+      onBack!();
+      return;
+    }
+
+    final navigator = Navigator.of(context);
+    if (navigator.canPop()) {
+      navigator.pop();
+    }
+  }
+
+  bool _canShowBack(BuildContext context) {
+    if (!showBackButton) return false;
+    if (onBack != null) return true;
+    return Navigator.of(context).canPop();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final canBack = _canShowBack(context);
+
     return Scaffold(
       appBar: AppBar(
-        leading: showBackButton ? PiyiBackButton(onPressed: onBack) : null,
+        leading: canBack
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => _goBack(context),
+              )
+            : null,
         title: Text(title),
         actions: actions,
       ),
-      floatingActionButton: floatingActionButton,
-      bottomNavigationBar: bottomNavigationBar,
       body: SafeArea(
-        minimum: padding,
-        child: child,
+        child: Padding(
+          padding: padding,
+          child: child,
+        ),
       ),
     );
   }
