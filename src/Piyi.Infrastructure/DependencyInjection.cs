@@ -19,7 +19,7 @@ public static class DependencyInjection
 
         services.AddDbContext<PiyiDbContext>(options =>
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = DatabaseConnectionStringFactory.GetConnectionString(configuration);
             options.UseNpgsql(connectionString);
         });
 

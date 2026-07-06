@@ -1,0 +1,7 @@
+DATABASE_URL=postgresql://neondb_owner:TU_PASSWORD@ep-patient-queen-aiq482o8-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+ASPNETCORE_ENVIRONMENT=Production
+PIYI_ENABLE_SWAGGER=true
+Jwt__Issuer=Piyi.API
+Jwt__Audience=Piyi.Mobile
+Jwt__SecretKey=PiyiBeta2026_SecretKey_Muy_Larga_Para_JWT_123456
+Jwt__ExpirationMinutes=1440

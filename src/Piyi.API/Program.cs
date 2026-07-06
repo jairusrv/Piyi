@@ -29,7 +29,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() ||
+    string.Equals(Environment.GetEnvironmentVariable("PIYI_ENABLE_SWAGGER"), "true", StringComparison.OrdinalIgnoreCase))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -44,7 +45,7 @@ app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new
 {
-    service = "Piyí API",
+    service = "PiyÃ­ API",
     status = "OK",
     version = "0.0.1",
     timestamp = DateTimeOffset.UtcNow
