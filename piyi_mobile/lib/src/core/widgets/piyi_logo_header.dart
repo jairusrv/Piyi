@@ -5,11 +5,11 @@ import '../brand/piyi_brand.dart';
 class PiyiLogoHeader extends StatelessWidget {
   const PiyiLogoHeader({
     super.key,
-    this.size = 150,
-    this.showSlogan = true,
+    this.width = 210,
+    this.showSlogan = false,
   });
 
-  final double size;
+  final double width;
   final bool showSlogan;
 
   @override
@@ -18,7 +18,7 @@ class PiyiLogoHeader extends StatelessWidget {
       children: [
         Image.asset(
           PiyiBrand.logoAsset,
-          width: size,
+          width: width,
           fit: BoxFit.contain,
         ),
         if (showSlogan) ...[
@@ -28,7 +28,7 @@ class PiyiLogoHeader extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: const Color(0xFF31A997),
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                 ),
           ),
         ],

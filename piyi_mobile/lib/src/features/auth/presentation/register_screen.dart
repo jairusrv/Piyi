@@ -1,19 +1,11 @@
 import 'package:dio/dio.dart';
-import '../../../core/widgets/piyi_country_phone_field.dart';
 import 'package:flutter/material.dart';
-import '../../../core/widgets/piyi_country_phone_field.dart';
+import 'package:piyi_mobile/src/core/brand/piyi_brand.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/widgets/piyi_country_phone_field.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../core/widgets/piyi_country_phone_field.dart';
 import '../../../core/errors/api_error_message.dart';
-import '../../../core/widgets/piyi_country_phone_field.dart';
 import '../../home/presentation/home_screen.dart';
-import '../../../core/widgets/piyi_country_phone_field.dart';
 import '../data/auth_repository.dart';
-
-import '../../../core/widgets/piyi_country_phone_field.dart';
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 

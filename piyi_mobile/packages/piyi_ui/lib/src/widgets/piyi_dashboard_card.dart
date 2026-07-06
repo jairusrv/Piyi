@@ -29,7 +29,7 @@ class PiyiDashboardCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(PiyiRadius.xl),
-        border: Border.all(color: color.withOpacity(0.12)),
+        border: Border.all(color: color.withValues(alpha: 0.12)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class PiyiDashboardCard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundColor: color.withOpacity(0.14),
+                backgroundColor: color.withValues(alpha: 0.14),
                 child: Icon(icon, color: color),
               ),
               const Spacer(),
@@ -45,7 +45,7 @@ class PiyiDashboardCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.12),
+                    color: color.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(PiyiRadius.pill),
                   ),
                   child: Text(

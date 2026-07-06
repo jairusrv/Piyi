@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:go_router/go_router.dart';
 
-class PiyiBackButton extends StatelessWidget {
-  const PiyiBackButton({
+class PiyiAppBackButton extends StatelessWidget {
+  const PiyiAppBackButton({
     super.key,
     this.fallbackRoute = '/home',
   });
@@ -10,7 +11,7 @@ class PiyiBackButton extends StatelessWidget {
   final String fallbackRoute;
 
   static Widget fallbackHome(BuildContext context) {
-    return const PiyiBackButton(fallbackRoute: '/home');
+    return const PiyiAppBackButton(fallbackRoute: '/home');
   }
 
   @override

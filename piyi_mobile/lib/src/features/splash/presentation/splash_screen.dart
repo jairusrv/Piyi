@@ -16,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     Future<void>.delayed(const Duration(milliseconds: 900), () {
       if (!mounted) return;
       context.go('/login');
@@ -35,16 +36,16 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 Image(
                   image: AssetImage(PiyiBrand.logoAsset),
-                  width: 230,
+                  width: 240,
                   fit: BoxFit.contain,
                 ),
-                SizedBox(height: 18),
+                SizedBox(height: 12),
                 Text(
                   PiyiBrand.slogan,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF31A997),
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

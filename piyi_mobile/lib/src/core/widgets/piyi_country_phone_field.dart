@@ -48,12 +48,6 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
     ).$2;
   }
 
-  String get fullPhone {
-    final raw = widget.controller.text.trim();
-    if (raw.startsWith('+')) return raw;
-    return '$_dialCode$raw';
-  }
-
   Future<void> _selectCountry() async {
     final selected = await showModalBottomSheet<({String code, String flag, String name, String dial})>(
       context: context,

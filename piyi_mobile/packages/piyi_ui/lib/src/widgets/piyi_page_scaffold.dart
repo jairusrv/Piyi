@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../tokens/piyi_spacing.dart';
 
@@ -12,7 +11,6 @@ class PiyiPageScaffold extends StatelessWidget {
     this.onBack,
     this.padding = const EdgeInsets.all(PiyiSpacing.md),
     this.showBackButton = true,
-    this.fallbackRoute = '/home',
   });
 
   final String title;
@@ -21,7 +19,6 @@ class PiyiPageScaffold extends StatelessWidget {
   final VoidCallback? onBack;
   final EdgeInsetsGeometry padding;
   final bool showBackButton;
-  final String fallbackRoute;
 
   void _handleBack(BuildContext context) {
     if (onBack != null) {
@@ -30,13 +27,9 @@ class PiyiPageScaffold extends StatelessWidget {
     }
 
     final navigator = Navigator.of(context);
-
     if (navigator.canPop()) {
       navigator.pop();
-      return;
     }
-
-    context.go(fallbackRoute);
   }
 
   @override

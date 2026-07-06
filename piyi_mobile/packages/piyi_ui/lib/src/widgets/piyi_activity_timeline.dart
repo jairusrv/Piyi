@@ -60,7 +60,7 @@ class _TimelineRow extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: item.color.withOpacity(0.14),
+                backgroundColor: item.color.withValues(alpha: 0.14),
                 child: Icon(item.icon, color: item.color, size: 18),
               ),
               if (!isLast)
@@ -68,7 +68,7 @@ class _TimelineRow extends StatelessWidget {
                   child: Container(
                     width: 2,
                     margin: const EdgeInsets.symmetric(vertical: 4),
-                    color: item.color.withOpacity(0.15),
+                    color: item.color.withValues(alpha: 0.15),
                   ),
                 ),
             ],

@@ -31,7 +31,7 @@ class PiyiMarkerBottomSheet extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: color.withOpacity(0.14),
+                  backgroundColor: color.withValues(alpha: 0.14),
                   child: Icon(icon, color: color, size: 32),
                 ),
                 const SizedBox(width: PiyiSpacing.md),

@@ -88,7 +88,7 @@ class _ReportSightingScreenState extends ConsumerState<ReportSightingScreen> {
       onBack: () => PiyiNavigationHelper.backOrHome(context),
       child: ListView(
         children: [
-          PiyiBannerCard(
+          const PiyiBannerCard(
             icon: Icons.visibility,
             title: '¿Crees que la viste?',
             subtitle: 'Usaremos tu ubicación actual para ayudar al dueño.',

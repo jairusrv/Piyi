@@ -30,7 +30,7 @@ class PiyiReminderCard extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: color.withOpacity(0.14),
+            backgroundColor: color.withValues(alpha: 0.14),
             child: Icon(icon, color: color),
           ),
           const SizedBox(width: PiyiSpacing.md),

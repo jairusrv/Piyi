@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/navigation/piyi_back_button.dart';
+import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
@@ -19,7 +19,7 @@ class LostPetsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: PiyiBackButton.fallbackHome(context),
+        leading: PiyiAppBackButton.fallbackHome(context),
         title: const Text('Mascotas perdidas'),
         actions: [
           IconButton(
@@ -53,7 +53,7 @@ class LostPetsScreen extends ConsumerWidget {
                     return PiyiEmptyState(
                       icon: Icons.pets,
                       title: 'No hay reportes activos',
-                      message: 'Cuando una mascota sea reportada como perdida aparecerÃ¡ aquÃ­.',
+                      message: 'Cuando una mascota sea reportada como perdida aparecerÃƒÆ’Ã‚Â¡ aquÃƒÆ’Ã‚Â­.',
                       actionLabel: 'Actualizar',
                       onAction: () => ref.invalidate(lostPetsListProvider),
                     );
@@ -104,7 +104,7 @@ class LostPetsScreen extends ConsumerWidget {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      item.lastSeenAddress ?? 'UbicaciÃ³n no indicada',
+                                      item.lastSeenAddress ?? 'UbicaciÃƒÆ’Ã‚Â³n no indicada',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodySmall,

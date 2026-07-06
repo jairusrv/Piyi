@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../core/navigation/piyi_back_button.dart';
+import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -124,7 +124,7 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: PiyiBackButton.fallbackHome(context),
+        leading: PiyiAppBackButton.fallbackHome(context),
         title: const Text('Registrar mascota')),
       body: SafeArea(
         minimum: const EdgeInsets.all(PiyiSpacing.md),
@@ -242,7 +242,7 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
                   PiyiTextField(
                     controller: _colorController,
                     label: 'Color',
-                    hint: 'Ej: Negro, cafÃ©, blanco...',
+                    hint: 'Ej: Negro, cafÃƒÆ’Ã‚Â©, blanco...',
                     icon: Icons.palette,
                   ),
                   const SizedBox(height: PiyiSpacing.sm),

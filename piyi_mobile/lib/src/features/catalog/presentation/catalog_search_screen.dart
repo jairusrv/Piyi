@@ -63,7 +63,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => PiyiNavigationHelper.backOrHome(context),
         ),
-        title: const Text('Catálogo'),
+        title: const Text('CatÃƒÂ¡logo'),
         actions: [
           IconButton(
             onPressed: () => ref.invalidate(catalogSearchResultsProvider),
@@ -78,7 +78,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
             PiyiBannerCard(
               icon: Icons.search,
               title: 'Busca productos y servicios',
-              subtitle: 'Encuentra proveedores Pro y contáctalos directamente.',
+              subtitle: 'Encuentra proveedores Pro y contÃƒÂ¡ctalos directamente.',
               color: PiyiColors.primary,
             ),
             const SizedBox(height: PiyiSpacing.md),
@@ -87,7 +87,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
                 children: [
                   PiyiTextField(
                     controller: _searchController,
-                    label: '¿Qué necesitas?',
+                    label: 'Ã‚Â¿QuÃƒÂ© necesitas?',
                     hint: 'Shampoo medicado, corte schnauzer, alimento senior...',
                     icon: Icons.search,
                   ),
@@ -97,7 +97,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
                       Expanded(
                         child: PiyiTextField(
                           controller: _categoryController,
-                          label: 'Categoría',
+                          label: 'CategorÃƒÂ­a',
                           hint: 'Medicamento, grooming...',
                           icon: Icons.category,
                         ),
@@ -141,8 +141,8 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
                     return PiyiEmptyState(
                       icon: Icons.inventory_2_outlined,
                       title: 'No encontramos resultados',
-                      message: 'Prueba con otro producto, servicio, marca o categoría.',
-                      actionLabel: 'Limpiar búsqueda',
+                      message: 'Prueba con otro producto, servicio, marca o categorÃƒÂ­a.',
+                      actionLabel: 'Limpiar bÃƒÂºsqueda',
                       onAction: _clearSearch,
                     );
                   }
@@ -201,7 +201,7 @@ class _CatalogItemCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${catalogTypeLabel(item.type)}${item.brand == null ? '' : ' · ${item.brand}'}',
+                  '${catalogTypeLabel(item.type)}${item.brand == null ? '' : ' Ã‚Â· ${item.brand}'}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

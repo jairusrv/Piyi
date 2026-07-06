@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/navigation/piyi_back_button.dart';
+import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:piyi_ui/piyi_ui.dart';
 
@@ -21,7 +21,7 @@ class BusinessDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: PiyiBackButton.fallbackHome(context),
+        leading: PiyiAppBackButton.fallbackHome(context),
         title: const Text('Negocio')),
       body: SafeArea(
         minimum: const EdgeInsets.all(PiyiSpacing.md),
@@ -65,7 +65,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: PiyiSpacing.xs),
                       Text(
-                        business.description ?? 'Sin descripciÃ³n',
+                        business.description ?? 'Sin descripciÃƒÆ’Ã‚Â³n',
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -73,7 +73,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.md),
                 PiyiSection(
-                  title: 'Contacto rÃ¡pido',
+                  title: 'Contacto rÃƒÆ’Ã‚Â¡pido',
                   child: Column(
                     children: [
                       Row(
@@ -113,7 +113,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: PiyiSpacing.sm),
                       PiyiSecondaryButton(
-                        label: 'CÃ³mo llegar',
+                        label: 'CÃƒÆ’Ã‚Â³mo llegar',
                         icon: Icons.directions,
                         onPressed: () async {
                           try {
@@ -134,12 +134,12 @@ class BusinessDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.xl),
                 PiyiSection(
-                  title: 'InformaciÃ³n',
+                  title: 'InformaciÃƒÆ’Ã‚Â³n',
                   child: Column(
                     children: [
                       PiyiTile(
                         icon: Icons.location_on,
-                        title: 'DirecciÃ³n',
+                        title: 'DirecciÃƒÆ’Ã‚Â³n',
                         subtitle: business.address ?? 'No indicada',
                         color: PiyiColors.secondary,
                       ),
@@ -153,7 +153,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                       const SizedBox(height: PiyiSpacing.sm),
                       PiyiTile(
                         icon: Icons.phone,
-                        title: 'TelÃ©fono',
+                        title: 'TelÃƒÆ’Ã‚Â©fono',
                         subtitle: business.phone ?? 'No indicado',
                         color: PiyiColors.primary,
                       ),
@@ -174,20 +174,20 @@ class BusinessDetailScreen extends ConsumerWidget {
                       ? const PiyiEmptyState(
                           icon: Icons.pets,
                           title: 'Sin servicios registrados',
-                          message: 'Este negocio aÃºn no ha agregado servicios.',
+                          message: 'Este negocio aÃƒÆ’Ã‚Âºn no ha agregado servicios.',
                         )
                       : Column(
                           children: business.services.map((service) {
                             final price = service.priceFrom == null
                                 ? 'Precio no indicado'
-                                : 'Desde â‚¡${service.priceFrom}${service.priceTo == null ? '' : ' hasta â‚¡${service.priceTo}'}';
+                                : 'Desde ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¡${service.priceFrom}${service.priceTo == null ? '' : ' hasta ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¡${service.priceTo}'}';
 
                             return Padding(
                               padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
                               child: PiyiTile(
                                 icon: Icons.pets,
                                 title: service.name,
-                                subtitle: '${service.description ?? 'Sin descripciÃ³n'}\n$price',
+                                subtitle: '${service.description ?? 'Sin descripciÃƒÆ’Ã‚Â³n'}\n$price',
                                 color: PiyiColors.primary,
                               ),
                             );
@@ -201,7 +201,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                       ? const PiyiEmptyState(
                           icon: Icons.schedule,
                           title: 'Horario no indicado',
-                          message: 'Este negocio aÃºn no ha registrado su horario.',
+                          message: 'Este negocio aÃƒÆ’Ã‚Âºn no ha registrado su horario.',
                         )
                       : Column(
                           children: business.schedules.map((schedule) {
@@ -277,15 +277,15 @@ class BusinessDetailScreen extends ConsumerWidget {
       case 2:
         return 'Martes';
       case 3:
-        return 'MiÃ©rcoles';
+        return 'MiÃƒÆ’Ã‚Â©rcoles';
       case 4:
         return 'Jueves';
       case 5:
         return 'Viernes';
       case 6:
-        return 'SÃ¡bado';
+        return 'SÃƒÆ’Ã‚Â¡bado';
       default:
-        return 'DÃ­a';
+        return 'DÃƒÆ’Ã‚Â­a';
     }
   }
 }

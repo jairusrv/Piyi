@@ -99,7 +99,7 @@ class _ReportLostPetScreenState extends ConsumerState<ReportLostPetScreen> {
       onBack: () => PiyiNavigationHelper.backOrHome(context),
       child: ListView(
         children: [
-          PiyiBannerCard(
+          const PiyiBannerCard(
             icon: Icons.location_on,
             title: 'Ayudemos a encontrarla',
             subtitle: 'Usaremos tu ubicación actual como último lugar visto.',

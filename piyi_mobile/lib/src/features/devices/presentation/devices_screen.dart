@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../core/navigation/piyi_back_button.dart';
+import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/devices_repository.dart';
@@ -71,7 +71,7 @@ class _DevicesScreenState extends ConsumerState<DevicesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: PiyiBackButton.fallbackHome(context),
+        leading: PiyiAppBackButton.fallbackHome(context),
         title: const Text('Dispositivos'),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -126,7 +126,7 @@ class _DevicesScreenState extends ConsumerState<DevicesScreen> {
                         style: const TextStyle(fontWeight: FontWeight.w900),
                       ),
                       subtitle: Text(
-                        '${device.platform}\nActivo: ${device.isActive ? 'SÃ­' : 'No'}\nÃšltima vez: ${device.lastSeenAt ?? 'No indicado'}',
+                        '${device.platform}\nActivo: ${device.isActive ? 'SÃƒÆ’Ã‚Â­' : 'No'}\nÃƒÆ’Ã…Â¡ltima vez: ${device.lastSeenAt ?? 'No indicado'}',
                       ),
                       isThreeLine: true,
                       trailing: device.isActive

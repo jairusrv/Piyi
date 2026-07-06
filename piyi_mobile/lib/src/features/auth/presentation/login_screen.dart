@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:piyi_mobile/src/core/brand/piyi_brand.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,7 +78,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 48),
-            const Icon(Icons.pets, size: 56),
+            const Image.asset(PiyiBrand.logoAsset, width: 210, fit: BoxFit.contain),
             const SizedBox(height: 12),
             const Text(
               AppConfig.displayName,

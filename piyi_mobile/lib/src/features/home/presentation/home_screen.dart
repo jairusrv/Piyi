@@ -60,7 +60,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: PiyiAppBar(
         title: 'Hola Jairo',
-        subtitle: 'mente',
         actions: [
           IconButton(
             onPressed: () => context.go(NotificationsScreen.route),
