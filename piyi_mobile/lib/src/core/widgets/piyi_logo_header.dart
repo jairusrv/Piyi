@@ -5,7 +5,7 @@ import '../brand/piyi_brand.dart';
 class PiyiLogoHeader extends StatelessWidget {
   const PiyiLogoHeader({
     super.key,
-    this.width = 210,
+    this.width = 230,
     this.showSlogan = false,
   });
 
@@ -20,6 +20,8 @@ class PiyiLogoHeader extends StatelessWidget {
           PiyiBrand.logoAsset,
           width: width,
           fit: BoxFit.contain,
+          filterQuality: FilterQuality.high,
+          isAntiAlias: true,
         ),
         if (showSlogan) ...[
           const SizedBox(height: 8),

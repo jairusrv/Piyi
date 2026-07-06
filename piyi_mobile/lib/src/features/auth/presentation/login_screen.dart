@@ -78,16 +78,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 48),
-            const Image.asset(PiyiBrand.logoAsset, width: 210, fit: BoxFit.contain),
-            const SizedBox(height: 12),
-            const Text(
-              AppConfig.displayName,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
+            Image.asset(PiyiBrand.logoAsset,
+                width: 250,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+                isAntiAlias: true),
+            //const SizedBox(height: 12),
+            //const Text(
+            //  AppConfig.displayName,
+            //  textAlign: TextAlign.center,
+            //  style: TextStyle(
+            //    fontSize: 42,
+            //    fontWeight: FontWeight.w900,
+            //   ),
+            //  ),
             const SizedBox(height: 12),
             const Text(
               '',

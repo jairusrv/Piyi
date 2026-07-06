@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:piyi_mobile/src/core/widgets/piyi_user_greeting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piyi_ui/piyi_ui.dart';
@@ -176,7 +177,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiSection(
-                title: 'Accesos rÃ¡pidos',
+                title: 'Accesos rÃƒÂ¡pidos',
                 child: Column(
                   children: [
                     PiyiTile(
@@ -223,7 +224,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiSection(
-                title: 'PrÃ³ximos recordatorios',
+                title: 'PrÃƒÂ³ximos recordatorios',
                 actionLabel: 'Ver mascotas',
                 onActionTap: () => context.go(PetsScreen.route),
                 child: Column(

@@ -1,27 +1,26 @@
-# Piyí - Hotfix 21B Logo/Login/Icon
+# Piyí - Hotfix 21B-2 UserName + Phone + Logo/Icon
 
-## Corrige
+## Por qué no se veía el código de área
 
-- El ícono del escritorio Android se veía como icono genérico de Android.
-- Login mostraba huella + texto Piyí.
-- Ahora login usa el logo oficial de Piyí.
-- Agrega adaptive icon Android.
-- Regenera mipmap icons.
-- Agrega assets del logo en Flutter.
+El widget `PiyiCountryPhoneField` estaba importado, pero el campo anterior de teléfono no fue reemplazado en `register_screen.dart`. Por eso `flutter analyze` lo marcaba como `unused_import` y en pantalla seguía viéndose el campo normal `Telefono`.
+
+## Por qué Home mostraba Jairo
+
+El texto estaba quedando como saludo fijo en la pantalla Home. Este hotfix lo reemplaza por un widget que intenta leer el nombre desde sesión/token seguro.
+
+## Qué corrige
+
+- Campo teléfono con bandera y código país.
+- Home con nombre dinámico del usuario.
+- Logo de login con asset de mayor resolución y `FilterQuality.high`.
+- Ícono launcher Android con adaptive icon.
+- Assets de logo en alta resolución.
 
 ## Aplicar
 
-Extraer sobre:
-
-```powershell
-C:\Users\jairo\Documents\Piyi
-```
-
-Ejecutar:
-
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-21B-Logo-Login-Icon.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-21B-2.ps1
 ```
 
 ## Probar
@@ -33,16 +32,4 @@ Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
 flutter pub get
 adb uninstall com.piyi.mobile
 flutter run --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
-```
-
-## Archivos incluidos
-
-```text
-piyi_mobile\assets\brand\piyi_logo.png
-piyi_mobile\assets\brand\piyi_logo_square.png
-piyi_mobile\assets\images\logo.png
-piyi_mobile\android\app\src\main\res\mipmap-*\ic_launcher.png
-piyi_mobile\android\app\src\main\res\mipmap-anydpi-v26\ic_launcher.xml
-piyi_mobile\android\app\src\main\res\drawable-*\ic_launcher_foreground.png
-piyi_mobile\android\app\src\main\res\drawable\ic_launcher_background.xml
 ```
