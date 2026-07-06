@@ -56,7 +56,7 @@ class ApiErrorMessage {
           return 'Revisa los datos e intenta de nuevo.';
         }
         if (statusCode == 401) {
-          return 'Correo o contrasena incorrectos.';
+          return 'Correo o contraseña incorrectos.';
         }
         if (statusCode == 403) {
           return 'No tienes permisos.';

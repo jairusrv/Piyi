@@ -59,7 +59,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
             PiyiBannerCard(
               icon: Icons.store,
               title: 'Servicios para mascotas',
-              subtitle: 'Encuentra veterinarias, grooming, hoteles, tiendas y mÃƒÆ’Ã‚Â¡s.',
+              subtitle: 'Encuentra veterinarias, grooming, hoteles, tiendas y mÃƒÆ’Ã‚¡s.',
               color: PiyiColors.secondary,
             ),
             const SizedBox(height: PiyiSpacing.md),
@@ -88,7 +88,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
                     return PiyiEmptyState(
                       icon: Icons.store_mall_directory,
                       title: 'No hay negocios registrados',
-                      message: 'Cuando registremos veterinarias, groomers y tiendas aparecerÃƒÆ’Ã‚Â¡n aquÃƒÆ’Ã‚Â­.',
+                      message: 'Cuando registremos veterinarias, groomers y tiendas aparecerÃƒÆ’Ã‚¡n aquÃƒÆ’Ã‚Â­.',
                       actionLabel: 'Actualizar',
                       onAction: () => ref.invalidate(businessesListProvider),
                     );

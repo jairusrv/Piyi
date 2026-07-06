@@ -146,11 +146,11 @@ if (Test-Path $register) {
     # Try safe replacements for phone field.
     if ($content -match "_phoneController") {
         if ($content -notmatch "PiyiCountryPhoneField\s*\(") {
-            $pattern1 = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\(.*?labelText:\s*['""](Tel[eé]fono|Telefono|Phone)['""].*?\)\s*,?\s*\)"
+            $pattern1 = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\(.*?labelText:\s*['""](Tel[eé]fono|Teléfono|Phone)['""].*?\)\s*,?\s*\)"
             if ($content -match $pattern1) {
                 $content = [regex]::Replace($content, $pattern1, "PiyiCountryPhoneField(controller: _phoneController)", 1)
             } else {
-                $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,.*?label\s*:\s*['""](Tel[eé]fono|Telefono|Phone)['""].*?\)"
+                $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,.*?label\s*:\s*['""](Tel[eé]fono|Teléfono|Phone)['""].*?\)"
                 if ($content -match $pattern2) {
                     $content = [regex]::Replace($content, $pattern2, "PiyiCountryPhoneField(controller: _phoneController)", 1)
                 }

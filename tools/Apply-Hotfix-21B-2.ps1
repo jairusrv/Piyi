@@ -55,7 +55,7 @@ foreach ($file in $files) {
 
 # 3) Login: improve logo resolution and remove old paw/title if possible.
 $loginFiles = Get-ChildItem ".\piyi_mobile\lib" -Recurse -Filter "*.dart" | Where-Object {
-    $_.Name -match "login" -or (Select-String -Path $_.FullName -Pattern "Correo electronico|Correo electrónico|Ingresar|Bienvenido de nuevo" -Quiet)
+    $_.Name -match "login" -or (Select-String -Path $_.FullName -Pattern "Correo electrónico|Correo electrónico|Ingresar|Bienvenido de nuevo" -Quiet)
 }
 
 foreach ($file in $loginFiles) {
@@ -114,11 +114,11 @@ if (Test-Path $register) {
     }
 
     if ($content -notmatch "PiyiCountryPhoneField\s*\(") {
-        $pattern1 = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\([\s\S]*?labelText:\s*['""](Tel[eé]fono|Telefono|Phone)['""][\s\S]*?\)\s*,?\s*\)"
+        $pattern1 = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\([\s\S]*?labelText:\s*['""](Tel[eé]fono|Teléfono|Phone)['""][\s\S]*?\)\s*,?\s*\)"
         if ($content -match $pattern1) {
             $content = [regex]::Replace($content, $pattern1, "PiyiCountryPhoneField(controller: _phoneController)", 1)
         } else {
-            $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,[\s\S]*?(label|labelText)\s*:\s*['""](Tel[eé]fono|Telefono|Phone)['""][\s\S]*?\)"
+            $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,[\s\S]*?(label|labelText)\s*:\s*['""](Tel[eé]fono|Teléfono|Phone)['""][\s\S]*?\)"
             if ($content -match $pattern2) {
                 $content = [regex]::Replace($content, $pattern2, "PiyiCountryPhoneField(controller: _phoneController)", 1)
             }

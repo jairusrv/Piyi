@@ -156,7 +156,7 @@ class CatalogItemDetailScreen extends ConsumerWidget {
               const SizedBox(height: PiyiSpacing.xl),
               const PiyiAlertCard(
                 title: 'Compra directa con el proveedor',
-                subtitle: 'PiyÃƒÂ­ solo muestra informaciÃƒÂ³n. La compra, pago o entrega se acuerda directamente con el negocio.',
+                subtitle: 'PiyíƒÂ­ solo muestra informaciÃƒÂ³n. La compra, pago o entrega se acuerda directamente con el negocio.',
                 actionLabel: 'Entendido',
               ),
             ],

@@ -63,7 +63,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => PiyiNavigationHelper.backOrHome(context),
         ),
-        title: const Text('CatÃƒÂ¡logo'),
+        title: const Text('CatÃƒ¡logo'),
         actions: [
           IconButton(
             onPressed: () => ref.invalidate(catalogSearchResultsProvider),
@@ -78,7 +78,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
             PiyiBannerCard(
               icon: Icons.search,
               title: 'Busca productos y servicios',
-              subtitle: 'Encuentra proveedores Pro y contÃƒÂ¡ctalos directamente.',
+              subtitle: 'Encuentra proveedores Pro y contÃƒ¡ctalos directamente.',
               color: PiyiColors.primary,
             ),
             const SizedBox(height: PiyiSpacing.md),
@@ -87,7 +87,7 @@ class _CatalogSearchScreenState extends ConsumerState<CatalogSearchScreen> {
                 children: [
                   PiyiTextField(
                     controller: _searchController,
-                    label: 'Ã‚Â¿QuÃƒÂ© necesitas?',
+                    label: 'Ã‚¿QuÃƒÂ© necesitas?',
                     hint: 'Shampoo medicado, corte schnauzer, alimento senior...',
                     icon: Icons.search,
                   ),

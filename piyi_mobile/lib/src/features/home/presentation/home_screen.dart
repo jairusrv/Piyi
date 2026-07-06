@@ -177,7 +177,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(height: PiyiSpacing.xl),
               PiyiSection(
-                title: 'Accesos rÃƒÂ¡pidos',
+                title: 'Accesos rÃƒ¡pidos',
                 child: Column(
                   children: [
                     PiyiTile(

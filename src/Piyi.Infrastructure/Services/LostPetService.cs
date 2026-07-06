@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 #pragma warning disable CS8601
 using Microsoft.EntityFrameworkCore;
 using Piyi.Application.Abstractions;
@@ -117,10 +117,10 @@ public sealed class LostPetService : ILostPetService
             return Result<LostPetDetailResponse>.Failure("Mascota no encontrada.");
 
         if (string.IsNullOrWhiteSpace(request.Title))
-            return Result<LostPetDetailResponse>.Failure("El tÃ­tulo es requerido.");
+            return Result<LostPetDetailResponse>.Failure("El título es requerido.");
 
         if (string.IsNullOrWhiteSpace(request.Description))
-            return Result<LostPetDetailResponse>.Failure("La descripciÃ³n es requerida.");
+            return Result<LostPetDetailResponse>.Failure("La descripción es requerida.");
 
         var activeExists = await _dbContext.LostPets
             .AnyAsync(x => x.PetId == petId && x.Status == LostPetStatus.Active && !x.IsDeleted, cancellationToken);

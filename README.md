@@ -1,25 +1,26 @@
-# Piyí - Sprint 21C Pet Catalog Seed Data
+# Piyí - Hotfix 21D-2 Text Audit JSON Fix
+
+Corrige el error del script anterior usando un JSON ASCII con escapes Unicode.
 
 ## Aplicar
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Sprint-21C.ps1
-dotnet build /warnaserror
+powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-21D-2-Text-Audit.ps1
 ```
 
-## Subir a Render
+## Validar
 
 ```powershell
-git add .
-git commit -m "Sprint 21C seed pet species and breeds"
-git push
+dotnet build /warnaserror
+
+cd .\piyi_mobile
+flutter analyze --no-fatal-infos
+flutter run --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
 ```
 
-Luego en Render:
+Reporte:
 
 ```text
-Manual Deploy -> Clear build cache & deploy
+docs\audits\Text_Audit_Report_21D_2.txt
 ```
-
-Al iniciar el API, Neon quedará precargado con especies y razas.

@@ -53,7 +53,7 @@ class LostPetsScreen extends ConsumerWidget {
                     return PiyiEmptyState(
                       icon: Icons.pets,
                       title: 'No hay reportes activos',
-                      message: 'Cuando una mascota sea reportada como perdida aparecerÃƒÆ’Ã‚Â¡ aquÃƒÆ’Ã‚Â­.',
+                      message: 'Cuando una mascota sea reportada como perdida aparecerÃƒÆ’Ã‚¡ aquÃƒÆ’Ã‚Â­.',
                       actionLabel: 'Actualizar',
                       onAction: () => ref.invalidate(lostPetsListProvider),
                     );

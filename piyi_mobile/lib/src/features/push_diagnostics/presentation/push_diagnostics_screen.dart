@@ -85,8 +85,8 @@ class _PushDiagnosticsScreenState extends ConsumerState<PushDiagnosticsScreen> {
                       const SizedBox(height: 8),
                       Text(
                         info.firebaseInitialized
-                            ? 'La app intentarÃƒÆ’Ã‚Â¡ usar token FCM real.'
-                            : 'La app usarÃƒÆ’Ã‚Â¡ token DEV temporal hasta configurar Firebase.',
+                            ? 'La app intentarÃƒÆ’Ã‚¡ usar token FCM real.'
+                            : 'La app usarÃƒÆ’Ã‚¡ token DEV temporal hasta configurar Firebase.',
                         textAlign: TextAlign.center,
                       ),
                     ],

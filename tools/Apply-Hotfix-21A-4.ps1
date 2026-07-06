@@ -59,13 +59,13 @@ foreach ($file in $registerFiles) {
             $content = $content -replace "(import\s+'[^']+';\s*\r?\n)", "`$1import '../../../core/widgets/piyi_country_phone_field.dart';`r`n"
         }
 
-        # Replace common TextField/TextFormField block that uses _phoneController and label telefono.
-        $pattern = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\(\s*labelText:\s*['""](Tel[eé]fono|Telefono|Phone)['""].*?\)\s*,?\s*\)"
+        # Replace common TextField/TextFormField block that uses _phoneController and label teléfono.
+        $pattern = "(?s)(TextFormField|TextField)\s*\(\s*controller:\s*_phoneController\s*,.*?decoration:\s*InputDecoration\s*\(\s*labelText:\s*['""](Tel[eé]fono|Teléfono|Phone)['""].*?\)\s*,?\s*\)"
         if ($content -match $pattern) {
             $content = [regex]::Replace($content, $pattern, "PiyiCountryPhoneField(controller: _phoneController)", 1)
         } else {
             # Conservative replacement for PiyiInput phone if exists
-            $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,.*?label:\s*['""](Tel[eé]fono|Telefono|Phone)['""].*?\)"
+            $pattern2 = "(?s)PiyiInput\s*\(\s*controller:\s*_phoneController\s*,.*?label:\s*['""](Tel[eé]fono|Teléfono|Phone)['""].*?\)"
             if ($content -match $pattern2) {
                 $content = [regex]::Replace($content, $pattern2, "PiyiCountryPhoneField(controller: _phoneController)", 1)
             }

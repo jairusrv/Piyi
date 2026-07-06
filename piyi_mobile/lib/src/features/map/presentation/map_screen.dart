@@ -78,7 +78,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: PiyiAppBackButton.fallbackHome(context),
-        title: const Text('Mapa PiyÃƒÆ’Ã‚Â­'),
+        title: const Text('Mapa PiyíƒÆ’Ã‚Â­'),
         actions: [
           IconButton(onPressed: _openFilters, icon: const Icon(Icons.filter_alt)),
           IconButton(onPressed: _refreshMap, icon: const Icon(Icons.refresh)),

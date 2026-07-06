@@ -11,7 +11,7 @@ Future<void> main() async {
 
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      debugPrint('PiyÃ­ FlutterError: ${details.exception}');
+      debugPrint('Piyí FlutterError: ${details.exception}');
     };
 
     runApp(
@@ -20,7 +20,7 @@ Future<void> main() async {
       ),
     );
   }, (Object error, StackTrace stackTrace) {
-    debugPrint('PiyÃ­ startup error: $error');
+    debugPrint('Piyí startup error: $error');
     debugPrintStack(stackTrace: stackTrace);
 
     runApp(
@@ -32,7 +32,7 @@ Future<void> main() async {
               child: Padding(
                 padding: EdgeInsets.all(24),
                 child: Text(
-                  'No pudimos iniciar PiyÃ­. CerrÃ¡ la app e intentÃ¡ nuevamente.',
+                  'No pudimos iniciar Piyí. Cerrá la app e intentá nuevamente.',
                   textAlign: TextAlign.center,
                 ),
               ),

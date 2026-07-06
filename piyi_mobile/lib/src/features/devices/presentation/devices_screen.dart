@@ -126,7 +126,7 @@ class _DevicesScreenState extends ConsumerState<DevicesScreen> {
                         style: const TextStyle(fontWeight: FontWeight.w900),
                       ),
                       subtitle: Text(
-                        '${device.platform}\nActivo: ${device.isActive ? 'SÃƒÆ’Ã‚Â­' : 'No'}\nÃƒÆ’Ã…Â¡ltima vez: ${device.lastSeenAt ?? 'No indicado'}',
+                        '${device.platform}\nActivo: ${device.isActive ? 'SÃƒÆ’Ã‚Â­' : 'No'}\nÃƒÆ’Ã…¡ltima vez: ${device.lastSeenAt ?? 'No indicado'}',
                       ),
                       isThreeLine: true,
                       trailing: device.isActive

@@ -26,7 +26,7 @@ La primera beta debe probar solo los flujos principales:
 
 ## Datos que se deben pedir a testers
 
-- modelo de telefono;
+- modelo de teléfono;
 - version de Android o iOS;
 - si pudo registrarse;
 - si pudo iniciar sesion luego de cerrar y abrir la app;

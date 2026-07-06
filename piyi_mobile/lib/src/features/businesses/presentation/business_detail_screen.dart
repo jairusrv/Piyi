@@ -73,7 +73,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.md),
                 PiyiSection(
-                  title: 'Contacto rÃƒÆ’Ã‚Â¡pido',
+                  title: 'Contacto rÃƒÆ’Ã‚¡pido',
                   child: Column(
                     children: [
                       Row(
@@ -180,7 +180,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                           children: business.services.map((service) {
                             final price = service.priceFrom == null
                                 ? 'Precio no indicado'
-                                : 'Desde ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¡${service.priceFrom}${service.priceTo == null ? '' : ' hasta ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¡${service.priceTo}'}';
+                                : 'Desde ÃƒÂ¢Ã¢â‚¬Å¡Ã‚¡${service.priceFrom}${service.priceTo == null ? '' : ' hasta ÃƒÂ¢Ã¢â‚¬Å¡Ã‚¡${service.priceTo}'}';
 
                             return Padding(
                               padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
@@ -283,7 +283,7 @@ class BusinessDetailScreen extends ConsumerWidget {
       case 5:
         return 'Viernes';
       case 6:
-        return 'SÃƒÆ’Ã‚Â¡bado';
+        return 'SÃƒÆ’Ã‚¡bado';
       default:
         return 'DÃƒÆ’Ã‚Â­a';
     }

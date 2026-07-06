@@ -1,0 +1,206 @@
+[
+  {
+    "bad": "Piy\u00c3\u00ad",
+    "good": "Piy\u00ed"
+  },
+  {
+    "bad": "Piy\u00c3",
+    "good": "Piy\u00ed"
+  },
+  {
+    "bad": "Configuraci\u00c3\u00b3n",
+    "good": "Configuraci\u00f3n"
+  },
+  {
+    "bad": "configuraci\u00c3\u00b3n",
+    "good": "configuraci\u00f3n"
+  },
+  {
+    "bad": "Tel\u00c3\u00a9fono",
+    "good": "Tel\u00e9fono"
+  },
+  {
+    "bad": "tel\u00c3\u00a9fono",
+    "good": "tel\u00e9fono"
+  },
+  {
+    "bad": "Telefono",
+    "good": "Tel\u00e9fono"
+  },
+  {
+    "bad": "telefono",
+    "good": "tel\u00e9fono"
+  },
+  {
+    "bad": "Contrase\u00c3\u00b1a",
+    "good": "Contrase\u00f1a"
+  },
+  {
+    "bad": "contrase\u00c3\u00b1a",
+    "good": "contrase\u00f1a"
+  },
+  {
+    "bad": "Contrasena",
+    "good": "Contrase\u00f1a"
+  },
+  {
+    "bad": "contrasena",
+    "good": "contrase\u00f1a"
+  },
+  {
+    "bad": "Notificaci\u00c3\u00b3n",
+    "good": "Notificaci\u00f3n"
+  },
+  {
+    "bad": "notificaci\u00c3\u00b3n",
+    "good": "notificaci\u00f3n"
+  },
+  {
+    "bad": "Ubicaci\u00c3\u00b3n",
+    "good": "Ubicaci\u00f3n"
+  },
+  {
+    "bad": "ubicaci\u00c3\u00b3n",
+    "good": "ubicaci\u00f3n"
+  },
+  {
+    "bad": "Direcci\u00c3\u00b3n",
+    "good": "Direcci\u00f3n"
+  },
+  {
+    "bad": "direcci\u00c3\u00b3n",
+    "good": "direcci\u00f3n"
+  },
+  {
+    "bad": "Descripci\u00c3\u00b3n",
+    "good": "Descripci\u00f3n"
+  },
+  {
+    "bad": "descripci\u00c3\u00b3n",
+    "good": "descripci\u00f3n"
+  },
+  {
+    "bad": "Categor\u00c3\u00ada",
+    "good": "Categor\u00eda"
+  },
+  {
+    "bad": "categor\u00c3\u00ada",
+    "good": "categor\u00eda"
+  },
+  {
+    "bad": "Informaci\u00c3\u00b3n",
+    "good": "Informaci\u00f3n"
+  },
+  {
+    "bad": "informaci\u00c3\u00b3n",
+    "good": "informaci\u00f3n"
+  },
+  {
+    "bad": "N\u00c3\u00bamero",
+    "good": "N\u00famero"
+  },
+  {
+    "bad": "n\u00c3\u00bamero",
+    "good": "n\u00famero"
+  },
+  {
+    "bad": "C\u00c3\u00b3digo",
+    "good": "C\u00f3digo"
+  },
+  {
+    "bad": "c\u00c3\u00b3digo",
+    "good": "c\u00f3digo"
+  },
+  {
+    "bad": "Pa\u00c3\u00ads",
+    "good": "Pa\u00eds"
+  },
+  {
+    "bad": "pa\u00c3\u00ads",
+    "good": "pa\u00eds"
+  },
+  {
+    "bad": "\u00c2\u00bf",
+    "good": "\u00bf"
+  },
+  {
+    "bad": "\u00c2\u00a1",
+    "good": "\u00a1"
+  },
+  {
+    "bad": "\u00c3\u00a1",
+    "good": "\u00e1"
+  },
+  {
+    "bad": "\u00c3\u00a9",
+    "good": "\u00e9"
+  },
+  {
+    "bad": "\u00c3\u00ad",
+    "good": "\u00ed"
+  },
+  {
+    "bad": "\u00c3\u00b3",
+    "good": "\u00f3"
+  },
+  {
+    "bad": "\u00c3\u00ba",
+    "good": "\u00fa"
+  },
+  {
+    "bad": "\u00c3\u00b1",
+    "good": "\u00f1"
+  },
+  {
+    "bad": "\u00c3\u0081",
+    "good": "\u00c1"
+  },
+  {
+    "bad": "\u00c3\u2030",
+    "good": "\u00c9"
+  },
+  {
+    "bad": "\u00c3\u008d",
+    "good": "\u00cd"
+  },
+  {
+    "bad": "\u00c3\u201c",
+    "good": "\u00d3"
+  },
+  {
+    "bad": "\u00c3\u0161",
+    "good": "\u00da"
+  },
+  {
+    "bad": "\u00c3\u2018",
+    "good": "\u00d1"
+  },
+  {
+    "bad": "Correo electronico",
+    "good": "Correo electr\u00f3nico"
+  },
+  {
+    "bad": "Iniciar sesion",
+    "good": "Iniciar sesi\u00f3n"
+  },
+  {
+    "bad": "Cerrar sesion",
+    "good": "Cerrar sesi\u00f3n"
+  },
+  {
+    "bad": "Aun no tienes mascotas",
+    "good": "A\u00fan no tienes mascotas"
+  },
+  {
+    "bad": "Aun no tienes notificaciones",
+    "good": "A\u00fan no tienes notificaciones"
+  },
+  {
+    "bad": "Aun no hay reportes",
+    "good": "A\u00fan no hay reportes"
+  },
+  {
+    "bad": "Anadir",
+    "good": "A\u00f1adir"
+  }
+]

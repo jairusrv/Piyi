@@ -50,7 +50,7 @@ foreach ($file in $files) {
 
 # 3) Patch LoginScreen: sustituir huella + texto Piyí por logo oficial.
 $loginCandidates = Get-ChildItem ".\piyi_mobile\lib" -Recurse -Filter "*.dart" | Where-Object {
-    $_.Name -match "login" -or (Select-String -Path $_.FullName -Pattern "Bienvenido de nuevo|Correo electronico|Correo electrónico|Ingresar" -Quiet)
+    $_.Name -match "login" -or (Select-String -Path $_.FullName -Pattern "Bienvenido de nuevo|Correo electrónico|Correo electrónico|Ingresar" -Quiet)
 }
 
 foreach ($file in $loginCandidates) {

@@ -56,4 +56,4 @@ flutter build apk --release `
 - Confirmar CORS y JWT en ambiente staging.
 - Reemplazar `REEMPLAZAR_GOOGLE_MAPS_API_KEY` si se probaran mapas.
 - Definir firma real de Android antes de Play Internal Testing.
-- Probar flujo completo en telefono fisico.
+- Probar flujo completo en teléfono fisico.

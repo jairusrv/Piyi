@@ -53,7 +53,7 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        app.Logger.LogError(ex, "Error seeding PiyÃ­ pet catalog.");
+        app.Logger.LogError(ex, "Error seeding Piyí pet catalog.");
     }
 }
 
@@ -61,7 +61,7 @@ app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new
 {
-    service = "PiyÃƒÂ­ API",
+    service = "PiyíƒÂ­ API",
     status = "OK",
     version = "0.0.1",
     timestamp = DateTimeOffset.UtcNow

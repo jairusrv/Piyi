@@ -45,7 +45,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         lastName.isEmpty ||
         email.isEmpty ||
         password.isEmpty) {
-      _showMessage('Completa nombre, apellido, correo y contrasena.');
+      _showMessage('Completa nombre, apellido, correo y contraseña.');
       return;
     }
 
@@ -107,19 +107,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration:
-                  const InputDecoration(labelText: 'Correo electronico'),
+                  const InputDecoration(labelText: 'Correo electrónico'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _phoneController,
               keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(labelText: 'Telefono'),
+              decoration: const InputDecoration(labelText: 'Teléfono'),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Contrasena'),
+              decoration: const InputDecoration(labelText: 'Contraseña'),
             ),
             const SizedBox(height: 24),
             FilledButton(

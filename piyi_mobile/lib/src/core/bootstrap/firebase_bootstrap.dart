@@ -11,7 +11,7 @@ class FirebaseBootstrap {
     );
 
     if (!enabled) {
-      debugPrint('PiyÃ­ Firebase disabled for beta startup.');
+      debugPrint('Piyí Firebase disabled for beta startup.');
       return false;
     }
 
@@ -21,10 +21,10 @@ class FirebaseBootstrap {
       }
 
       await Firebase.initializeApp();
-      debugPrint('PiyÃ­ Firebase initialized.');
+      debugPrint('Piyí Firebase initialized.');
       return true;
     } catch (error, stackTrace) {
-      debugPrint('PiyÃ­ Firebase initialization skipped: $error');
+      debugPrint('Piyí Firebase initialization skipped: $error');
       debugPrintStack(stackTrace: stackTrace);
       return false;
     }

@@ -173,7 +173,7 @@ class _ActionPanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('Acciones rÃƒÆ’Ã‚Â¡pidas', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+            const Text('Acciones rÃƒÆ’Ã‚¡pidas', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
             const SizedBox(height: 12),
             Wrap(
               spacing: 10,

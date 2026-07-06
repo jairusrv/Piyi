@@ -37,7 +37,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-      _showMessage('Ingresa correo y contrasena.');
+      _showMessage('Ingresa correo y contraseña.');
       return;
     }
 
@@ -103,7 +103,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                labelText: 'Correo electronico',
+                labelText: 'Correo electrónico',
               ),
             ),
             const SizedBox(height: 16),
@@ -111,7 +111,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: 'Contrasena',
+                labelText: 'Contraseña',
               ),
             ),
             const SizedBox(height: 24),

@@ -39,7 +39,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                 PiyiBannerCard(
                   icon: Icons.location_on,
                   title: report.petName.isEmpty ? 'Mascota perdida' : report.petName,
-                  subtitle: report.lastSeenAddress ?? 'ÃƒÆ’Ã…Â¡ltima ubicaciÃƒÆ’Ã‚Â³n no indicada',
+                  subtitle: report.lastSeenAddress ?? 'ÃƒÆ’Ã…¡ltima ubicaciÃƒÆ’Ã‚Â³n no indicada',
                   color: PiyiColors.error,
                 ),
                 const SizedBox(height: PiyiSpacing.md),
@@ -82,7 +82,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                       const SizedBox(height: PiyiSpacing.sm),
                       PiyiTile(
                         icon: Icons.location_on,
-                        title: 'ÃƒÆ’Ã…Â¡ltimo lugar visto',
+                        title: 'ÃƒÆ’Ã…¡ltimo lugar visto',
                         subtitle: report.lastSeenAddress ?? 'No indicado',
                         color: PiyiColors.error,
                       ),
@@ -104,7 +104,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                       PiyiTile(
                         icon: Icons.card_giftcard,
                         title: 'Recompensa',
-                        subtitle: report.rewardAmount == null ? 'No indicada' : 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¡${report.rewardAmount}',
+                        subtitle: report.rewardAmount == null ? 'No indicada' : 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚¡${report.rewardAmount}',
                         color: PiyiColors.warning,
                       ),
                     ],
