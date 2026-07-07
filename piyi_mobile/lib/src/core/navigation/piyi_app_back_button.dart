@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:piyi_mobile/src/core/navigation/piyi_app_back_button.dart';
 import 'package:go_router/go_router.dart';
 
 class PiyiAppBackButton extends StatelessWidget {

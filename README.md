@@ -1,26 +1,25 @@
-# Piyí - Hotfix 21D-2 Text Audit JSON Fix
+# Piyí - Hotfix 22-1 RC1 Analyze Errors Fix
 
-Corrige el error del script anterior usando un JSON ASCII con escapes Unicode.
+Corrige los errores reales de `flutter analyze`:
+
+- `getRefreshToken` faltante.
+- `saveRefreshToken` faltante.
+- `saveUserData` faltante.
+- `clearAllSession` faltante.
+- `PiyiLogoHeader(size:)` inválido.
+- Import innecesario/autorreferenciado en `piyi_app_back_button.dart`.
 
 ## Aplicar
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-21D-2-Text-Audit.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-22-1.ps1
 ```
 
 ## Validar
 
 ```powershell
-dotnet build /warnaserror
-
-cd .\piyi_mobile
+cd C:\Users\jairo\Documents\Piyi\piyi_mobile
 flutter analyze --no-fatal-infos
 flutter run --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
-```
-
-Reporte:
-
-```text
-docs\audits\Text_Audit_Report_21D_2.txt
 ```

@@ -39,20 +39,20 @@ class _AboutScreenState extends State<AboutScreen> {
       onBack: () => PiyiNavigationHelper.backOrHome(context),
       child: ListView(
         children: [
-          const PiyiLogoHeader(size: 180),
+          const PiyiLogoHeader(width: 180),
           const SizedBox(height: 24),
           PiyiCard(
             child: Column(
               children: [
                 _row('App', PiyiBrand.displayName),
-                _row('Versión', _info?.version ?? '0.2.1'),
+                _row('VersiÃ³n', _info?.version ?? '0.2.1'),
                 _row('Build', _info?.buildNumber ?? '21'),
                 _row('API', PiyiBrand.apiUrl),
                 _row('Desarrollador', 'Jairo Rivera'),
                 _row('Soporte', PiyiBrand.supportEmail),
                 const SizedBox(height: 16),
                 PiyiPrimaryButton(
-                  label: 'Ver política de privacidad',
+                  label: 'Ver polÃ­tica de privacidad',
                   icon: Icons.privacy_tip,
                   onPressed: _openPrivacy,
                 ),
@@ -61,7 +61,7 @@ class _AboutScreenState extends State<AboutScreen> {
           ),
           const SizedBox(height: 20),
           const Text(
-            '© 2026 Piyí. Todos los derechos reservados.',
+            'Â© 2026 PiyÃ­. Todos los derechos reservados.',
             textAlign: TextAlign.center,
           ),
         ],

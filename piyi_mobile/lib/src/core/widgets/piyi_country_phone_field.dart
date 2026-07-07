@@ -7,12 +7,14 @@ class PiyiCountryPhoneField extends StatefulWidget {
     this.initialDialCode = '+506',
     this.initialCountryCode = 'CR',
     this.label = 'Teléfono',
+    this.onDialCodeChanged,
   });
 
   final TextEditingController controller;
   final String initialDialCode;
   final String initialCountryCode;
   final String label;
+  final ValueChanged<String>? onDialCodeChanged;
 
   @override
   State<PiyiCountryPhoneField> createState() => _PiyiCountryPhoneFieldState();
@@ -37,8 +39,13 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
   @override
   void initState() {
     super.initState();
+
     _dialCode = widget.initialDialCode;
     _countryCode = widget.initialCountryCode;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onDialCodeChanged?.call(_dialCode);
+    });
   }
 
   String get _flag {
@@ -59,7 +66,9 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
               child: Text(
                 'Selecciona país',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
               ),
             ),
             for (final c in countries)
@@ -67,7 +76,10 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
                 leading: Text(c.$2, style: const TextStyle(fontSize: 28)),
                 title: Text(c.$3),
                 trailing: Text(c.$4, style: const TextStyle(fontWeight: FontWeight.w800)),
-                onTap: () => Navigator.pop(context, (code: c.$1, flag: c.$2, name: c.$3, dial: c.$4)),
+                onTap: () => Navigator.pop(
+                  context,
+                  (code: c.$1, flag: c.$2, name: c.$3, dial: c.$4),
+                ),
               ),
           ],
         );
@@ -79,6 +91,8 @@ class _PiyiCountryPhoneFieldState extends State<PiyiCountryPhoneField> {
         _countryCode = selected.code;
         _dialCode = selected.dial;
       });
+
+      widget.onDialCodeChanged?.call(_dialCode);
     }
   }
 

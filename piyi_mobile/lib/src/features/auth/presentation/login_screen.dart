@@ -1,11 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:piyi_mobile/src/core/brand/piyi_brand.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/errors/api_error_message.dart';
-import '../../../core/config/app_config.dart';
+import '../../../core/brand/piyi_brand.dart';
 import '../../home/presentation/home_screen.dart';
 import '../data/auth_repository.dart';
 import 'register_screen.dart';
@@ -33,41 +30,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   Future<void> _login() async {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text;
-
-    if (email.isEmpty || password.isEmpty) {
-      _showMessage('Ingresa correo y contraseña.');
-      return;
-    }
-
     setState(() => _isLoading = true);
 
     try {
       await ref.read(authRepositoryProvider).login(
-            email: email,
-            password: password,
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
           );
 
       if (!mounted) return;
+
       context.go(HomeScreen.route);
-    } on DioException catch (e) {
+    } catch (e) {
       if (!mounted) return;
-      _showMessage(ApiErrorMessage.fromDio(e));
-    } catch (_) {
-      if (!mounted) return;
-      _showMessage('No se pudo iniciar sesion. Intenta de nuevo.');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('No se pudo iniciar sesión: $e')),
+      );
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
     }
-  }
-
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
   }
 
   @override
@@ -77,28 +61,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         minimum: const EdgeInsets.all(24),
         child: ListView(
           children: [
-            const SizedBox(height: 48),
-            Image.asset(PiyiBrand.logoAsset,
+            const SizedBox(height: 36),
+            Center(
+              child: Image.asset(
+                PiyiBrand.logoAsset,
                 width: 250,
                 fit: BoxFit.contain,
                 filterQuality: FilterQuality.high,
-                isAntiAlias: true),
-            //const SizedBox(height: 12),
-            //const Text(
-            //  AppConfig.displayName,
-            //  textAlign: TextAlign.center,
-            //  style: TextStyle(
-            //    fontSize: 42,
-            //    fontWeight: FontWeight.w900,
-            //   ),
-            //  ),
-            const SizedBox(height: 12),
+                isAntiAlias: true,
+              ),
+            ),
+            const SizedBox(height: 18),
             const Text(
-              '',
+              'Bienvenido de nuevo',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 36),
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,

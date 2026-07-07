@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:piyi_mobile/src/core/widgets/piyi_country_phone_field.dart';
-import 'package:piyi_mobile/src/core/brand/piyi_brand.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/errors/api_error_message.dart';
+import '../../../core/widgets/piyi_country_phone_field.dart';
 import '../../home/presentation/home_screen.dart';
 import '../data/auth_repository.dart';
+
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
@@ -23,6 +24,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String _phoneDialCode = '+506';
   bool _isLoading = false;
 
   @override
@@ -39,15 +41,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final firstName = _firstNameController.text.trim();
     final lastName = _lastNameController.text.trim();
     final email = _emailController.text.trim();
+    final phone = _phoneController.text.trim();
     final password = _passwordController.text;
 
-    if (firstName.isEmpty ||
-        lastName.isEmpty ||
-        email.isEmpty ||
-        password.isEmpty) {
+    if (firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty) {
       _showMessage('Completa nombre, apellido, correo y contraseña.');
       return;
     }
+
+    final phoneNumber = phone.isEmpty
+        ? null
+        : phone.startsWith('+')
+            ? phone
+            : '$_phoneDialCode$phone';
 
     setState(() => _isLoading = true);
 
@@ -56,13 +62,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            phoneNumber: _phoneController.text.trim().isEmpty
-                ? null
-                : _phoneController.text.trim(),
+            phoneNumber: phoneNumber,
             password: password,
           );
 
       if (!mounted) return;
+
       context.go(HomeScreen.route);
     } on DioException catch (e) {
       if (!mounted) return;
@@ -106,14 +111,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration:
-                  const InputDecoration(labelText: 'Correo electrónico'),
+              decoration: const InputDecoration(labelText: 'Correo electrónico'),
             ),
             const SizedBox(height: 16),
-            TextField(
+            PiyiCountryPhoneField(
               controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(labelText: 'Teléfono'),
+              onDialCodeChanged: (value) => _phoneDialCode = value,
             ),
             const SizedBox(height: 16),
             TextField(
