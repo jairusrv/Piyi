@@ -1,12 +1,18 @@
-# Piyí - Hotfix 22-3 SecureStorage Final Fix
+# Piyí - Hotfix 22-4 SecureStorage Provider + Legacy Compat
 
-Corrige definitivamente los errores repetidos de `SecureStorageService`.
+Corrige:
+
+- `secureStorageServiceProvider` no definido.
+- `saveToken` no definido.
+- `saveUserProfile` no definido.
+- `clearAll` no definido.
+- `getToken` no definido.
 
 ## Aplicar
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-22-3.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-22-4.ps1
 ```
 
 ## Validar

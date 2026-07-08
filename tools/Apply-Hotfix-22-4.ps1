@@ -1,3 +1,19 @@
+$ErrorActionPreference = "Stop"
+
+Write-Host "Aplicando Piyí Hotfix 22-4 - SecureStorage Provider + Legacy Compat..." -ForegroundColor Cyan
+
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+if (!(Test-Path ".\piyi_mobile")) {
+    Write-Host "ERROR: Ejecuta desde C:\Users\jairo\Documents\Piyi" -ForegroundColor Red
+    exit 1
+}
+
+$target = ".\piyi_mobile\lib\src\core\storage\secure_storage_service.dart"
+$dir = Split-Path $target -Parent
+New-Item -ItemType Directory -Force -Path $dir | Out-Null
+
+$content = @'
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -127,3 +143,24 @@ class SecureStorageService {
     await clearAllSession();
   }
 }
+'@
+
+[System.IO.File]::WriteAllText((Resolve-Path $target).Path, $content, $utf8NoBom)
+
+$check = Get-Content $target -Raw
+$required = @(
+    "secureStorageServiceProvider",
+    "Future<String?> getToken",
+    "Future<void> saveToken",
+    "Future<void> saveUserProfile",
+    "Future<void> clearAll()"
+)
+
+foreach ($item in $required) {
+    if ($check -notmatch [regex]::Escape($item)) {
+        Write-Host "ERROR: No se encontró $item después de escribir el archivo." -ForegroundColor Red
+        exit 1
+    }
+}
+
+Write-Host "OK: SecureStorageService compatible reemplazado y validado." -ForegroundColor Green
