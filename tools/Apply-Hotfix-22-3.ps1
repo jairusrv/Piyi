@@ -1,3 +1,19 @@
+$ErrorActionPreference = "Stop"
+
+Write-Host "Aplicando Piyí Hotfix 22-3 - SecureStorage final..." -ForegroundColor Cyan
+
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+if (!(Test-Path ".\piyi_mobile")) {
+    Write-Host "ERROR: Ejecuta desde C:\Users\jairo\Documents\Piyi" -ForegroundColor Red
+    exit 1
+}
+
+$target = ".\piyi_mobile\lib\src\core\storage\secure_storage_service.dart"
+$dir = Split-Path $target -Parent
+New-Item -ItemType Directory -Force -Path $dir | Out-Null
+
+$content = @'
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
@@ -128,3 +144,18 @@ class SecureStorageService {
     await delete('phoneNumber');
   }
 }
+'@
+
+[System.IO.File]::WriteAllText((Resolve-Path $target).Path, $content, $utf8NoBom)
+
+$check = Get-Content $target -Raw
+$required = @("Future<String?> read", "Future<void> write", "Future<void> delete", "String? userId", "clearAllSession")
+
+foreach ($item in $required) {
+    if ($check -notmatch [regex]::Escape($item)) {
+        Write-Host "ERROR: No se encontró $item después de escribir el archivo." -ForegroundColor Red
+        exit 1
+    }
+}
+
+Write-Host "OK: SecureStorageService reemplazado y validado." -ForegroundColor Green
