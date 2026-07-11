@@ -1,0 +1,17 @@
+PiyÃ­ Sprint 23B
+Archivos de texto corregidos: 1
+Archivos aÃºn sospechosos: 9
+
+CORREGIDOS
+docs\audits\Encoding_Audit_Report_23A_20260710_203325.txt
+
+SOSPECHOSOS
+piyi_mobile\pubspec.yaml
+piyi_mobile\lib\src\features\businesses\presentation\businesses_screen.dart
+piyi_mobile\lib\src\features\businesses\presentation\business_detail_screen.dart
+piyi_mobile\lib\src\features\devices\presentation\devices_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pets_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pet_detail_screen.dart
+piyi_mobile\lib\src\features\map\presentation\map_screen.dart
+piyi_mobile\lib\src\features\pets\presentation\pet_detail_screen.dart
+piyi_mobile\lib\src\features\push_diagnostics\presentation\push_diagnostics_screen.dart

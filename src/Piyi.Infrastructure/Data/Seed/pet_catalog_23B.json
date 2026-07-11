@@ -1,0 +1,752 @@
+{
+  "dog": {
+    "name": "Perro",
+    "icon": "pets",
+    "sortOrder": 1,
+    "breeds": [
+      [
+        "Mestizo / Criollo",
+        "Variable"
+      ],
+      [
+        "Bulldog Francés",
+        "Pequeño"
+      ],
+      [
+        "Labrador Retriever",
+        "Grande"
+      ],
+      [
+        "Golden Retriever",
+        "Grande"
+      ],
+      [
+        "Pastor Alemán",
+        "Grande"
+      ],
+      [
+        "Dachshund / Salchicha",
+        "Pequeño"
+      ],
+      [
+        "Poodle / Caniche",
+        "Variable"
+      ],
+      [
+        "Beagle",
+        "Mediano"
+      ],
+      [
+        "Rottweiler",
+        "Grande"
+      ],
+      [
+        "Bulldog Inglés",
+        "Mediano"
+      ],
+      [
+        "Chihuahua",
+        "Pequeño"
+      ],
+      [
+        "Shih Tzu",
+        "Pequeño"
+      ],
+      [
+        "Schnauzer Miniatura",
+        "Pequeño"
+      ],
+      [
+        "Yorkshire Terrier",
+        "Pequeño"
+      ],
+      [
+        "Pomerania",
+        "Pequeño"
+      ],
+      [
+        "Cocker Spaniel",
+        "Mediano"
+      ],
+      [
+        "Border Collie",
+        "Mediano"
+      ],
+      [
+        "Husky Siberiano",
+        "Grande"
+      ],
+      [
+        "Doberman",
+        "Grande"
+      ],
+      [
+        "Pug",
+        "Pequeño"
+      ],
+      [
+        "Maltés",
+        "Pequeño"
+      ],
+      [
+        "Bichón Frisé",
+        "Pequeño"
+      ],
+      [
+        "American Bully",
+        "Variable"
+      ],
+      [
+        "Pitbull Terrier",
+        "Mediano"
+      ],
+      [
+        "Boxer",
+        "Grande"
+      ],
+      [
+        "Akita",
+        "Grande"
+      ],
+      [
+        "Dálmata",
+        "Grande"
+      ],
+      [
+        "Gran Danés",
+        "Gigante"
+      ],
+      [
+        "San Bernardo",
+        "Gigante"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "cat": {
+    "name": "Gato",
+    "icon": "pets",
+    "sortOrder": 2,
+    "breeds": [
+      [
+        "Mestizo / Doméstico común",
+        "Mediano"
+      ],
+      [
+        "Doméstico de pelo corto",
+        "Mediano"
+      ],
+      [
+        "Doméstico de pelo largo",
+        "Mediano"
+      ],
+      [
+        "Maine Coon",
+        "Grande"
+      ],
+      [
+        "Ragdoll",
+        "Grande"
+      ],
+      [
+        "British Shorthair",
+        "Mediano"
+      ],
+      [
+        "Siamés",
+        "Mediano"
+      ],
+      [
+        "Persa",
+        "Mediano"
+      ],
+      [
+        "Bengalí",
+        "Mediano"
+      ],
+      [
+        "Sphynx",
+        "Mediano"
+      ],
+      [
+        "Azul Ruso",
+        "Mediano"
+      ],
+      [
+        "Scottish Fold",
+        "Mediano"
+      ],
+      [
+        "Abisinio",
+        "Mediano"
+      ],
+      [
+        "Angora Turco",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "bird": {
+    "name": "Ave",
+    "icon": "flutter_dash",
+    "sortOrder": 3,
+    "breeds": [
+      [
+        "Periquito australiano",
+        "Pequeño"
+      ],
+      [
+        "Canario",
+        "Pequeño"
+      ],
+      [
+        "Ninfa / Cockatiel",
+        "Pequeño"
+      ],
+      [
+        "Agapornis",
+        "Pequeño"
+      ],
+      [
+        "Loro amazónico",
+        "Mediano"
+      ],
+      [
+        "Loro gris africano",
+        "Mediano"
+      ],
+      [
+        "Cacatúa",
+        "Grande"
+      ],
+      [
+        "Guacamaya",
+        "Grande"
+      ],
+      [
+        "Diamante mandarín",
+        "Pequeño"
+      ],
+      [
+        "Paloma doméstica",
+        "Mediano"
+      ],
+      [
+        "Gallina de compañía",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "fish": {
+    "name": "Pez",
+    "icon": "set_meal",
+    "sortOrder": 4,
+    "breeds": [
+      [
+        "Betta",
+        "Pequeño"
+      ],
+      [
+        "Goldfish",
+        "Mediano"
+      ],
+      [
+        "Guppy",
+        "Pequeño"
+      ],
+      [
+        "Molly",
+        "Pequeño"
+      ],
+      [
+        "Platy",
+        "Pequeño"
+      ],
+      [
+        "Tetra neón",
+        "Pequeño"
+      ],
+      [
+        "Pez ángel",
+        "Mediano"
+      ],
+      [
+        "Disco",
+        "Mediano"
+      ],
+      [
+        "Cíclido",
+        "Variable"
+      ],
+      [
+        "Koi",
+        "Grande"
+      ],
+      [
+        "Pez payaso",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "rabbit": {
+    "name": "Conejo",
+    "icon": "cruelty_free",
+    "sortOrder": 5,
+    "breeds": [
+      [
+        "Mestizo / Común",
+        "Variable"
+      ],
+      [
+        "Holland Lop",
+        "Pequeño"
+      ],
+      [
+        "Mini Lop",
+        "Pequeño"
+      ],
+      [
+        "Cabeza de León",
+        "Pequeño"
+      ],
+      [
+        "Enano Holandés",
+        "Pequeño"
+      ],
+      [
+        "Rex",
+        "Mediano"
+      ],
+      [
+        "Mini Rex",
+        "Pequeño"
+      ],
+      [
+        "Angora",
+        "Mediano"
+      ],
+      [
+        "Belier",
+        "Mediano"
+      ],
+      [
+        "Gigante de Flandes",
+        "Grande"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "hamster": {
+    "name": "Hámster",
+    "icon": "cruelty_free",
+    "sortOrder": 6,
+    "breeds": [
+      [
+        "Sirio / Dorado",
+        "Pequeño"
+      ],
+      [
+        "Ruso enano",
+        "Pequeño"
+      ],
+      [
+        "Roborovski",
+        "Pequeño"
+      ],
+      [
+        "Campbell",
+        "Pequeño"
+      ],
+      [
+        "Chino",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "guinea-pig": {
+    "name": "Cuy / Cobaya",
+    "icon": "cruelty_free",
+    "sortOrder": 7,
+    "breeds": [
+      [
+        "Americano",
+        "Pequeño"
+      ],
+      [
+        "Abisinio",
+        "Pequeño"
+      ],
+      [
+        "Peruano",
+        "Pequeño"
+      ],
+      [
+        "Sheltie",
+        "Pequeño"
+      ],
+      [
+        "Texel",
+        "Pequeño"
+      ],
+      [
+        "Skinny",
+        "Pequeño"
+      ],
+      [
+        "Mestizo",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "ferret": {
+    "name": "Hurón",
+    "icon": "cruelty_free",
+    "sortOrder": 8,
+    "breeds": [
+      [
+        "Sable",
+        "Pequeño"
+      ],
+      [
+        "Albino",
+        "Pequeño"
+      ],
+      [
+        "Champagne",
+        "Pequeño"
+      ],
+      [
+        "Canela",
+        "Pequeño"
+      ],
+      [
+        "Chocolate",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "turtle": {
+    "name": "Tortuga",
+    "icon": "cruelty_free",
+    "sortOrder": 9,
+    "breeds": [
+      [
+        "Orejas rojas",
+        "Mediano"
+      ],
+      [
+        "Orejas amarillas",
+        "Mediano"
+      ],
+      [
+        "Rusa",
+        "Pequeño"
+      ],
+      [
+        "Mediterránea",
+        "Mediano"
+      ],
+      [
+        "Sulcata",
+        "Grande"
+      ],
+      [
+        "De caja",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "lizard": {
+    "name": "Lagarto / Reptil",
+    "icon": "cruelty_free",
+    "sortOrder": 10,
+    "breeds": [
+      [
+        "Gecko leopardo",
+        "Pequeño"
+      ],
+      [
+        "Dragón barbudo",
+        "Mediano"
+      ],
+      [
+        "Iguana verde",
+        "Grande"
+      ],
+      [
+        "Camaleón velado",
+        "Mediano"
+      ],
+      [
+        "Anolis verde",
+        "Pequeño"
+      ],
+      [
+        "Escinco de lengua azul",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "snake": {
+    "name": "Serpiente",
+    "icon": "cruelty_free",
+    "sortOrder": 11,
+    "breeds": [
+      [
+        "Pitón bola",
+        "Mediano"
+      ],
+      [
+        "Serpiente del maíz",
+        "Mediano"
+      ],
+      [
+        "Boa constrictora",
+        "Grande"
+      ],
+      [
+        "Serpiente rey",
+        "Mediano"
+      ],
+      [
+        "Serpiente de leche",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "horse": {
+    "name": "Caballo",
+    "icon": "pets",
+    "sortOrder": 12,
+    "breeds": [
+      [
+        "Criollo",
+        "Grande"
+      ],
+      [
+        "Paso Fino",
+        "Grande"
+      ],
+      [
+        "Cuarto de Milla",
+        "Grande"
+      ],
+      [
+        "Pura Sangre",
+        "Grande"
+      ],
+      [
+        "Andaluz",
+        "Grande"
+      ],
+      [
+        "Árabe",
+        "Grande"
+      ],
+      [
+        "Percherón",
+        "Grande"
+      ],
+      [
+        "Pony",
+        "Mediano"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "mini-pig": {
+    "name": "Mini pig",
+    "icon": "pets",
+    "sortOrder": 13,
+    "breeds": [
+      [
+        "Vietnamita",
+        "Mediano"
+      ],
+      [
+        "Juliana",
+        "Mediano"
+      ],
+      [
+        "Göttingen",
+        "Pequeño"
+      ],
+      [
+        "Kunekune miniatura",
+        "Mediano"
+      ],
+      [
+        "Mestizo",
+        "Variable"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "hedgehog": {
+    "name": "Erizo",
+    "icon": "cruelty_free",
+    "sortOrder": 14,
+    "breeds": [
+      [
+        "Pigmeo africano",
+        "Pequeño"
+      ],
+      [
+        "Argelino",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "chinchilla": {
+    "name": "Chinchilla",
+    "icon": "cruelty_free",
+    "sortOrder": 15,
+    "breeds": [
+      [
+        "Gris estándar",
+        "Pequeño"
+      ],
+      [
+        "Beige",
+        "Pequeño"
+      ],
+      [
+        "Blanca",
+        "Pequeño"
+      ],
+      [
+        "Black Velvet",
+        "Pequeño"
+      ],
+      [
+        "Mosaico",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "gerbil": {
+    "name": "Jerbo",
+    "icon": "cruelty_free",
+    "sortOrder": 16,
+    "breeds": [
+      [
+        "Mongol",
+        "Pequeño"
+      ],
+      [
+        "De cola gorda",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "rat": {
+    "name": "Rata doméstica",
+    "icon": "cruelty_free",
+    "sortOrder": 17,
+    "breeds": [
+      [
+        "Fancy Rat",
+        "Pequeño"
+      ],
+      [
+        "Dumbo",
+        "Pequeño"
+      ],
+      [
+        "Rex",
+        "Pequeño"
+      ],
+      [
+        "Hairless",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  },
+  "mouse": {
+    "name": "Ratón doméstico",
+    "icon": "cruelty_free",
+    "sortOrder": 18,
+    "breeds": [
+      [
+        "Fancy Mouse",
+        "Pequeño"
+      ],
+      [
+        "Satinado",
+        "Pequeño"
+      ],
+      [
+        "De pelo largo",
+        "Pequeño"
+      ],
+      [
+        "Otro",
+        "Variable"
+      ]
+    ]
+  }
+}

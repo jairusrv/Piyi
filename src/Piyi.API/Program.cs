@@ -57,6 +57,23 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<PiyiDbContext>();
+
+    try
+    {
+        await dbContext.Database.MigrateAsync();
+        await PetCatalogSeeder23B.SeedAsync(dbContext);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "No se pudo inicializar el catÃ¡logo de especies y razas.");
+        throw;
+    }
+}
+
 app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok(new

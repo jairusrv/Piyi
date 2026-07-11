@@ -1,20 +1,28 @@
-# Piyí — Sprint 23A Encoding Audit sin Python
-
-Corrige el Sprint 23 anterior.
-
-## Cambios
-
-- No requiere Python.
-- Usa PowerShell y .NET incluidos en Windows.
-- Repara mojibake simple, doble y triple.
-- Corrige `surface:` duplicado en `app_theme.dart`.
-- Crea respaldo automático.
-- Genera reporte.
-- El BAT se detiene inmediatamente cuando una etapa falla.
+# Piyí — Sprint 23B
 
 ## Aplicar
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-.\tools\Apply-Sprint-23A.bat
+.\tools\Apply-Sprint-23B.bat
+```
+
+## Publicar
+
+```powershell
+git add .
+git commit -m "Sprint 23B encoding and pet catalog database seed"
+git push
+```
+
+En Render:
+
+```text
+Manual Deploy → Clear build cache & deploy
+```
+
+## Verificar catálogo publicado
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\Verify-Pet-Catalog-23B.ps1
 ```

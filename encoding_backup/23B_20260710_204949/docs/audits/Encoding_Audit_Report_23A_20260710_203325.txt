@@ -1,4 +1,4 @@
-Piyí Sprint 23A - Encoding Audit sin Python
+PiyÃ­ Sprint 23A - Encoding Audit sin Python
 Fecha: 2026-07-10 20:33:47
 Archivos revisados: 715
 Archivos corregidos: 14

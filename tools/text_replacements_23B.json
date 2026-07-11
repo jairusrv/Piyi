@@ -1,0 +1,90 @@
+[
+  {
+    "bad": "C\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3digo",
+    "good": "C\u00f3digo"
+  },
+  {
+    "bad": "C\u00c3\u0192\u00c2\u00b3digo",
+    "good": "C\u00f3digo"
+  },
+  {
+    "bad": "C\u00c3\u00b3digo",
+    "good": "C\u00f3digo"
+  },
+  {
+    "bad": "Configuraci\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3n",
+    "good": "Configuraci\u00f3n"
+  },
+  {
+    "bad": "Configuraci\u00c3\u0192\u00c2\u00b3n",
+    "good": "Configuraci\u00f3n"
+  },
+  {
+    "bad": "Tel\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00a9fono",
+    "good": "Tel\u00e9fono"
+  },
+  {
+    "bad": "Tel\u00c3\u0192\u00c2\u00a9fono",
+    "good": "Tel\u00e9fono"
+  },
+  {
+    "bad": "Contrase\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b1a",
+    "good": "Contrase\u00f1a"
+  },
+  {
+    "bad": "Contrase\u00c3\u0192\u00c2\u00b1a",
+    "good": "Contrase\u00f1a"
+  },
+  {
+    "bad": "Informaci\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3n",
+    "good": "Informaci\u00f3n"
+  },
+  {
+    "bad": "Informaci\u00c3\u0192\u00c2\u00b3n",
+    "good": "Informaci\u00f3n"
+  },
+  {
+    "bad": "Descripci\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3n",
+    "good": "Descripci\u00f3n"
+  },
+  {
+    "bad": "Descripci\u00c3\u0192\u00c2\u00b3n",
+    "good": "Descripci\u00f3n"
+  },
+  {
+    "bad": "Ubicaci\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3n",
+    "good": "Ubicaci\u00f3n"
+  },
+  {
+    "bad": "Ubicaci\u00c3\u0192\u00c2\u00b3n",
+    "good": "Ubicaci\u00f3n"
+  },
+  {
+    "bad": "Direcci\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00b3n",
+    "good": "Direcci\u00f3n"
+  },
+  {
+    "bad": "Direcci\u00c3\u0192\u00c2\u00b3n",
+    "good": "Direcci\u00f3n"
+  },
+  {
+    "bad": "Categor\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00ada",
+    "good": "Categor\u00eda"
+  },
+  {
+    "bad": "Categor\u00c3\u0192\u00c2\u00ada",
+    "good": "Categor\u00eda"
+  },
+  {
+    "bad": "Piy\u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00ad",
+    "good": "Piy\u00ed"
+  },
+  {
+    "bad": "Piy\u00c3\u0192\u00c2\u00ad",
+    "good": "Piy\u00ed"
+  },
+  {
+    "bad": "Piy\u00c3\u00ad",
+    "good": "Piy\u00ed"
+  }
+]
