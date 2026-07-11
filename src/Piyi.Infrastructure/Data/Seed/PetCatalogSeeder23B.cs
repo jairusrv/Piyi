@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Piyi.Domain.Entities;
+using Piyi.Infrastructure.Data;
 
 namespace Piyi.Infrastructure.Data.Seed;
 
@@ -9,8 +10,11 @@ public static class PetCatalogSeeder23B
     private sealed class SpeciesSeed
     {
         public string Name { get; set; } = string.Empty;
+
         public string? Icon { get; set; }
+
         public int SortOrder { get; set; }
+
         public List<List<string>> Breeds { get; set; } = [];
     }
 
@@ -22,33 +26,42 @@ public static class PetCatalogSeeder23B
 
         if (seedPath is null)
         {
-            return;
+            throw new FileNotFoundException(
+                "No se encontró Data/Seed/pet_catalog_23B.json.");
         }
 
         var json = await File.ReadAllTextAsync(seedPath, cancellationToken);
 
-        var catalog = JsonSerializer.Deserialize<Dictionary<string, SpeciesSeed>>(
-            json,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+        var catalog =
+            JsonSerializer.Deserialize<Dictionary<string, SpeciesSeed>>(
+                json,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
         if (catalog is null || catalog.Count == 0)
         {
-            return;
+            throw new InvalidOperationException(
+                "El catálogo de especies y razas está vacío.");
         }
 
         var existingSpecies = await dbContext.Species
             .IgnoreQueryFilters()
-            .ToDictionaryAsync(x => x.Code, StringComparer.OrdinalIgnoreCase, cancellationToken);
+            .ToListAsync(cancellationToken);
 
         foreach (var item in catalog.OrderBy(x => x.Value.SortOrder))
         {
             var code = item.Key.Trim();
             var seed = item.Value;
 
-            if (!existingSpecies.TryGetValue(code, out var species))
+            var species = existingSpecies.FirstOrDefault(
+                x => string.Equals(
+                    x.Code,
+                    code,
+                    StringComparison.OrdinalIgnoreCase));
+
+            if (species is null)
             {
                 species = new Species
                 {
@@ -61,7 +74,7 @@ public static class PetCatalogSeeder23B
                 };
 
                 dbContext.Species.Add(species);
-                existingSpecies[code] = species;
+                existingSpecies.Add(species);
             }
             else
             {
@@ -77,7 +90,9 @@ public static class PetCatalogSeeder23B
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        var speciesIds = existingSpecies.Values.Select(x => x.Id).ToArray();
+        var speciesIds = existingSpecies
+            .Select(x => x.Id)
+            .ToArray();
 
         var existingBreeds = await dbContext.Breeds
             .IgnoreQueryFilters()
@@ -86,7 +101,11 @@ public static class PetCatalogSeeder23B
 
         foreach (var item in catalog)
         {
-            var species = existingSpecies[item.Key];
+            var species = existingSpecies.First(
+                x => string.Equals(
+                    x.Code,
+                    item.Key,
+                    StringComparison.OrdinalIgnoreCase));
 
             foreach (var breedSeed in item.Value.Breeds)
             {
@@ -96,11 +115,17 @@ public static class PetCatalogSeeder23B
                 }
 
                 var breedName = breedSeed[0].Trim();
-                var size = breedSeed.Count > 1 ? breedSeed[1].Trim() : null;
+                var size = breedSeed.Count > 1
+                    ? breedSeed[1].Trim()
+                    : null;
 
-                var breed = existingBreeds.FirstOrDefault(x =>
-                    x.SpeciesId == species.Id &&
-                    string.Equals(x.Name, breedName, StringComparison.OrdinalIgnoreCase));
+                var breed = existingBreeds.FirstOrDefault(
+                    x =>
+                        x.SpeciesId == species.Id &&
+                        string.Equals(
+                            x.Name,
+                            breedName,
+                            StringComparison.OrdinalIgnoreCase));
 
                 if (breed is null)
                 {
@@ -108,7 +133,9 @@ public static class PetCatalogSeeder23B
                     {
                         SpeciesId = species.Id,
                         Name = breedName,
-                        Size = string.IsNullOrWhiteSpace(size) ? null : size,
+                        Size = string.IsNullOrWhiteSpace(size)
+                            ? null
+                            : size,
                         IsActive = true,
                         IsDeleted = false
                     };
@@ -119,7 +146,9 @@ public static class PetCatalogSeeder23B
                 else
                 {
                     breed.Name = breedName;
-                    breed.Size = string.IsNullOrWhiteSpace(size) ? null : size;
+                    breed.Size = string.IsNullOrWhiteSpace(size)
+                        ? null
+                        : size;
                     breed.IsActive = true;
                     breed.IsDeleted = false;
                     breed.DeletedAt = null;
@@ -135,9 +164,23 @@ public static class PetCatalogSeeder23B
     {
         var candidates = new[]
         {
-            Path.Combine(AppContext.BaseDirectory, "Data", "Seed", "pet_catalog_23B.json"),
-            Path.Combine(Directory.GetCurrentDirectory(), "Data", "Seed", "pet_catalog_23B.json"),
-            Path.Combine(Directory.GetCurrentDirectory(), "src", "Piyi.Infrastructure", "Data", "Seed", "pet_catalog_23B.json")
+            Path.Combine(
+                AppContext.BaseDirectory,
+                "Data",
+                "Seed",
+                "pet_catalog_23B.json"),
+            Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "Data",
+                "Seed",
+                "pet_catalog_23B.json"),
+            Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "src",
+                "Piyi.Infrastructure",
+                "Data",
+                "Seed",
+                "pet_catalog_23B.json")
         };
 
         return candidates.FirstOrDefault(File.Exists);
