@@ -28,7 +28,7 @@ class CurrentLocationService {
     if (!allowed) return null;
 
     final position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
     );
 
     String? country;

@@ -137,7 +137,7 @@ class _BusinessesScreenState extends ConsumerState<BusinessesScreen> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      item.address ?? item.city ?? 'Ubicación no indicada',
+                                      item.address ?? item.city ?? 'UbicaciÃƒÆ’Ã‚Â³n no indicada',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodySmall,

@@ -225,8 +225,8 @@ class _AboutSection extends StatelessWidget {
         children: [
           PiyiTile(
             icon: Icons.description,
-            title: 'Descripción',
-            subtitle: profile.longDescription ?? profile.shortDescription ?? 'Sin descripción',
+            title: 'DescripciÃƒÆ’Ã‚Â³n',
+            subtitle: profile.longDescription ?? profile.shortDescription ?? 'Sin descripciÃƒÆ’Ã‚Â³n',
             color: PiyiColors.secondary,
           ),
           const SizedBox(height: PiyiSpacing.sm),
@@ -266,12 +266,12 @@ class _FeaturesSection extends StatelessWidget {
     ].where((x) => x.enabled).toList();
 
     return PiyiSection(
-      title: 'Características',
+      title: 'CaracterÃƒÆ’Ã‚Â­sticas',
       child: features.isEmpty
           ? const PiyiEmptyState(
               icon: Icons.info_outline,
-              title: 'Sin características registradas',
-              message: 'Este negocio aún no ha completado esta información.',
+              title: 'Sin caracterÃƒÆ’Ã‚Â­sticas registradas',
+              message: 'Este negocio aÃƒÆ’Ã‚Âºn no ha completado esta informaciÃƒÆ’Ã‚Â³n.',
             )
           : Wrap(
               spacing: 8,
@@ -297,12 +297,12 @@ class _ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PiyiSection(
-      title: 'Contacto y ubicación',
+      title: 'Contacto y ubicaciÃƒÆ’Ã‚Â³n',
       child: Column(
         children: [
           PiyiTile(
             icon: Icons.location_on,
-            title: 'Dirección',
+            title: 'DirecciÃƒÆ’Ã‚Â³n',
             subtitle: profile.address ?? 'No indicada',
             color: PiyiColors.error,
           ),
@@ -317,7 +317,7 @@ class _ContactSection extends StatelessWidget {
           ),
           const SizedBox(height: PiyiSpacing.sm),
           PiyiSecondaryButton(
-            label: 'Cómo llegar',
+            label: 'CÃƒÆ’Ã‚Â³mo llegar',
             icon: Icons.directions,
             onPressed: () async {
               try {
@@ -347,7 +347,7 @@ class _GallerySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PiyiSection(
-      title: 'Galería',
+      title: 'GalerÃƒÆ’Ã‚Â­a',
       child: SizedBox(
         height: 145,
         child: ListView.separated(

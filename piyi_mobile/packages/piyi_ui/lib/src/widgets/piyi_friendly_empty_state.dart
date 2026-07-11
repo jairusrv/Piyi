@@ -32,7 +32,7 @@ class PiyiFriendlyEmptyState extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 42,
-              backgroundColor: color.withOpacity(0.12),
+              backgroundColor: color.withValues(alpha: 0.12),
               child: Icon(icon, color: color, size: 46),
             ),
             const SizedBox(height: PiyiSpacing.md),

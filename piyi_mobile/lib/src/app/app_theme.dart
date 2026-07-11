@@ -15,7 +15,7 @@ class AppTheme {
         primary: primary,
         secondary: secondary,
         surface: Colors.white,
-        background: background,
+        surface: background,
       ),
       scaffoldBackgroundColor: background,
     );

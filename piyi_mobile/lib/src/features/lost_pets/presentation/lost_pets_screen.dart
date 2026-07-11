@@ -104,7 +104,7 @@ class LostPetsScreen extends ConsumerWidget {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      item.lastSeenAddress ?? 'UbicaciÃƒÆ’Ã‚Â³n no indicada',
+                                      item.lastSeenAddress ?? 'Ubicación no indicada',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodySmall,

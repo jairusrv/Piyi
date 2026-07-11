@@ -30,7 +30,7 @@ class PiyiErrorView extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 38,
-              backgroundColor: PiyiColors.error.withOpacity(0.12),
+              backgroundColor: PiyiColors.error.withValues(alpha: 0.12),
               child: Icon(icon, size: 42, color: PiyiColors.error),
             ),
             const SizedBox(height: PiyiSpacing.md),

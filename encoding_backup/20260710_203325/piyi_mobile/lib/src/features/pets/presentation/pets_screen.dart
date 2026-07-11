@@ -41,7 +41,7 @@ class PetsScreen extends ConsumerWidget {
             if (pets.isEmpty) {
               return PiyiEmptyState(
                 icon: Icons.pets,
-                title: 'Aún no tienes mascotas',
+                title: 'AÃƒÆ’Ã‚Âºn no tienes mascotas',
                 message: 'Registra tu primera mascota para gestionar su salud, QR, recordatorios y alertas.',
                 actionLabel: 'Registrar mascota',
                 onAction: () => context.go(CreatePetScreen.route),
@@ -85,7 +85,7 @@ class PetsScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                '${pet.speciesName}${pet.breedName == null ? '' : ' · ${pet.breedName}'}',
+                                '${pet.speciesName}${pet.breedName == null ? '' : ' Ãƒâ€šÃ‚Â· ${pet.breedName}'}',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

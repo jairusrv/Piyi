@@ -41,7 +41,7 @@ class NotificationsScreen extends ConsumerWidget {
                     child: Text(
                       unreadOnly
                           ? 'No tienes notificaciones sin leer.'
-                          : 'Aún no tienes notificaciones.',
+                          : 'AÃƒÆ’Ã‚Âºn no tienes notificaciones.',
                       textAlign: TextAlign.center,
                     ),
                   ),

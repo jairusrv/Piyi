@@ -134,12 +134,12 @@ class BusinessDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.xl),
                 PiyiSection(
-                  title: 'Información',
+                  title: 'InformaciÃƒÆ’Ã‚Â³n',
                   child: Column(
                     children: [
                       PiyiTile(
                         icon: Icons.location_on,
-                        title: 'Dirección',
+                        title: 'DirecciÃƒÆ’Ã‚Â³n',
                         subtitle: business.address ?? 'No indicada',
                         color: PiyiColors.secondary,
                       ),
@@ -153,7 +153,7 @@ class BusinessDetailScreen extends ConsumerWidget {
                       const SizedBox(height: PiyiSpacing.sm),
                       PiyiTile(
                         icon: Icons.phone,
-                        title: 'Teléfono',
+                        title: 'TelÃƒÆ’Ã‚Â©fono',
                         subtitle: business.phone ?? 'No indicado',
                         color: PiyiColors.primary,
                       ),

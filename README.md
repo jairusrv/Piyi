@@ -1,27 +1,20 @@
-# Piyí - Hotfix 22-4 SecureStorage Provider + Legacy Compat
+# Piyí — Sprint 23A Encoding Audit sin Python
 
-Corrige:
+Corrige el Sprint 23 anterior.
 
-- `secureStorageServiceProvider` no definido.
-- `saveToken` no definido.
-- `saveUserProfile` no definido.
-- `clearAll` no definido.
-- `getToken` no definido.
+## Cambios
+
+- No requiere Python.
+- Usa PowerShell y .NET incluidos en Windows.
+- Repara mojibake simple, doble y triple.
+- Corrige `surface:` duplicado en `app_theme.dart`.
+- Crea respaldo automático.
+- Genera reporte.
+- El BAT se detiene inmediatamente cuando una etapa falla.
 
 ## Aplicar
 
 ```powershell
 cd C:\Users\jairo\Documents\Piyi
-powershell -ExecutionPolicy Bypass -File .\tools\Apply-Hotfix-22-4.ps1
-```
-
-## Validar
-
-```powershell
-cd C:\Users\jairo\Documents\Piyi\piyi_mobile
-flutter clean
-Remove-Item -Recurse -Force .dart_tool -ErrorAction SilentlyContinue
-flutter pub get
-flutter analyze --no-fatal-infos
-flutter build apk --release --dart-define=PIYI_API_BASE_URL=https://piyi.onrender.com
+.\tools\Apply-Sprint-23A.bat
 ```

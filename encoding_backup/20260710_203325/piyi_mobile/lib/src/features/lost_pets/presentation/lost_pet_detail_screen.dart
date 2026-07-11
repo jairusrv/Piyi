@@ -70,12 +70,12 @@ class LostPetDetailScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: PiyiSpacing.md),
                 PiyiSection(
-                  title: 'Información del reporte',
+                  title: 'InformaciÃƒÆ’Ã‚Â³n del reporte',
                   child: Column(
                     children: [
                       PiyiTile(
                         icon: Icons.campaign,
-                        title: 'Descripción',
+                        title: 'DescripciÃƒÆ’Ã‚Â³n',
                         subtitle: report.description,
                         color: PiyiColors.error,
                       ),
@@ -135,7 +135,7 @@ class LostPetDetailScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(bottom: PiyiSpacing.sm),
                             child: PiyiTile(
                               icon: Icons.place,
-                              title: sighting.address ?? 'Ubicación reportada',
+                              title: sighting.address ?? 'UbicaciÃƒÆ’Ã‚Â³n reportada',
                               subtitle:
                                   '${sighting.observation ?? 'Sin observaciÃƒÆ’Ã‚Â³n'}\nLat: ${sighting.latitude}, Lng: ${sighting.longitude}',
                               color: PiyiColors.error,

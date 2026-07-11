@@ -1,0 +1,45 @@
+PiyÃ­ Sprint 23A - Encoding Audit sin Python
+Fecha: 2026-07-10 20:33:47
+Archivos revisados: 715
+Archivos corregidos: 14
+Archivos aÃºn sospechosos: 19
+Errores: 0
+
+CORREGIDOS
+piyi_mobile\pubspec.yaml
+piyi_mobile\lib\src\features\businesses\presentation\businesses_screen.dart
+piyi_mobile\lib\src\features\businesses\presentation\business_detail_screen.dart
+piyi_mobile\lib\src\features\business_profiles\presentation\business_profile_screen.dart
+piyi_mobile\lib\src\features\catalog\presentation\catalog_item_detail_screen.dart
+piyi_mobile\lib\src\features\catalog\presentation\catalog_search_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pets_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pet_detail_screen.dart
+piyi_mobile\lib\src\features\notifications\presentation\notifications_screen.dart
+piyi_mobile\lib\src\features\pets\presentation\create_pet_screen.dart
+piyi_mobile\lib\src\features\pets\presentation\pets_screen.dart
+piyi_mobile\lib\src\features\pets\presentation\pet_detail_screen.dart
+piyi_mobile\lib\src\features\settings\presentation\about_screen.dart
+tools\text_replacements_21D.json
+
+SOSPECHOSOS
+docs\audits\Sprint_22_RC1_Text_Check.txt
+docs\release\RC1_Checklist.md
+docs\release\RC1_Test_Plan.md
+piyi_mobile\pubspec.yaml
+piyi_mobile\lib\src\features\businesses\presentation\businesses_screen.dart
+piyi_mobile\lib\src\features\businesses\presentation\business_detail_screen.dart
+piyi_mobile\lib\src\features\catalog\presentation\catalog_item_detail_screen.dart
+piyi_mobile\lib\src\features\catalog\presentation\catalog_search_screen.dart
+piyi_mobile\lib\src\features\devices\presentation\devices_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pets_screen.dart
+piyi_mobile\lib\src\features\lost_pets\presentation\lost_pet_detail_screen.dart
+piyi_mobile\lib\src\features\map\presentation\map_screen.dart
+piyi_mobile\lib\src\features\pets\presentation\pet_detail_screen.dart
+piyi_mobile\lib\src\features\push_diagnostics\presentation\push_diagnostics_screen.dart
+src\Piyi.API\Program.cs
+tools\Apply-Hotfix-21D-1-Text-Audit.ps1
+tools\Apply-Hotfix-21D-2-Text-Audit.ps1
+tools\Apply-Sprint-21D-Text-Audit.ps1
+tools\Apply-Sprint-22-RC1.ps1
+
+ERRORES

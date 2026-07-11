@@ -242,7 +242,7 @@ class _CreatePetScreenState extends ConsumerState<CreatePetScreen> {
                   PiyiTextField(
                     controller: _colorController,
                     label: 'Color',
-                    hint: 'Ej: Negro, café, blanco...',
+                    hint: 'Ej: Negro, cafÃƒÆ’Ã‚Â©, blanco...',
                     icon: Icons.palette,
                   ),
                   const SizedBox(height: PiyiSpacing.sm),

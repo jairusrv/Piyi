@@ -20,7 +20,7 @@ class PiyiLoadingOverlay extends StatelessWidget {
         if (isLoading)
           Positioned.fill(
             child: Container(
-              color: Colors.black.withOpacity(0.28),
+              color: Colors.black.withValues(alpha: 0.28),
               child: Center(
                 child: Card(
                   child: Padding(

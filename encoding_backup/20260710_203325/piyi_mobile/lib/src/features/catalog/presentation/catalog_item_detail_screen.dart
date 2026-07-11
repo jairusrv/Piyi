@@ -40,7 +40,7 @@ class CatalogItemDetailScreen extends ConsumerWidget {
               _Header(item: item),
               const SizedBox(height: PiyiSpacing.md),
               PiyiSection(
-                title: 'Información',
+                title: 'InformaciÃƒÆ’Ã‚Â³n',
                 child: Column(
                   children: [
                     PiyiTile(
@@ -52,22 +52,22 @@ class CatalogItemDetailScreen extends ConsumerWidget {
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiTile(
                       icon: Icons.description,
-                      title: 'Descripción',
-                      subtitle: item.description ?? 'Sin descripciÃƒÂ³n',
+                      title: 'DescripciÃƒÆ’Ã‚Â³n',
+                      subtitle: item.description ?? 'Sin descripciÃƒÆ’Ã‚Â³n',
                       color: PiyiColors.secondary,
                     ),
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiTile(
                       icon: Icons.local_offer,
-                      title: 'Marca / Categoría',
-                      subtitle: '${item.brand ?? 'Marca no indicada'} Ã‚Â· ${item.category ?? 'Categoría no indicada'}',
+                      title: 'Marca / CategorÃƒÆ’Ã‚Â­a',
+                      subtitle: '${item.brand ?? 'Marca no indicada'} Ãƒâ€šÃ‚Â· ${item.category ?? 'CategorÃƒÆ’Ã‚Â­a no indicada'}',
                       color: PiyiColors.info,
                     ),
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiTile(
                       icon: Icons.qr_code,
-                      title: 'Código / SKU',
-                      subtitle: 'Código: ${item.barcode ?? 'No indicado'}\nSKU: ${item.sku ?? 'No indicado'}',
+                      title: 'CÃƒÆ’Ã‚Â³digo / SKU',
+                      subtitle: 'CÃƒÆ’Ã‚Â³digo: ${item.barcode ?? 'No indicado'}\nSKU: ${item.sku ?? 'No indicado'}',
                       color: PiyiColors.warning,
                     ),
                     const SizedBox(height: PiyiSpacing.sm),
@@ -88,7 +88,7 @@ class CatalogItemDetailScreen extends ConsumerWidget {
                     PiyiTile(
                       icon: Icons.store,
                       title: item.businessName,
-                      subtitle: item.businessAddress ?? 'Dirección no indicada',
+                      subtitle: item.businessAddress ?? 'DirecciÃƒÆ’Ã‚Â³n no indicada',
                       color: PiyiColors.secondary,
                       trailing: item.businessIsVerified
                           ? const Icon(Icons.verified, color: PiyiColors.success)
@@ -134,7 +134,7 @@ class CatalogItemDetailScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: PiyiSpacing.sm),
                     PiyiSecondaryButton(
-                      label: 'CÃƒÂ³mo llegar',
+                      label: 'CÃƒÆ’Ã‚Â³mo llegar',
                       icon: Icons.directions,
                       onPressed: () async {
                         try {
@@ -156,7 +156,7 @@ class CatalogItemDetailScreen extends ConsumerWidget {
               const SizedBox(height: PiyiSpacing.xl),
               const PiyiAlertCard(
                 title: 'Compra directa con el proveedor',
-                subtitle: 'PiyíƒÂ­ solo muestra informaciÃƒÂ³n. La compra, pago o entrega se acuerda directamente con el negocio.',
+                subtitle: 'PiyÃ­Æ’Ã‚Â­ solo muestra informaciÃƒÆ’Ã‚Â³n. La compra, pago o entrega se acuerda directamente con el negocio.',
                 actionLabel: 'Entendido',
               ),
             ],

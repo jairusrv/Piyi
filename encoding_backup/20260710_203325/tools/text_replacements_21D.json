@@ -24,7 +24,7 @@
     "good": "tel\u00e9fono"
   },
   {
-    "bad": "Teléfono",
+    "bad": "Telefono",
     "good": "Tel\u00e9fono"
   },
   {
@@ -40,7 +40,7 @@
     "good": "contrase\u00f1a"
   },
   {
-    "bad": "Contraseña",
+    "bad": "Contrasena",
     "good": "Contrase\u00f1a"
   },
   {
@@ -176,31 +176,31 @@
     "good": "\u00d1"
   },
   {
-    "bad": "Correo electrónico",
+    "bad": "Correo electronico",
     "good": "Correo electr\u00f3nico"
   },
   {
-    "bad": "Iniciar sesión",
+    "bad": "Iniciar sesion",
     "good": "Iniciar sesi\u00f3n"
   },
   {
-    "bad": "Cerrar sesión",
+    "bad": "Cerrar sesion",
     "good": "Cerrar sesi\u00f3n"
   },
   {
-    "bad": "Aún no tienes mascotas",
+    "bad": "Aun no tienes mascotas",
     "good": "A\u00fan no tienes mascotas"
   },
   {
-    "bad": "Aún no tienes notificaciones",
+    "bad": "Aun no tienes notificaciones",
     "good": "A\u00fan no tienes notificaciones"
   },
   {
-    "bad": "Aún no hay reportes",
+    "bad": "Aun no hay reportes",
     "good": "A\u00fan no hay reportes"
   },
   {
-    "bad": "Añadir",
+    "bad": "Anadir",
     "good": "A\u00f1adir"
   }
 ]

@@ -103,7 +103,7 @@ class _PetProfileHeader extends StatelessWidget {
             backgroundImage: pet.photoUrl == null ? null : NetworkImage(pet.photoUrl),
             child: pet.photoUrl == null
                 ? Text(
-                    pet.name.isEmpty ? 'ÃƒÂ°Ã…Â¸Ã‚ÂÃ‚Â¾' : pet.name[0].toUpperCase(),
+                    pet.name.isEmpty ? 'ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¾' : pet.name[0].toUpperCase(),
                     style: const TextStyle(fontSize: 38, fontWeight: FontWeight.w900),
                   )
                 : null,
@@ -115,7 +115,7 @@ class _PetProfileHeader extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${pet.speciesName}${pet.breedName == null ? '' : ' Ãƒâ€šÃ‚Â· ${pet.breedName}'}',
+            '${pet.speciesName}${pet.breedName == null ? '' : ' ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ${pet.breedName}'}',
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ],
@@ -152,7 +152,7 @@ class _InfoTab extends StatelessWidget {
           _InfoRow(
             icon: Icons.health_and_safety,
             label: 'Esterilizada/o',
-            value: pet.isSterilized ? 'SÃƒÆ’Ã‚Â­' : 'No',
+            value: pet.isSterilized ? 'SÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­' : 'No',
           ),
         ],
       ),
@@ -173,7 +173,7 @@ class _ActionPanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('Acciones rÃƒÆ’Ã‚¡pidas', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+            const Text('Acciones rÃƒÆ’Ã†â€™Ãƒâ€šÂ¡pidas', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
             const SizedBox(height: 12),
             Wrap(
               spacing: 10,
@@ -217,7 +217,7 @@ class _HealthSummaryCard extends StatelessWidget {
                 children: [
                   const Text('Resumen de salud', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
                   const SizedBox(height: 4),
-                  Text(pet.isSterilized ? 'Esterilizada/o Ãƒâ€šÃ‚Â· estado ${pet.status}' : 'Sin esterilizar Ãƒâ€šÃ‚Â· estado ${pet.status}'),
+                  Text(pet.isSterilized ? 'Esterilizada/o ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· estado ${pet.status}' : 'Sin esterilizar ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· estado ${pet.status}'),
                 ],
               ),
             ),
@@ -251,7 +251,7 @@ class _QrTab extends ConsumerWidget {
                     children: [
                       const Icon(Icons.qr_code_2, size: 90),
                       const SizedBox(height: 16),
-                      const Text('Tu mascota aÃƒÆ’Ã‚Âºn no tiene QR', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                      const Text('Tu mascota aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºn no tiene QR', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
                       const SizedBox(height: 12),
                       const Text('Genera una identidad digital para que puedan contactarte si se pierde.', textAlign: TextAlign.center),
                       const SizedBox(height: 20),
@@ -311,7 +311,7 @@ class _VaccinesTab extends ConsumerWidget {
       itemBuilder: (vaccine) => ListTile(
         leading: const Icon(Icons.vaccines),
         title: Text(vaccine.name),
-        subtitle: Text('Aplicada: ${vaccine.appliedDate ?? 'No indicada'}\\nPrÃƒÆ’Ã‚Â³xima: ${vaccine.nextDueDate ?? 'No indicada'}'),
+        subtitle: Text('Aplicada: ${vaccine.appliedDate ?? 'No indicada'}\\nPrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³xima: ${vaccine.nextDueDate ?? 'No indicada'}'),
       ),
     );
   }
@@ -351,7 +351,7 @@ class _AppointmentsTab extends ConsumerWidget {
       itemBuilder: (appointment) => ListTile(
         leading: const Icon(Icons.event),
         title: Text(appointment.title),
-        subtitle: Text('${appointment.type} Ãƒâ€šÃ‚Â· ${appointment.status}\\n${appointment.appointmentDateTime}\\n${appointment.placeName ?? ''}'),
+        subtitle: Text('${appointment.type} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ${appointment.status}\\n${appointment.appointmentDateTime}\\n${appointment.placeName ?? ''}'),
       ),
     );
   }
